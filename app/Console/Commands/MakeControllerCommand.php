@@ -65,7 +65,8 @@ class MakeControllerCommand extends Command
     {
         return [
             'namespace' => 'app\\Http\\Controller',
-            'class' => $this->getSingularControllerName($this->argument('name'))
+            'class' => $this->getSingularControllerName($this->argument('name')),
+            'rootNamespace' => 'App\\'
         ];
     }
 
@@ -74,6 +75,7 @@ class MakeControllerCommand extends Command
      */
     public function getSourceFile()
     {
+        // dump($this->getStubVariables()); exit;
         return $this->getStubContents($this->getStubPath(), $this->getStubVariables());
     }
 
@@ -85,9 +87,9 @@ class MakeControllerCommand extends Command
 
     public function getStubContents($stub, $stubVariables = [])
     {
-        // dump($stub); exit;
         $contents = file_get_contents($stub);
         foreach ($stubVariables as $search => $replace) {
+            // dump($replace); exit;
             $contents = str_replace('$' . $search . '$', $replace, $contents);
         }
         return $contents;
@@ -99,7 +101,7 @@ class MakeControllerCommand extends Command
 
     public function getGenetatedControllerPath()
     {
-        return base_path('app\\Http\\Controllers\\') . $this->getSingularControllerName($this->argument('name')) . 'Controller.php';
+        return base_path('app/Http/Controllers/') . $this->getSingularControllerName($this->argument('name')) . 'Controller.php';
     }
 
     /**

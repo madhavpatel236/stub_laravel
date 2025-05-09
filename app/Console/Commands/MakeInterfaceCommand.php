@@ -99,11 +99,13 @@ class MakeInterfaceCommand extends Command
      */
     public function getStubContents($stub , $stubVariables = [])
     {
-        dump($stub); exit;
+        // dump($stub); exit;
         $contents = file_get_contents($stub);
 
         foreach ($stubVariables as $search => $replace)
         {
+            dump($replace); exit;
+
             $contents = str_replace('$'.$search.'$' , $replace, $contents);
         }
 
