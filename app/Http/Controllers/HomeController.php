@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Container\Attributes\Config as AttributesConfig;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 
 class HomeController extends Controller
 {
@@ -27,7 +30,16 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request->all());
+        // dump($request->all());
+        // env('DB_DATABASE', $request->input('db_name_input'));
+        // config()->set('DB_DATABASE', $request->input('db_name_input') );
+        // Config::set('database', $request->input('db_name_input'));
+        Artisan::call('config:cache');
+        Config::set('database.connections.mysql.database', $request->input('db_name_input'));
+        Artisan::call('make:migration', ['name' => $request->input('table_name_input')]);
+        Artisan::call('migrate');
+        Artisan::call('make:controller', ['name' => $request->input('table_name_input')]);
+        Artisan::call('make:model', ['name' => $request->input('table_name_input')]);
     }
 
     /**
