@@ -1,11 +1,16 @@
 <?php
 
+use App\Console\Commands\MakeMigrationCommand;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/Home', function(){
-    return view('Pages.Home');
-});
+// Route::get('/Home', function(){
+//     return view('Pages.Home');
+// });
+
+Route::resource('/Home', HomeController::class);
+

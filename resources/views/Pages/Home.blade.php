@@ -1,4 +1,4 @@
-<form action="" method="POST">
+<form action="{{ route('Home.store') }}" method="POST">
     @csrf
     <label for="db_name_input"> Database name: </label>
     <input type="text" name="db_name_input" class="db_name_input" />
