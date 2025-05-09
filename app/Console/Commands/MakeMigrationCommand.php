@@ -64,7 +64,8 @@ class MakeMigrationCommand extends Command
         return [
             // 'namespace' => 'database\\migrations',
             // 'class' => $this->getSingularMigrationName($this->argument('name')),
-            'table' => $this->getSingularMigrationName($this->argument('name'))
+            'table' => $this->getSingularMigrationName($this->argument('name')),
+            'name' => 'madhav'
             // 'rootNamespace' => 'App\\'
         ];
     }
