@@ -6,19 +6,19 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Pluralizer;
 
-class MakeControllerCommand extends Command
+class MakeModelCommand extends Command
 {
 
     /**
      * @var string
      */
 
-    protected $signature = 'make:controller {name}';
+    protected $signature = 'make:model {name}';
 
     /**
      * @var string
      */
-    protected $description = 'Command description- make a controller,model and do a migration .';
+    protected $description = 'Command description- make a model from the console command';
 
 
     /**
@@ -53,7 +53,7 @@ class MakeControllerCommand extends Command
      */
     public function getStubPath()
     {
-        return __DIR__ . '/../../../stubs/controller.stub';
+        return __DIR__ . '/../../../stubs/model.stub';
     }
 
 
@@ -63,7 +63,7 @@ class MakeControllerCommand extends Command
     public function getStubVariables()
     {
         return [
-            'namespace' => 'app\\Http\\Controller',
+            'namespace' => 'app\\Models',
             'class' => $this->getSingularControllerName($this->argument('name')),
             'rootNamespace' => 'App\\'
         ];
@@ -100,7 +100,7 @@ class MakeControllerCommand extends Command
 
     public function getGenetatedControllerPath()
     {
-        return base_path('app/Http/Controllers/') . $this->getSingularControllerName($this->argument('name')) . 'Controller.php';
+        return base_path('app/Models/') . $this->getSingularControllerName($this->argument('name')) . 'Controller.php';
     }
 
     /**
