@@ -6,23 +6,22 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Pluralizer;
 
-class MakeModelCommand extends Command
+class MakeMigrationCommand extends Command
 {
 
     /**
      * @var string
      */
 
-    protected $signature = 'make:model {name}';
+    protected $signature = 'make:migration {name}';
 
     /**
      * @var string
      */
-    protected $description = 'Command description- make a model from the console command';
+    protected $description = 'Command description- make a migration from the console command';
 
 
     /**
-     * Create a new command instance.
      * @param Filesystem $files
      */
     public $files;
@@ -34,7 +33,7 @@ class MakeModelCommand extends Command
 
     public function handle()
     {
-        $path = $this->getGenetatedModelPath();
+        $path = $this->getGenetatedMigrationPath();
         $this->makeDireactory(dirname($path));
         $contents = $this->getSourceFile();
 
@@ -53,7 +52,7 @@ class MakeModelCommand extends Command
      */
     public function getStubPath()
     {
-        return __DIR__ . '/../../../stubs/model.stub';
+        return __DIR__ . '/../../../stubs/migration.create.stub';
     }
 
 
@@ -63,9 +62,10 @@ class MakeModelCommand extends Command
     public function getStubVariables()
     {
         return [
-            'namespace' => 'app\\Models',
-            'class' => $this->getSingularModelName($this->argument('name')),
-            'rootNamespace' => 'App\\'
+            // 'namespace' => 'database\\migrations',
+            // 'class' => $this->getSingularMigrationName($this->argument('name')),
+            'table' => $this->getSingularMigrationName($this->argument('name'))
+            // 'rootNamespace' => 'App\\'
         ];
     }
 
@@ -98,16 +98,16 @@ class MakeModelCommand extends Command
      * @return string
      */
 
-    public function getGenetatedModelPath()
+    public function getGenetatedMigrationPath()
     {
-        return base_path('app/Models/') . $this->getSingularModelName($this->argument('name')) . 'Model.php';
+        return base_path('database/migrations/') . $this->getSingularMigrationName($this->argument('name')) . '_table.php';
     }
 
     /**
      * @param $name
      * @return string
      */
-    public function getSingularModelName($name)
+    public function getSingularMigrationName($name)
     {
         return ucwords(Pluralizer::singular($name));
     }
