@@ -110,7 +110,7 @@ class MakeMigrationCommand extends Command
      */
     public function getSingularMigrationName($name)
     {
-        return ucwords(Pluralizer::singular($name));
+        return Pluralizer::singular($name);
     }
 
 

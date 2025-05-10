@@ -37,7 +37,10 @@ class HomeController extends Controller
         Artisan::call('config:cache');
         Config::set('database.connections.mysql.database', $request->input('db_name_input'));
         Artisan::call('make:migration', ['name' => $request->input('table_name_input')]);
-        Artisan::call('migrate');
+        // Artisan::call('migrate');
+        // dump("database/migrations/'".$request->input('table_name_input').'.php'); exit;
+        dump(Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php'));
+        // Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input'));
         Artisan::call('make:controller', ['name' => $request->input('table_name_input')]);
         Artisan::call('make:model', ['name' => $request->input('table_name_input')]);
     }
