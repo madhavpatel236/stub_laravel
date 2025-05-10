@@ -5,7 +5,7 @@ namespace app\Http\Controller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Patel extends Controller
+class Sssss extends Controller
 {
     /**
      * Display a listing of the resource.
