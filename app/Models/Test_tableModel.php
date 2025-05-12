@@ -4,6 +4,6 @@ namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class A extends Model
+class Test_table extends Model
 {
 }

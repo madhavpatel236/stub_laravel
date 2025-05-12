@@ -37,7 +37,7 @@
                     </select> </td>
                 <td><input name="table_col_length0" id="table_col_length0" class="table_col_length0" /></td>
                 <td> <select name="table_col_defaultVal0" id="table_col_defaultVal0" class="table_col_defaultVal0">
-                        <option value="->nullable($value = true)"> None </option>
+                        <option value=""> None </option>
                         {{-- <option value="As Defined"> As Defined: </option> --}}
                         <option value="->nullable()"> Null </option>
                         <option value="->useCurrent()"> CURRENT_TIMESTAMP </option>
@@ -54,9 +54,9 @@
                 </td>
                 <td> <select name="table_col_index0" id="table_col_index0" class="table_col_index0">
                         <option value=""> -- </option>
-                        <option value="primary()"> PRIMARY </option>
-                        <option value="unique(true)"> UNIQUE </option>
-                        <option value="index()"> INDEX </option>
+                        <option value="->primary()"> PRIMARY </option>
+                        <option value="->unique(true)"> UNIQUE </option>
+                        <option value="->index()"> INDEX </option>
                         {{-- <option value="fullText()"> FULL TEXT </option> --}}
                         {{-- <option value="SPATIAL"> SPATIAL </option> --}}
                     </select> </td>
