@@ -67,7 +67,7 @@ class HomeController extends Controller
         Config::set('database.connections.mysql.database', $request->input('db_name_input'));
 
         Artisan::call('make:migration', ['name' => [
-            'table_name' => $request->input('table_col_name_input0'),
+            'table_name' => [$request->input('table_name_input')],
             'table_col_name_input' => $table_col_name_input,
             'table_col_type' => $table_col_type,
             'table_col_length' => $table_col_length,
@@ -76,8 +76,11 @@ class HomeController extends Controller
             'table_col_nullVal' => $table_col_nullVal,
             'table_col_index' => $table_col_index,
             'table_col_AI' => $table_col_AI,
-            'table_col_comment0' => $table_col_comment
+            'table_col_comment' => $table_col_comment
         ]]);
+
+
+
 
         Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php');
         // Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input'));

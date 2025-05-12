@@ -5,6 +5,12 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Pluralizer;
+use Ramsey\Uuid\Type\Integer;
+
+use function PHPUnit\Framework\isArray;
+use function PHPUnit\Framework\isBool;
+use function PHPUnit\Framework\isInt;
+use function PHPUnit\Framework\isString;
 
 class MakeMigrationCommand extends Command
 {
@@ -61,12 +67,16 @@ class MakeMigrationCommand extends Command
      */
     public function getStubVariables()
     {
-
+        // dd($this->argument('name'));
 
         return [
-            'table' => $this->getSingularMigrationName($this->argument('name')),
-            'data' => 'name',
-            // 'demo' => $this->getSingularMigrationName($this->argument('demo')),
+            'table' => $this->getSingularMigrationName($this->argument('name')['table_name']),
+            'name' => $this->argument('name')['table_col_name_input'],
+            'type' => $this->argument('name')['table_col_type'],
+            // 'length' => $this->argument('name')['table_col_type'] = 'integer' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 4294967295) ||
+            //     $this->argument('name')['table_col_type'] = 'string' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 65535) ||
+            //     $this->argument('name')['table_col_type'] = 'text' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255)
+            'length' => $this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 4294967295
         ];
     }
 
@@ -87,11 +97,20 @@ class MakeMigrationCommand extends Command
 
     public function getStubContents($stub, $stubVariables = [])
     {
+        // dump($stub);
+        dump($this->argument('name')['table_col_type']);
+        dump($this->argument('name')['table_col_length']);
+        $c = 0;
         $contents = file_get_contents($stub);
         foreach ($stubVariables as $search => $replace) {
-            // dump($replace); exit;
-            $contents = str_replace('$' . $search . '$', $replace, $contents);
+            if (is_array($replace)) {
+                // dump($search );
+                // dump($replace);
+                $contents = str_replace('$' . $search . '$', $replace[0], $contents);
+            }
+            // $contents = str_replace('$' . $search . '$', $replace, $contents);
         }
+        dump($contents);
         return $contents;
     }
 
@@ -101,9 +120,8 @@ class MakeMigrationCommand extends Command
 
     public function getGenetatedMigrationPath()
     {
-        dump($this->argument('name'));
-        exit;
-        return base_path('database/migrations/') . $this->getSingularMigrationName($this->argument('name'));
+        // dump($this->argument('name')['table_name']); exit;
+        return base_path('database/migrations/') . $this->getSingularMigrationName($this->argument('name')['table_name'][0]) . '_table.php';
     }
 
     /**
@@ -112,7 +130,9 @@ class MakeMigrationCommand extends Command
      */
     public function getSingularMigrationName($name)
     {
-        return Pluralizer::singular($name);
+        // dump(is_string($name)); exit;
+        // return Pluralizer::singular($name);
+        return $name;
     }
 
 
@@ -128,3 +148,10 @@ class MakeMigrationCommand extends Command
         return $path;
     }
 }
+
+
+
+
+// Schema::table('users', function (Blueprint $table) {
+//     $table->integer('votes')->unsigned()->default(1)->comment('my comment')->change();
+// });

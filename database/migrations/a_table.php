@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('a', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->text('col11', 12 );
             $table->timestamps();
         });
     }
@@ -26,3 +26,7 @@ return new class extends Migration
         Schema::dropIfExists('a');
     }
 };
+
+
+
+

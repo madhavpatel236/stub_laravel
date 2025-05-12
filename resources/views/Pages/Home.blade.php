@@ -28,35 +28,35 @@
             <tr class="table_body_row0" name="table_body_row0" id="table_body_row0">
                 <td> <input type="text" name="table_col_name_input0" class="table_col_name_input0" /></td>
                 <td> <select name="table_col_type0" class="table_col_type0" id="table_col_type0">
-                        <option value="INT"> INT </option>
-                        <option value="VARCHAR"> VARCHAR </option>
-                        <option value="TEXT"> TEXT </option>
-                        <option value="DATE"> DATE </option>
+                        <option value="integer"> INT </option>
+                        <option value="string"> VARCHAR </option>
+                        <option value="text"> TEXT </option>
+                        {{-- <option value="date"> DATE </option> --}}
                     </select> </td>
                 <td><input name="table_col_length0" id="table_col_length0" class="table_col_length0" /></td>
                 <td> <select name="table_col_defaultVal0" id="table_col_defaultVal0" class="table_col_defaultVal0">
                         <option value="None"> None </option>
-                        <option value="As Defined"> As Defined: </option>
-                        <option value="Null"> Null </option>
-                        <option value="CURRENT_TIMESTAMP"> CURRENT_TIMESTAMP </option>
+                        {{-- <option value="As Defined"> As Defined: </option> --}}
+                        <option value="nullable"> Null </option>
+                        <option value="useCurrent()"> CURRENT_TIMESTAMP </option>
                     </select> </td>
                 <td> <select name="table_col_attribute0" id="table_col_attribute0" class="table_col_attribute0">
                         <option value=""> </option>
-                        <option value="BINARY"> BINARY </option>
-                        <option value="UNSIGNED"> UNSIGNED </option>
-                        <option value=" UNSIGNED ZEROFILL"> UNSIGNED ZEROFILL </option>
-                        <option value="on update CURRENT_TIMESTAMP"> on update CURRENT_TIMESTAMP </option>
+                        <option value="binary"> BINARY </option>
+                        <option value="unsigned()"> UNSIGNED </option>
+                        {{-- <option value=" UNSIGNED ZEROFILL"> UNSIGNED ZEROFILL </option> --}}
+                        <option value="useCurrentOnUpdate()"> on update CURRENT_TIMESTAMP </option>
                     </select> </td>
                 <td><input type="checkbox" name="table_col_nullVal0" class="table_col_nullVal0"
                         id="table_col_nullVal0" />
                 </td>
                 <td> <select name="table_col_index0" id="table_col_index0" class="table_col_index0">
                         <option value=""> -- </option>
-                        <option value="PRIMERY"> PRIMERY </option>
-                        <option value="UNIQUE"> UNIQUE </option>
-                        <option value="INDEX"> INDEX </option>
-                        <option value="FULL TEXT"> FULL TEXT </option>
-                        <option value="SPATIAL"> SPATIAL </option>
+                        <option value="primary()"> PRIMARY </option>
+                        <option value="unique(true)"> UNIQUE </option>
+                        <option value="index()"> INDEX </option>
+                        {{-- <option value="fullText()"> FULL TEXT </option> --}}
+                        {{-- <option value="SPATIAL"> SPATIAL </option> --}}
                     </select> </td>
                 <td><input type="checkbox" name="table_col_AI0" id="table_col_AI0" class="table_col_AI0" /></td>
                 <td><input type="text" name="table_col_comment0" class="table_col_comment0"
