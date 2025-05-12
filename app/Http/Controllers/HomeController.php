@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         // dump($request->input('table_data_input_name'));
-        dump($request->all());
+        dump($request);
         exit;
         // dump($request->all());
         // env('DB_DATABASE', $request->input('db_name_input'));
