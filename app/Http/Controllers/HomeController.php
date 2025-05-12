@@ -46,11 +46,11 @@ class HomeController extends Controller
         // config()->set('DB_DATABASE', $request->input('db_name_input') );
         // Config::set('database', $request->input('db_name_input'));
         Artisan::call('config:cache');
-        // exit;
         Config::set('database.connections.mysql.database', $request->input('db_name_input'));
-        Artisan::call('make:migration', ['name' => $request->input('table_name_input')]);
+        Artisan::call('make:migration', ['name' => [$request->input('table_col_name_input0')]]);
         // Artisan::call('migrate');
-        dump(Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php'));
+        Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php');
+        // Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input'));
         Artisan::call('make:controller', ['name' => $request->input('table_name_input')]);
         Artisan::call('make:model', ['name' => $request->input('table_name_input')]);
         Artisan::call('make:view Pages/' . $request->input('table_name_input'));

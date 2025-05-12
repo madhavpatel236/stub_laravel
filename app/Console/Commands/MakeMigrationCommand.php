@@ -61,12 +61,12 @@ class MakeMigrationCommand extends Command
      */
     public function getStubVariables()
     {
+
+
         return [
-            // 'namespace' => 'database\\migrations',
-            // 'class' => $this->getSingularMigrationName($this->argument('name')),
             'table' => $this->getSingularMigrationName($this->argument('name')),
-            'data' => 'name'
-            // 'rootNamespace' => 'App\\'
+            'data' => 'name',
+            // 'demo' => $this->getSingularMigrationName($this->argument('demo')),
         ];
     }
 
@@ -101,7 +101,9 @@ class MakeMigrationCommand extends Command
 
     public function getGenetatedMigrationPath()
     {
-        return base_path('database/migrations/') . $this->getSingularMigrationName($this->argument('name')) . '_table.php';
+        dump($this->argument());
+        exit;
+        return base_path('database/migrations/') . $this->getSingularMigrationName($this->argument('name'));
     }
 
     /**
