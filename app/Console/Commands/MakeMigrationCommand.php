@@ -79,6 +79,7 @@ class MakeMigrationCommand extends Command
             'length' => $this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255,
             'default' => $this->argument('name')['table_col_defaultVal'],
             'attributes' => $this->argument('name')['table_col_attribute'],
+            'null' => $this->argument('name')['table_col_nullVal'][0] == "on" ? ['->nullable($value = true)'] : [''],
         ];
     }
 
@@ -100,13 +101,14 @@ class MakeMigrationCommand extends Command
     public function getStubContents($stub, $stubVariables = [])
     {
         // dump($stub);
-        dump($this->argument('name')['table_col_defaultVal']);
+        // dump($this->argument('name')['table_col_nullVal'][0]);
+        dump($stubVariables);
         $c = 0;
         $contents = file_get_contents($stub);
         foreach ($stubVariables as $search => $replace) {
             if (is_array($replace)) {
-                // dump($search );
-                // dump($replace);
+                dump($search);
+                dump($replace);
                 $contents = str_replace('$' . $search . '$', $replace[0], $contents);
             }
             // $contents = str_replace('$' . $search . '$', $replace, $contents);
