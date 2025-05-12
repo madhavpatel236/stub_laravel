@@ -34,12 +34,30 @@ class HomeController extends Controller
     {
         // dump($request->all());
         $count = 0;
+        $table_col_name_input = [];
+        $table_col_type = [];
+        $table_col_defaultVal = [];
+        $table_col_attribute = [];
+        $table_col_nullVal = [];
+        $table_col_index = [];
+        $table_col_AI = [];
+        $table_col_comment = [];
+        $table_col_length = [];
 
+        while ($request->input('table_col_name_input' . $count) != null) {
+            array_push($table_col_name_input, $request->input('table_col_name_input' . $count));
+            array_push($table_col_type, $request->input('table_col_type' . $count));
+            array_push($table_col_length, $request->input('table_col_length' . $count));
+            array_push($table_col_defaultVal, $request->input('table_col_defaultVal' . $count));
 
-        // while ($request->input('table_col_name_input' . $count)) {
-        //     dump($request->input('table_col_name_input' . $count));
-        //     $count = $count + 1;
-        // }
+            array_push($table_col_attribute, $request->input('table_col_attribute' . $count));
+            array_push($table_col_nullVal, $request->input('table_col_nullVal' . $count));
+            array_push($table_col_index, $request->input('table_col_index' . $count));
+            array_push($table_col_AI, $request->input('table_col_AI' . $count));
+            array_push($table_col_comment, $request->input('table_col_comment' . $count));
+            $count = $count + 1;
+        }
+        // dump($table_col_name_input);
 
 
         // env('DB_DATABASE', $request->input('db_name_input'));
@@ -47,8 +65,20 @@ class HomeController extends Controller
         // Config::set('database', $request->input('db_name_input'));
         Artisan::call('config:cache');
         Config::set('database.connections.mysql.database', $request->input('db_name_input'));
-        Artisan::call('make:migration', ['name' => [$request->input('table_col_name_input0')]]);
-        // Artisan::call('migrate');
+
+        Artisan::call('make:migration', ['name' => [
+            'table_name' => $request->input('table_col_name_input0'),
+            'table_col_name_input' => $table_col_name_input,
+            'table_col_type' => $table_col_type,
+            'table_col_length' => $table_col_length,
+            'table_col_defaultVal' => $table_col_defaultVal,
+            'table_col_attribute' => $table_col_attribute,
+            'table_col_nullVal' => $table_col_nullVal,
+            'table_col_index' => $table_col_index,
+            'table_col_AI' => $table_col_AI,
+            'table_col_comment0' => $table_col_comment
+        ]]);
+
         Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php');
         // Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input'));
         Artisan::call('make:controller', ['name' => $request->input('table_name_input')]);

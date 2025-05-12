@@ -101,7 +101,7 @@ class MakeMigrationCommand extends Command
 
     public function getGenetatedMigrationPath()
     {
-        dump($this->argument());
+        dump($this->argument('name'));
         exit;
         return base_path('database/migrations/') . $this->getSingularMigrationName($this->argument('name'));
     }

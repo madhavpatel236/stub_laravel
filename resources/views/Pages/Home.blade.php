@@ -27,13 +27,13 @@
         <tbody class="table_body" name="table_body" id="table_body">
             <tr class="table_body_row0" name="table_body_row0" id="table_body_row0">
                 <td> <input type="text" name="table_col_name_input0" class="table_col_name_input0" /></td>
-                <td> <select name="table_col_type_input0" class="table_col_type_input0" id="table_col_type_input0">
+                <td> <select name="table_col_type0" class="table_col_type0" id="table_col_type0">
                         <option value="INT"> INT </option>
                         <option value="VARCHAR"> VARCHAR </option>
                         <option value="TEXT"> TEXT </option>
                         <option value="DATE"> DATE </option>
                     </select> </td>
-                <td><input name="table_col_type0" id="table_col_type0" class="table_col_type0" /></td>
+                <td><input name="table_col_length0" id="table_col_length0" class="table_col_length0" /></td>
                 <td> <select name="table_col_defaultVal0" id="table_col_defaultVal0" class="table_col_defaultVal0">
                         <option value="None"> None </option>
                         <option value="As Defined"> As Defined: </option>
@@ -91,13 +91,13 @@
                         var data = `
                     <tr class="table_body_row${count}" name="table_body_row${count}" id="table_body_row${count}">
                 <td> <input type="text" name="table_col_name_input${count}" class="table_col_name_input${count}" /></td>
-                <td> <select name="table_col_type_input${count}" class="table_col_type_input${count}" id="table_col_type_input${count}">
+                <td> <select name="table_col_type${count}" class="table_col_type${count}" id="table_col_type${count}">
                         <option value="INT"> INT </option>
                         <option value="VARCHAR"> VARCHAR </option>
                         <option value="TEXT"> TEXT </option>
                         <option value="DATE"> DATE </option>
                     </select> </td>
-                <td><input name="table_col_type${count}" id="table_col_type${count}" class="table_col_type${count}" /></td>
+                <td><input name="table_col_length${count}" id="table_col_length${count}" class="table_col_length${count}" /></td>
                 <td> <select name="table_col_defaultVal${count}" id="table_col_defaultVal${count}" class="table_col_defaultVal${count}">
                         <option value="None"> None </option>
                         <option value="As Defined"> As Defined: </option>
