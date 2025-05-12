@@ -76,7 +76,9 @@ class MakeMigrationCommand extends Command
             // 'length' => $this->argument('name')['table_col_type'] = 'integer' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 4294967295) ||
             //     $this->argument('name')['table_col_type'] = 'string' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 65535) ||
             //     $this->argument('name')['table_col_type'] = 'text' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255)
-            'length' => $this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 4294967295
+            'length' => $this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255,
+            'default' => $this->argument('name')['table_col_defaultVal'],
+            'attributes' => $this->argument('name')['table_col_attribute'],
         ];
     }
 
@@ -98,8 +100,7 @@ class MakeMigrationCommand extends Command
     public function getStubContents($stub, $stubVariables = [])
     {
         // dump($stub);
-        dump($this->argument('name')['table_col_type']);
-        dump($this->argument('name')['table_col_length']);
+        dump($this->argument('name')['table_col_defaultVal']);
         $c = 0;
         $contents = file_get_contents($stub);
         foreach ($stubVariables as $search => $replace) {

@@ -31,21 +31,23 @@
                         <option value="integer"> INT </option>
                         <option value="string"> VARCHAR </option>
                         <option value="text"> TEXT </option>
+                        <option value="binary"> BINARY </option>
+
                         {{-- <option value="date"> DATE </option> --}}
                     </select> </td>
                 <td><input name="table_col_length0" id="table_col_length0" class="table_col_length0" /></td>
                 <td> <select name="table_col_defaultVal0" id="table_col_defaultVal0" class="table_col_defaultVal0">
-                        <option value="None"> None </option>
+                        <option value="->nullable($value = true)"> None </option>
                         {{-- <option value="As Defined"> As Defined: </option> --}}
-                        <option value="nullable"> Null </option>
-                        <option value="useCurrent()"> CURRENT_TIMESTAMP </option>
+                        <option value="->nullable()"> Null </option>
+                        <option value="->useCurrent()"> CURRENT_TIMESTAMP </option>
                     </select> </td>
                 <td> <select name="table_col_attribute0" id="table_col_attribute0" class="table_col_attribute0">
                         <option value=""> </option>
                         <option value="binary"> BINARY </option>
-                        <option value="unsigned()"> UNSIGNED </option>
+                        <option value="->unsigned()"> UNSIGNED </option>
                         {{-- <option value=" UNSIGNED ZEROFILL"> UNSIGNED ZEROFILL </option> --}}
-                        <option value="useCurrentOnUpdate()"> on update CURRENT_TIMESTAMP </option>
+                        <option value="->useCurrentOnUpdate()"> on update CURRENT_TIMESTAMP </option>
                     </select> </td>
                 <td><input type="checkbox" name="table_col_nullVal0" class="table_col_nullVal0"
                         id="table_col_nullVal0" />
