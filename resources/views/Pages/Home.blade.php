@@ -59,7 +59,8 @@
                         <option value="SPATIAL"> SPATIAL </option>
                     </select> </td>
                 <td><input type="checkbox" name="table_col_AI0" id="table_col_AI0" class="table_col_AI0" /></td>
-                <td><input type="text" name="table_col_comment0" class="table_col_comment0" id="table_col_comment0" />
+                <td><input type="text" name="table_col_comment0" class="table_col_comment0"
+                        id="table_col_comment0" />
                 </td>
             </tr>
         </tbody>
@@ -76,6 +77,7 @@
 
 
         var count = 0;
+        var name = [];
 
         $('.add_field_btn').on('click', function() {
             $.ajax({

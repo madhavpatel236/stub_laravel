@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 
+use function PHPUnit\Framework\isNull;
+
 class HomeController extends Controller
 {
     /**
@@ -30,19 +32,25 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        // dump($request->input('table_data_input_name'));
-        dump($request);
-        exit;
         // dump($request->all());
+        $count = 0;
+
+
+        // while ($request->input('table_col_name_input' . $count)) {
+        //     dump($request->input('table_col_name_input' . $count));
+        //     $count = $count + 1;
+        // }
+
+
         // env('DB_DATABASE', $request->input('db_name_input'));
         // config()->set('DB_DATABASE', $request->input('db_name_input') );
         // Config::set('database', $request->input('db_name_input'));
         Artisan::call('config:cache');
+        // exit;
         Config::set('database.connections.mysql.database', $request->input('db_name_input'));
         Artisan::call('make:migration', ['name' => $request->input('table_name_input')]);
         // Artisan::call('migrate');
-        // dump(Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php'));
-        // Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input'));
+        dump(Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php'));
         Artisan::call('make:controller', ['name' => $request->input('table_name_input')]);
         Artisan::call('make:model', ['name' => $request->input('table_name_input')]);
         Artisan::call('make:view Pages/' . $request->input('table_name_input'));
