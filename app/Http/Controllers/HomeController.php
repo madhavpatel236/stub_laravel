@@ -30,7 +30,9 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        // dump('store');
+        // dump($request->input('table_data_input_name'));
+        dump($request->all());
+        exit;
         // dump($request->all());
         // env('DB_DATABASE', $request->input('db_name_input'));
         // config()->set('DB_DATABASE', $request->input('db_name_input') );
@@ -43,7 +45,7 @@ class HomeController extends Controller
         // Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input'));
         Artisan::call('make:controller', ['name' => $request->input('table_name_input')]);
         Artisan::call('make:model', ['name' => $request->input('table_name_input')]);
-        Artisan::call('make:view Pages/'. $request->input('table_name_input'));
+        Artisan::call('make:view Pages/' . $request->input('table_name_input'));
     }
 
     /**

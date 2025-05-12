@@ -2,11 +2,14 @@
 
 use App\Console\Commands\MakeMigrationCommand;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::redirect('/', '/Home');
 
 // Route::get('/Home', function(){
 //     return view('Pages.Home');
