@@ -7,6 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Pluralizer;
 use Ramsey\Uuid\Type\Integer;
 
+use function Laravel\Prompts\search;
 use function PHPUnit\Framework\isArray;
 use function PHPUnit\Framework\isBool;
 use function PHPUnit\Framework\isInt;
@@ -73,20 +74,16 @@ class MakeMigrationCommand extends Command
         // dd($this->argument('name')['table_col_comment']);
         return [
             'table' => $this->getSingularMigrationName($this->argument('name')['table_name']),
-            'name' => $this->argument('name')['table_col_name_input'],
-            'type' => $this->argument('name')['table_col_type'],
-            // 'length' => $this->argument('name')['table_col_type'] = 'integer' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 4294967295) ||
-            //     $this->argument('name')['table_col_type'] = 'string' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 65535) ||
-            //     $this->argument('name')['table_col_type'] = 'text' ?? ($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255)
-            'length' => $this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255,
-            'default' => $this->argument('name')['table_col_defaultVal'],
-            'attributes' => $this->argument('name')['table_col_attribute'],
-            // 'null' => $this->argument('name')['table_col_nullVal'][0] == "on" ? ['->nullable($value = true)'] : [''],
-            'null' => $this->argument('name')['table_col_nullVal'],
-            'index' => $this->argument('name')['table_col_index'],
-            // 'comments' => "->comment('" .  $this->argument('name')['table_col_comment']  . "')",
-            'comments' =>  $this->argument('name')['table_col_comment'],
-            'count' => $this->argument('name')['col_count'],
+            // 'name' => $this->argument('name')['table_col_name_input'],
+            // 'type' => $this->argument('name')['table_col_type'],
+            // 'length' => $this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255,
+            // 'default' => $this->argument('name')['table_col_defaultVal'],
+            // 'attributes' => $this->argument('name')['table_col_attribute'],
+            // 'null' => $this->argument('name')['table_col_nullVal'],
+            // 'index' => $this->argument('name')['table_col_index'],
+            // 'comments' =>  $this->argument('name')['table_col_comment'],
+            // 'count' => $this->argument('name')['col_count'],
+            'columns' => 'madhav',
         ];
     }
 
@@ -108,25 +105,79 @@ class MakeMigrationCommand extends Command
 
     public function getStubContents($stub, $stubVariables = [])
     {
+        // $table->$type$('$name$', $length$)->comments('$comments$')$default$$attributes$$index$;
         // 8 : dump('getStubContents'); exit;
-        // dump(array_key_exists(1, $stubVariables['null']));
         $contents = file_get_contents($stub);
-        dump($contents);
-        for ($i = 0; $i < count($stubVariables['name']); $i++) {
-            foreach ($stubVariables as $search => $replace) {
-                if (array_key_exists($i, $replace) == false) continue;
+        // dump($contents);
 
-                // dump($search);
+        for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+            dump($this->argument('name')['table_col_name_input']);
+            dump($this->argument('name')['table_col_type']);
+            dump($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255);
+            dump($this->argument('name')['table_col_defaultVal']);
+            dump($this->argument('name')['table_col_attribute']);
+            dump($this->argument('name')['table_col_nullVal']);
+            dump($this->argument('name')['table_col_index']);
+            dump($this->argument('name')['table_col_comment']);
+            dump($this->argument('name')['col_count']);
 
-                if ($search == 'null' && $replace[$i] == 'on') {
-                    $contents = str_replace('$' . null . '$', '->nullable($value = true)', $contents);
-                } elseif (is_array($replace)) {
-                    $contents = str_replace('$' . $search . '$', $replace[$i], $contents);
-                }
+
+            // dump($stubVariables['table'][0]);
+            $contents = str_replace('$' . 'table' . '$', $stubVariables['table'][0], $contents);
+
+            // dump($contents);
+
+
+            $value = "";
+            for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+                // $table->$type$('$name$', $length$)->comments('$comments$')$default$$attributes$$index$;
+                $value .= '$table->' . $this->argument('name')['table_col_type'][$i] . '->(' . $this->argument('name')['table_col_name_input'][$i] . ', ' . $this->argument('name')['table_col_length'][$i] . ')'
+                    . '->comments("' . $this->argument('name')['table_col_comment'][$i]   . '")' . $this->argument('name')['table_col_defaultVal'][$i]
+                    . $this->argument('name')['table_col_attribute'][$i] . $this->argument('name')['table_col_index'][$i];
+                // dump($value);
+
             }
+            $contents = str_replace('$' . 'columns' . '$', $value, $contents);
+            dump($contents);
         }
-        dump($contents);
-        return $contents;
+
+
+        // for ($i = 0; $i < count($stubVariables['name']); $i++) {
+        //     foreach ($stubVariables as $search => $replace) {
+
+        //         // dump($search == 'columns');
+        //         if ($search == 'table') {
+        //             $contents = str_replace('$' . $search . '$', $replace[0], $contents);
+        //         }
+
+        //         if ($search == 'columns') {
+        //             // dump('columns');
+        //             dump($this->argument('name')['table_col_name_input']);
+        //             $val = '$table->'. $search ;
+        //             // $val = $table->$type$('$name$', $length$)->comments('$comments$')$default$$attributes$$index$;
+        //             $contents = str_replace('$' . $search . '$', $val, $contents);
+        //         }
+
+        // if($search == 'content'){}
+        // dump($replace);
+
+        // if (array_key_exists($i, $replace) == false) continue;
+
+
+
+        //         if (array_key_exists($i, $replace) == false) continue;
+
+        //         // dump($search);
+
+        //         if ($search == 'null' && $replace[$i] == 'on') {
+        //             $contents = str_replace('$' . null . '$', '->nullable($value = true)', $contents);
+        //         } elseif (is_array($replace)) {
+        //             $contents = str_replace('$' . $search . '$', $replace[$i], $contents);
+        //         }
+        //     }
+        // }
+        // dump($contents);
+        // return $contents;
     }
 
     /**
@@ -168,6 +219,7 @@ class MakeMigrationCommand extends Command
 }
 
 
+// $table->$type$('$name$', $length$)->comments('$comments$')$default$$attributes$$index$;
 
 
 // Schema::table('users', function (Blueprint $table) {
