@@ -123,65 +123,25 @@ class MakeMigrationCommand extends Command
             // dump($this->argument('name')['col_count']);
 
 
-            // dump($stubVariables['table'][0]);
             $contents = str_replace('$' . 'table' . '$', $stubVariables['table'][0], $contents);
 
-            // if ($this->argument('name')['table_col_nullVal'] == 'null' && $replace[$i] == 'on') {
-            //             $contents = str_replace('$' . null . '$', '->nullable($value = true)', $contents);
-            // }
-
-            dump($this->argument('name')['table_col_nullVal']);
+            // $this->argument('name')['table_col_nullVal'][$i] == 'on' ?? $nullable = 'ds';
             $value = "";
             for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
-                // dump($this->argument('name')['table_col_nullVal'][$i] == null);continue;
-                // $table->$type$('$name$', $length$)->comments('$comments$')$default$$attributes$$index$;
-                $value .= '$table->' . $this->argument('name')['table_col_type'][$i] . '(' . "'" . $this->argument('name')['table_col_name_input'][$i] . "'" . ', ' . $this->argument('name')['table_col_length'][$i] . ')'
-                    . '->comment(' . "'" . $this->argument('name')['table_col_comment'][$i] . "'" . ')' . $this->argument('name')['table_col_defaultVal'][$i]
-                    . $this->argument('name')['table_col_attribute'][$i] . $this->argument('name')['table_col_index'][$i] . ';' . "\n";
-                // dump($value);
+                if ($this->argument('name')['table_col_nullVal'][$i] == 'on') {
+                    $value .= '$table->' . $this->argument('name')['table_col_type'][$i] . '(' . "'" . $this->argument('name')['table_col_name_input'][$i] . "'" . ', ' . $this->argument('name')['table_col_length'][$i] . ')'
+                        . '->comment(' . "'" . $this->argument('name')['table_col_comment'][$i] . "'" . ')' . $this->argument('name')['table_col_defaultVal'][$i]
+                        . $this->argument('name')['table_col_attribute'][$i] . $this->argument('name')['table_col_index'][$i] . '->nullable();' . ';' . "\n";
+                } else {
+                    $value .= '$table->' . $this->argument('name')['table_col_type'][$i] . '(' . "'" . $this->argument('name')['table_col_name_input'][$i] . "'" . ', ' . $this->argument('name')['table_col_length'][$i] . ')'
+                        . '->comment(' . "'" . $this->argument('name')['table_col_comment'][$i] . "'" . ')' . $this->argument('name')['table_col_defaultVal'][$i]
+                        . $this->argument('name')['table_col_attribute'][$i] . $this->argument('name')['table_col_index'][$i] . ';' . "\n";
+                }
             }
             $contents = str_replace('$' . 'columns' . '$', $value, $contents);
-            // dump($contents);
+            dump($contents);
             return $contents;
         }
-
-
-        // for ($i = 0; $i < count($stubVariables['name']); $i++) {
-        //     foreach ($stubVariables as $search => $replace) {
-
-        //         // dump($search == 'columns');
-        //         if ($search == 'table') {
-        //             $contents = str_replace('$' . $search . '$', $replace[0], $contents);
-        //         }
-
-        //         if ($search == 'columns') {
-        //             // dump('columns');
-        //             dump($this->argument('name')['table_col_name_input']);
-        //             $val = '$table->'. $search ;
-        //             // $val = $table->$type$('$name$', $length$)->comments('$comments$')$default$$attributes$$index$;
-        //             $contents = str_replace('$' . $search . '$', $val, $contents);
-        //         }
-
-        // if($search == 'content'){}
-        // dump($replace);
-
-        // if (array_key_exists($i, $replace) == false) continue;
-
-
-
-        //         if (array_key_exists($i, $replace) == false) continue;
-
-        //         // dump($search);
-
-        //         if ($search == 'null' && $replace[$i] == 'on') {
-        //             $contents = str_replace('$' . null . '$', '->nullable($value = true)', $contents);
-        //         } elseif (is_array($replace)) {
-        //             $contents = str_replace('$' . $search . '$', $replace[$i], $contents);
-        //         }
-        //     }
-        // }
-        // dump($contents);
-        // return $contents;
     }
 
     /**
