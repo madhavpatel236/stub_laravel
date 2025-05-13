@@ -87,6 +87,8 @@ class HomeController extends Controller
         Artisan::call('make:controller', ['name' => $request->input('table_name_input')]);
         Artisan::call('make:model', ['name' => $request->input('table_name_input')]);
         Artisan::call('make:view Pages/' . $request->input('table_name_input'));
+
+        // return view();
     }
 
     /**

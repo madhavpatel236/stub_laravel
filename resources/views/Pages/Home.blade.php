@@ -94,37 +94,41 @@
                     <tr class="table_body_row${count}" name="table_body_row${count}" id="table_body_row${count}">
                 <td> <input type="text" name="table_col_name_input${count}" class="table_col_name_input${count}" /></td>
                 <td> <select name="table_col_type${count}" class="table_col_type${count}" id="table_col_type${count}">
-                        <option value="INT"> INT </option>
-                        <option value="VARCHAR"> VARCHAR </option>
-                        <option value="TEXT"> TEXT </option>
-                        <option value="DATE"> DATE </option>
+                        <option value="integer"> INT </option>
+                        <option value="string"> VARCHAR </option>
+                        <option value="text"> TEXT </option>
+                        <option value="binary"> BINARY </option>
+                        {{-- <option value="date"> DATE </option> --}}
                     </select> </td>
                 <td><input name="table_col_length${count}" id="table_col_length${count}" class="table_col_length${count}" /></td>
                 <td> <select name="table_col_defaultVal${count}" id="table_col_defaultVal${count}" class="table_col_defaultVal${count}">
-                        <option value="None"> None </option>
-                        <option value="As Defined"> As Defined: </option>
-                        <option value="Null"> Null </option>
-                        <option value="CURRENT_TIMESTAMP"> CURRENT_TIMESTAMP </option>
+                        <option value=""> None </option>
+                        {{-- <option value="As Defined"> As Defined: </option> --}}
+                        <option value="->nullable()"> Null </option>
+                        <option value="->useCurrent()"> CURRENT_TIMESTAMP </option>
                     </select> </td>
                 <td> <select name="table_col_attribute${count}" id="table_col_attribute${count}" class="table_col_attribute${count}">
                         <option value=""> </option>
-                        <option value="BINARY"> BINARY </option>
-                        <option value="UNSIGNED"> UNSIGNED </option>
-                        <option value=" UNSIGNED ZEROFILL"> UNSIGNED ZEROFILL </option>
-                        <option value="on update CURRENT_TIMESTAMP"> on update CURRENT_TIMESTAMP </option>
+                        <option value="binary"> BINARY </option>
+                        <option value="->unsigned()"> UNSIGNED </option>
+                        {{-- <option value=" UNSIGNED ZEROFILL"> UNSIGNED ZEROFILL </option> --}}
+                        <option value="->useCurrentOnUpdate()"> on update CURRENT_TIMESTAMP </option>
                     </select> </td>
-                <td><input type="checkbox" name="table_col_nullVal${count}" class="table_col_nullVal${count}" id="table_col_nullVal${count}" />
+                <td><input type="checkbox" name="table_col_nullVal${count}" class="table_col_nullVal${count}"
+                        id="table_col_nullVal${count}" />
                 </td>
                 <td> <select name="table_col_index${count}" id="table_col_index${count}" class="table_col_index${count}">
                         <option value=""> -- </option>
-                        <option value="PRIMERY"> PRIMERY </option>
-                        <option value="UNIQUE"> UNIQUE </option>
-                        <option value="INDEX"> INDEX </option>
-                        <option value="FULL TEXT"> FULL TEXT </option>
-                        <option value="SPATIAL"> SPATIAL </option>
+                        <option value="->primary()"> PRIMARY </option>
+                        <option value="->unique(true)"> UNIQUE </option>
+                        <option value="->index()"> INDEX </option>
+                        {{-- <option value="fullText()"> FULL TEXT </option> --}}
+                        {{-- <option value="SPATIAL"> SPATIAL </option> --}}
                     </select> </td>
                 <td><input type="checkbox" name="table_col_AI${count}" id="table_col_AI${count}" class="table_col_AI${count}" /></td>
-                <td><input type="text" name="table_col_comment${count}" class="table_col_comment${count}" id="table_col_comment${count}" /></td>
+                <td><input type="text" name="table_col_comment${count}" class="table_col_comment${count}"
+                        id="table_col_comment${count}" />
+                </td>
             </tr>
                `;
                     }

@@ -39,6 +39,7 @@ class MakeMigrationCommand extends Command
 
     public function handle()
     {
+        // 1 : dump('handle'); exit;
         $path = $this->getGenetatedMigrationPath();
         $this->makeDireactory(dirname($path));
         $contents = $this->getSourceFile();
@@ -58,6 +59,7 @@ class MakeMigrationCommand extends Command
      */
     public function getStubPath()
     {
+        // 6 : dump('getStubPath'); exit;
         return __DIR__ . '/../../../stubs/migration.create.stub';
     }
 
@@ -67,8 +69,8 @@ class MakeMigrationCommand extends Command
      */
     public function getStubVariables()
     {
-        // dd($this->argument('name'));
-
+        // 7 : dump('getStubVariables'); exit;
+        // dd($this->argument('name')['table_col_comment']); exit;
         return [
             'table' => $this->getSingularMigrationName($this->argument('name')['table_name']),
             'name' => $this->argument('name')['table_col_name_input'],
@@ -79,9 +81,11 @@ class MakeMigrationCommand extends Command
             'length' => $this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255,
             'default' => $this->argument('name')['table_col_defaultVal'],
             'attributes' => $this->argument('name')['table_col_attribute'],
-            'null' => $this->argument('name')['table_col_nullVal'][0] == "on" ? ['->nullable($value = true)'] : [''],
+            // 'null' => $this->argument('name')['table_col_nullVal'][0] == "on" ? ['->nullable($value = true)'] : [''],
+            'null' => $this->argument('name')['table_col_nullVal'],
             'index' => $this->argument('name')['table_col_index'],
-            'comments' => ["->comment('" .  $this->argument('name')['table_col_comment'][0]  . "')"],
+            // 'comments' => "->comment('" .  $this->argument('name')['table_col_comment']  . "')",
+            'comments' =>  $this->argument('name')['table_col_comment'],
 
         ];
     }
@@ -91,6 +95,7 @@ class MakeMigrationCommand extends Command
      */
     public function getSourceFile()
     {
+        // 5 : dump('getSourceFile'); exit;
         // dump($this->getStubVariables()); exit;
         return $this->getStubContents($this->getStubPath(), $this->getStubVariables());
     }
@@ -103,20 +108,26 @@ class MakeMigrationCommand extends Command
 
     public function getStubContents($stub, $stubVariables = [])
     {
-        // dump($stub);
-        dump($this->argument('name')['table_col_comment']);
-        dump($stubVariables);
-        $c = 0;
+        // 8 : dump('getStubContents'); exit;
+        // dump($stubVariables);
+        // dump(count(($stubVariables)['name'])); exit;
         $contents = file_get_contents($stub);
-        foreach ($stubVariables as $search => $replace) {
-            if (is_array($replace)) {
-                // dump($search);
-                // dump($replace);
-                $contents = str_replace('$' . $search . '$', $replace[0], $contents);
+        for ($i = 0; $i < count($stubVariables['name']); $i++) {
+            foreach ($stubVariables as $search => $replace) {
+                // dump($search );
+                dump($replace);
+                // ->nullable($value = true)
+                if ($search == 'null' && $replace[$i] == 'on') {
+                    $contents = str_replace('$' . null . '$', '->nullable($value = true)', $contents);
+                } elseif (is_array($replace)) {
+                    $contents = str_replace('$' . $search . '$', $replace[$i], $contents);
+                }
             }
-            // $contents = str_replace('$' . $search . '$', $replace, $contents);
+            dump($contents);
+            // exit;
+            // exit;
         }
-        dump($contents);
+        // dump($contents);
         return $contents;
     }
 
@@ -126,6 +137,7 @@ class MakeMigrationCommand extends Command
 
     public function getGenetatedMigrationPath()
     {
+        // 2 : dump('getGenetatedMigrationPath'); exit;
         // dump($this->argument('name')['table_name']); exit;
         return base_path('database/migrations/') . $this->getSingularMigrationName($this->argument('name')['table_name'][0]) . '_table.php';
     }
@@ -136,7 +148,8 @@ class MakeMigrationCommand extends Command
      */
     public function getSingularMigrationName($name)
     {
-        // dump(is_string($name)); exit;
+
+        // 3 : dump('getSingularMigrationName'); exit;
         // return Pluralizer::singular($name);
         return $name;
     }
@@ -148,6 +161,7 @@ class MakeMigrationCommand extends Command
      */
     public function makeDireactory($path)
     {
+        // 4 : dump('makeDireactory'); exit;
         if (!$this->files->isDirectory($path)) {
             $this->files->makeDirectory($path, 0777, true, true);
         }
