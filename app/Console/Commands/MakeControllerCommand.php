@@ -87,7 +87,7 @@ class MakeControllerCommand extends Command
 
     public function getStubContents($stub, $stubVariables = [])
     {
-        dump(($this->argument('name')));
+        // dump(($this->argument('name')));
         $contents = file_get_contents($stub);
         // dump($contents);
         $contents = str_replace('$' . 'class' . '$', $this->argument('name')[0], $contents);
@@ -103,7 +103,7 @@ class MakeControllerCommand extends Command
             $val .= "'". $this->argument('name')['table_col_name_input'][$i] . "'" . ',';
         }
         $contents = str_replace('$' . 'storeData' . '$', $val , $contents);
-        dump($contents);
+        // dump($contents);
         return $contents;
     }
 

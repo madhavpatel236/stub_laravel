@@ -91,8 +91,13 @@ class HomeController extends Controller
             'table_name' => $request->input('table_name_input'),
             'table_col_name_input' => $table_col_name_input,
         ]]);
-        Artisan::call('make:model', ['name' => $request->input('table_name_input') . 'Model']); // add the fillable in the argument
-        // Artisan::call('make:model', ['name' => [$request->input('table_name_input') . 'Model', 'db_name' => 'demo']]); // add the fillable in the argument
+        // Artisan::call('make:model', ['name' => $request->input('table_name_input') . 'Model']); // add the fillable in the argument
+        Artisan::call('make:model', ['name' => [
+            $request->input('table_name_input') . 'Model',
+            'db_name' => 'demo',
+            'table_name' => $request->input('table_name_input'),
+            'table_col_name_input' => $table_col_name_input,
+        ]]); // add the fillable in the argument
         Artisan::call('make:view Pages/' . $request->input('table_name_input'));
         Artisan::call('make:view Edit/' . $request->input('table_name_input'));
         Artisan::call('make:view Create/' . $request->input('table_name_input'));

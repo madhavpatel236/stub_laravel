@@ -34,6 +34,8 @@ class MakeModelCommand extends Command
 
     public function handle()
     {
+        // dump(($this->argument('name')));
+
         $path = $this->getGenetatedModelPath();
         $this->makeDireactory(dirname($path));
         $contents = $this->getSourceFile();
@@ -86,11 +88,12 @@ class MakeModelCommand extends Command
 
     public function getStubContents($stub, $stubVariables = [])
     {
+        dump(($this->argument('name')));
         $contents = file_get_contents($stub);
-        foreach ($stubVariables as $search => $replace) {
-            // dump($replace); exit;
-            $contents = str_replace('$' . $search . '$', $replace, $contents);
-        }
+        $contents = str_replace('$' . 'class' . '$', $this->argument('name')[0] , $contents);
+        $contents = str_replace('$' . 'namespace' . '$', "App\Models" , $contents);
+        $contents = str_replace('$' . 'tableName' . '$', "'" . $this->argument('name')['table_name'] . "'" , $contents);
+        dump($contents);
         return $contents;
     }
 
@@ -100,7 +103,7 @@ class MakeModelCommand extends Command
 
     public function getGenetatedModelPath()
     {
-        return base_path('app/Models/') . $this->getSingularModelName($this->argument('name')) . 'Model.php';
+        return base_path('app/Models/') . $this->getSingularModelName($this->argument('name')[0]) . 'Model.php';
     }
 
     /**
