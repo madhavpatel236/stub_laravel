@@ -81,18 +81,20 @@ class HomeController extends Controller
             'table_col_comment' => $table_col_comment,
             'col_count' => count($table_col_name_input),
         ]]);
-        // $countforStub = $countforStub + 1;
-        // dump($countforStub);
-
 
 
         Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php');
         // Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input'));
-        Artisan::call('make:controller', ['name' => $request->input('table_name_input')]);
-        Artisan::call('make:model', ['name' => $request->input('table_name_input')]);
+        Artisan::call('make:controller', ['name' => [
+            $request->input('table_name_input') . 'Controller',
+            'db_name' => 'demo',
+            'table_name' => $request->input('table_name_input'),
+            'table_col_name_input' => $table_col_name_input,
+        ]]);
+        Artisan::call('make:model', ['name' => [$request->input('table_name_input') . 'Model', 'db_name' => 'demo']]); // add the fillable in the argument
         Artisan::call('make:view Pages/' . $request->input('table_name_input'));
 
-        // return view();
+        return view('Pages.' . $request->input('table_name_input'));
     }
 
     /**

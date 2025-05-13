@@ -111,7 +111,7 @@ class MakeMigrationCommand extends Command
         // dump($contents);
 
         for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
-            dump($this->argument('name')['table_name']);
+            // dump($this->argument('name')['table_name']);
             // dump($this->argument('name')['table_col_name_input']);
             // dump($this->argument('name')['table_col_type']);
             // dump($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255);
@@ -139,7 +139,7 @@ class MakeMigrationCommand extends Command
                 }
             }
             $contents = str_replace('$' . 'columns' . '$', $value, $contents);
-            dump($contents);
+            // dump($contents);
             return $contents;
         }
     }

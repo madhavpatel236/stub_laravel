@@ -34,6 +34,7 @@ class MakeControllerCommand extends Command
 
     public function handle()
     {
+        // dump($this->argument('name')[0]);exit;
         $path = $this->getGenetatedControllerPath();
         $this->makeDireactory(dirname($path));
         $contents = $this->getSourceFile();
@@ -88,7 +89,7 @@ class MakeControllerCommand extends Command
     {
         $contents = file_get_contents($stub);
         foreach ($stubVariables as $search => $replace) {
-            // dump($replace); exit;
+            dump($stubVariables); exit;
             $contents = str_replace('$' . $search . '$', $replace, $contents);
         }
         return $contents;
@@ -100,7 +101,7 @@ class MakeControllerCommand extends Command
 
     public function getGenetatedControllerPath()
     {
-        return base_path('app/Http/Controllers/') . $this->getSingularControllerName($this->argument('name')) . 'Controller.php';
+        return base_path('app/Http/Controllers/') . $this->getSingularControllerName($this->argument('name')[0]) . 'Controller.php';
     }
 
     /**
@@ -109,7 +110,8 @@ class MakeControllerCommand extends Command
      */
     public function getSingularControllerName($name)
     {
-        return ucwords(Pluralizer::singular($name));
+        // return ucwords(Pluralizer::singular($name));
+        return $name;
     }
 
 
