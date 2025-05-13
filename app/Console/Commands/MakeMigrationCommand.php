@@ -110,11 +110,14 @@ class MakeMigrationCommand extends Command
     {
         // 8 : dump('getStubContents'); exit;
         // dump(array_key_exists(1, $stubVariables['null']));
-        // dump($stubVariables);
         $contents = file_get_contents($stub);
+        dump($contents);
         for ($i = 0; $i < count($stubVariables['name']); $i++) {
             foreach ($stubVariables as $search => $replace) {
                 if (array_key_exists($i, $replace) == false) continue;
+
+                // dump($search);
+
                 if ($search == 'null' && $replace[$i] == 'on') {
                     $contents = str_replace('$' . null . '$', '->nullable($value = true)', $contents);
                 } elseif (is_array($replace)) {
