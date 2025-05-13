@@ -43,6 +43,7 @@ class HomeController extends Controller
         $table_col_AI = [];
         $table_col_comment = [];
         $table_col_length = [];
+        $count_stub = [];
 
         while ($request->input('table_col_name_input' . $count) != null) {
             array_push($table_col_name_input, $request->input('table_col_name_input' . $count));
@@ -55,6 +56,7 @@ class HomeController extends Controller
             array_push($table_col_index, $request->input('table_col_index' . $count));
             array_push($table_col_AI, $request->input('table_col_AI' . $count));
             array_push($table_col_comment, $request->input('table_col_comment' . $count));
+            array_push($count_stub, $count);
             $count = $count + 1;
         }
         // dump($table_col_name_input);
@@ -76,9 +78,11 @@ class HomeController extends Controller
             'table_col_nullVal' => $table_col_nullVal,
             'table_col_index' => $table_col_index,
             'table_col_AI' => $table_col_AI,
-            'table_col_comment' => $table_col_comment
+            'table_col_comment' => $table_col_comment,
+            'col_count' => $count_stub ,
         ]]);
-
+        // $countforStub = $countforStub + 1;
+        // dump($countforStub);
 
 
 

@@ -70,7 +70,7 @@ class MakeMigrationCommand extends Command
     public function getStubVariables()
     {
         // 7 : dump('getStubVariables'); exit;
-        // dd($this->argument('name')['table_col_comment']); exit;
+        // dd($this->argument('name')['table_col_comment']);
         return [
             'table' => $this->getSingularMigrationName($this->argument('name')['table_name']),
             'name' => $this->argument('name')['table_col_name_input'],
@@ -86,7 +86,7 @@ class MakeMigrationCommand extends Command
             'index' => $this->argument('name')['table_col_index'],
             // 'comments' => "->comment('" .  $this->argument('name')['table_col_comment']  . "')",
             'comments' =>  $this->argument('name')['table_col_comment'],
-
+            'count' => $this->argument('name')['col_count'],
         ];
     }
 
@@ -109,25 +109,20 @@ class MakeMigrationCommand extends Command
     public function getStubContents($stub, $stubVariables = [])
     {
         // 8 : dump('getStubContents'); exit;
+        // dump(array_key_exists(1, $stubVariables['null']));
         // dump($stubVariables);
-        // dump(count(($stubVariables)['name'])); exit;
         $contents = file_get_contents($stub);
         for ($i = 0; $i < count($stubVariables['name']); $i++) {
             foreach ($stubVariables as $search => $replace) {
-                // dump($search );
-                dump($replace);
-                // ->nullable($value = true)
+                if (array_key_exists($i, $replace) == false) continue;
                 if ($search == 'null' && $replace[$i] == 'on') {
                     $contents = str_replace('$' . null . '$', '->nullable($value = true)', $contents);
                 } elseif (is_array($replace)) {
                     $contents = str_replace('$' . $search . '$', $replace[$i], $contents);
                 }
             }
-            dump($contents);
-            // exit;
-            // exit;
         }
-        // dump($contents);
+        dump($contents);
         return $contents;
     }
 
