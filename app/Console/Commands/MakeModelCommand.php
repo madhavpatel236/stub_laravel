@@ -109,7 +109,8 @@ class MakeModelCommand extends Command
      */
     public function getSingularModelName($name)
     {
-        return ucwords(Pluralizer::singular($name));
+        // return ucwords(Pluralizer::singular($name));
+        return $name;
     }
 
 
