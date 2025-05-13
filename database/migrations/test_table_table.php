@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('test_table2', function (Blueprint $table) {
+        Schema::create('test_table', function (Blueprint $table) {
             $table->integer('col1', 34)->comment('this is the col1')->primary();
-$table->text('col2', 22)->comment('')->useCurrent();
+$table->binary('col2', 11)->comment('');
 ;
             $table->timestamps();
         });
@@ -24,7 +24,7 @@ $table->text('col2', 22)->comment('')->useCurrent();
      */
     public function down(): void
     {
-        Schema::dropIfExists('test_table2');
+        Schema::dropIfExists('test_table');
     }
 };
 

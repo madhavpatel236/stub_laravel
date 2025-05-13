@@ -111,34 +111,38 @@ class MakeMigrationCommand extends Command
         // dump($contents);
 
         for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
-            dump($this->argument('name')['table_col_name_input']);
-            dump($this->argument('name')['table_col_type']);
-            dump($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255);
-            dump($this->argument('name')['table_col_defaultVal']);
-            dump($this->argument('name')['table_col_attribute']);
-            dump($this->argument('name')['table_col_nullVal']);
-            dump($this->argument('name')['table_col_index']);
-            dump($this->argument('name')['table_col_comment']);
-            dump($this->argument('name')['col_count']);
+            dump($this->argument('name')['table_name']);
+            // dump($this->argument('name')['table_col_name_input']);
+            // dump($this->argument('name')['table_col_type']);
+            // dump($this->argument('name')['table_col_length'] != null ? $this->argument('name')['table_col_length'] : 255);
+            // dump($this->argument('name')['table_col_defaultVal']);
+            // dump($this->argument('name')['table_col_attribute']);
+            // dump($this->argument('name')['table_col_nullVal']);
+            // dump($this->argument('name')['table_col_index']);
+            // dump($this->argument('name')['table_col_comment']);
+            // dump($this->argument('name')['col_count']);
 
 
             // dump($stubVariables['table'][0]);
             $contents = str_replace('$' . 'table' . '$', $stubVariables['table'][0], $contents);
 
-            // dump($contents);
+            // if ($this->argument('name')['table_col_nullVal'] == 'null' && $replace[$i] == 'on') {
+            //             $contents = str_replace('$' . null . '$', '->nullable($value = true)', $contents);
+            // }
 
-
+            dump($this->argument('name')['table_col_nullVal']);
             $value = "";
             for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+                // dump($this->argument('name')['table_col_nullVal'][$i] == null);continue;
                 // $table->$type$('$name$', $length$)->comments('$comments$')$default$$attributes$$index$;
-                $value .= '$table->' . $this->argument('name')['table_col_type'][$i] . '->(' . $this->argument('name')['table_col_name_input'][$i] . ', ' . $this->argument('name')['table_col_length'][$i] . ')'
-                    . '->comments("' . $this->argument('name')['table_col_comment'][$i]   . '")' . $this->argument('name')['table_col_defaultVal'][$i]
-                    . $this->argument('name')['table_col_attribute'][$i] . $this->argument('name')['table_col_index'][$i];
+                $value .= '$table->' . $this->argument('name')['table_col_type'][$i] . '(' . "'" . $this->argument('name')['table_col_name_input'][$i] . "'" . ', ' . $this->argument('name')['table_col_length'][$i] . ')'
+                    . '->comment(' . "'" . $this->argument('name')['table_col_comment'][$i] . "'" . ')' . $this->argument('name')['table_col_defaultVal'][$i]
+                    . $this->argument('name')['table_col_attribute'][$i] . $this->argument('name')['table_col_index'][$i] . ';' . "\n";
                 // dump($value);
-
             }
             $contents = str_replace('$' . 'columns' . '$', $value, $contents);
-            dump($contents);
+            // dump($contents);
+            return $contents;
         }
 
 
