@@ -100,10 +100,10 @@ class MakeControllerCommand extends Command
         for ($i = 0; $i < count($this->argument('name')['table_col_name_input']); $i++) {
             // $value = array_push($val, $this->argument('name')['table_col_name_input'][$i]  );
             // dump($val[$i]);
-            $val .= "'". $this->argument('name')['table_col_name_input'][$i] . "'" . ',';
+            $val .= "'" . $this->argument('name')['table_col_name_input'][$i] . "'" . ',';
         }
-        $contents = str_replace('$' . 'storeData' . '$', $val , $contents);
-        dump($contents);
+        $contents = str_replace('$' . 'storeData' . '$', $val, $contents);
+        // dump($contents);
         return $contents;
     }
 

@@ -91,16 +91,35 @@ class HomeController extends Controller
             'table_name' => $request->input('table_name_input'),
             'table_col_name_input' => $table_col_name_input,
         ]]);
+
         // Artisan::call('make:model', ['name' => $request->input('table_name_input') . 'Model']); // add the fillable in the argument
         Artisan::call('make:model', ['name' => [
             $request->input('table_name_input') . 'Model',
             'db_name' => 'demo',
             'table_name' => $request->input('table_name_input'),
             'table_col_name_input' => $table_col_name_input,
-        ]]); // add the fillable in the argument
-        Artisan::call('make:view Pages/' . $request->input('table_name_input'));
-        Artisan::call('make:view Edit/' . $request->input('table_name_input'));
-        Artisan::call('make:view Create/' . $request->input('table_name_input'));
+        ]]);
+
+        // add the fillable in the argument
+        // dump($request->input('table_name_input'));
+
+        Artisan::call('make:view', ['name' => [
+            'table_name' => [$request->input('table_name_input')],
+            'table_col_name_input' => $table_col_name_input,
+            'table_col_type' => $table_col_type,
+            'table_col_length' => $table_col_length,
+            'table_col_defaultVal' => $table_col_defaultVal,
+            'table_col_attribute' => $table_col_attribute,
+            'table_col_nullVal' => $table_col_nullVal,
+            'table_col_index' => $table_col_index,
+            'table_col_AI' => $table_col_AI,
+            'table_col_comment' => $table_col_comment,
+            'col_count' => count($table_col_name_input),
+        ]]);
+
+        // Artisan::call('make:view Edit/' . $request->input('table_name_input'));
+        // Artisan::call('make:view Create/' . $request->input('table_name_input'));
+
         // redirect();
         return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
     }
