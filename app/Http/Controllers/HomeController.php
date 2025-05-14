@@ -101,8 +101,8 @@ class HomeController extends Controller
         Artisan::call('make:view Pages/' . $request->input('table_name_input'));
         Artisan::call('make:view Edit/' . $request->input('table_name_input'));
         Artisan::call('make:view Create/' . $request->input('table_name_input'));
-
-        return view('Pages.' . $request->input('table_name_input'));
+        // redirect();
+        return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
     }
 
     /**

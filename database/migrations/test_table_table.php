@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('test_table', function (Blueprint $table) {
             $table->integer('col1', )->comment('');
-$table->integer('col2', )->comment('');
+$table->integer('col2', )->comment('')->nullable();;
 ;
             $table->timestamps();
         });

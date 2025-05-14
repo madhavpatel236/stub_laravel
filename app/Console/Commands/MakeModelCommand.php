@@ -88,12 +88,12 @@ class MakeModelCommand extends Command
 
     public function getStubContents($stub, $stubVariables = [])
     {
-        dump(($this->argument('name')));
+        // dump(($this->argument('name')));
         $contents = file_get_contents($stub);
         $contents = str_replace('$' . 'class' . '$', $this->argument('name')[0] , $contents);
         $contents = str_replace('$' . 'namespace' . '$', "App\Models" , $contents);
         $contents = str_replace('$' . 'tableName' . '$', "'" . $this->argument('name')['table_name'] . "'" , $contents);
-        dump($contents);
+        // dump($contents);
         return $contents;
     }
 

@@ -1,3 +1,3 @@
 <div>
-    <!-- It is never too late to be what you might have been. - George Eliot -->
+    <!-- Waste no more time arguing what a good man should be, be one. - Marcus Aurelius -->
 </div>

@@ -1,3 +1,3 @@
 <div>
-    <!-- He who is contented is rich. - Laozi -->
+    <!-- Happiness is not something readymade. It comes from your own actions. - Dalai Lama -->
 </div>

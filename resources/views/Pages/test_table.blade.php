@@ -1,3 +1,3 @@
 <div>
-    <!-- Very little is needed to make a happy life. - Marcus Aurelius -->
+    <!-- Always remember that you are absolutely unique. Just like everyone else. - Margaret Mead -->
 </div>
