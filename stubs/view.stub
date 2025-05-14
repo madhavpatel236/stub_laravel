@@ -1,9 +1,15 @@
 <div>
 <form method='post' action='$action$'  name='data_input_form'>
-@method('post')
 @csrf
 $INPUT_FIELDS$
 <button name="data_submit_btn"> Submit </button>
-</form>
+</form> <br /> <br/>
+
+
+<table border=2 >
+<thead> $tableHead$ </thead>
+<tbody> $tableBody$ </tbody>
+</table>
+
 
 </div>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Container\Attributes\Config as AttributesConfig;
 use Illuminate\Http\Request;
-// use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
@@ -103,8 +102,12 @@ class HomeController extends Controller
             'table_col_name_input' => $table_col_name_input,
         ]]);
 
-        // add the fillable in the argument
-        // dump($request->input('table_name_input'));
+        // dump($request->input('table_name_input'). 'Controller'); exit;
+        // $controllerName = 'App\\Http\\Controllers\\' . $request->input('table_name_input') . 'Controller';
+
+        Route::resource('/user', ucfirst($request->input('table_name_input')) . "Controller"::class);
+        // Route::has();
+        // dump(ucfirst($request->input('table_name_input')) . "Controller"::class);
 
         Artisan::call('make:view', ['name' => [
             'table_name' => [$request->input('table_name_input')],
@@ -119,16 +122,6 @@ class HomeController extends Controller
             'table_col_comment' => $table_col_comment,
             'col_count' => count($table_col_name_input),
         ]]);
-
-        // Artisan::call('make:view Edit/' . $request->input('table_name_input'));
-        // Artisan::call('make:view Create/' . $request->input('table_name_input'));
-
-        // $controllerName = 'App\\Http\\Controllers\\' . $request->input('table_name_input') . 'Controller';
-        // dump($controllerName); exit;
-
-        // Route::resource('/user', $controllerName::class);
-
-        // dump(route('user.index')); exit;
 
         return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
     }
@@ -163,5 +156,11 @@ class HomeController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function storetablename(Request $request)
+    {
+
+        dd($request);
     }
 }

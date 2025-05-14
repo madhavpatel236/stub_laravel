@@ -90,7 +90,7 @@ class MakeViewCommand extends Command
     {
         // dump(($this->argument('name')));
         $contents = file_get_contents($stub);
-        dump($stubVariables);
+        // dump($stubVariables);
         // dump($this->argument("name")["table_col_name_input"]);
 
         $val = '';
@@ -101,30 +101,29 @@ class MakeViewCommand extends Command
             ';
         }
 
+        $th = '';
+        for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+            $th .=  '<th>' . $this->argument('name')['table_col_name_input'][$i] . '</th>';
+        }
+        $th .= '<th> Edit </th>'; // for the edit and delete btn
+        $thead = '<tr>' . $th . '</tr>';
 
-        $action = "{{route('user.store')}}";
+
+        $tbody = '<tr></tr>';
+
+        $action = "{{route('user.storetablename')}}";
+
         $contents = str_replace('$' . 'INPUT_FIELDS' . '$', $val, $contents);
         $contents = str_replace('$' . 'action' . '$', $action, $contents);
 
         $contents = str_replace('$' . 'type' . '$', $stubVariables['name'][0], $contents);
         $contents = str_replace('$' . 'name' . '$', $stubVariables['type'][0], $contents);
+        $contents = str_replace('$' . 'tableHead' . '$', $thead, $contents);
+        $contents = str_replace('$' . 'tableBody' . '$', $tbody, $contents);
+
         dump($contents);
 
-        // dump($contents);
-        // $contents = str_replace('$' . 'class' . '$', $this->argument('name')[0], $contents);
-        // $contents = str_replace('$' . 'namespace' . '$', 'App\Http\Controllers', $contents);
-        // $contents = str_replace('$' . 'UserModel' . '$', $this->argument('name')['table_name'] . 'Model', $contents);
-        // $contents = str_replace('$' . 'viewFileName' . '$', $this->argument('name')['table_name'], $contents);
 
-        // $val = '';
-
-        // for ($i = 0; $i < count($this->argument('name')['table_col_name_input']); $i++) {
-        //     // $value = array_push($val, $this->argument('name')['table_col_name_input'][$i]  );
-        //     // dump($val[$i]);
-        //     $val .= "'". $this->argument('name')['table_col_name_input'][$i] . "'" . ',';
-        // }
-        // $contents = str_replace('$' . 'storeData' . '$', $val , $contents);
-        // dump($contents);
         return $contents;
     }
 

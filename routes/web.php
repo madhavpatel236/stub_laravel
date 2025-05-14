@@ -17,4 +17,6 @@ Route::redirect('/', '/Home');
 // });
 
 Route::resource('/Home', HomeController::class);
+// Route::resource('/user', HomeController::class);
+
 // Route::resource('/view', [Test_table1::class]);
