@@ -103,7 +103,7 @@ class MakeModelCommand extends Command
 
     public function getGenetatedModelPath()
     {
-        return base_path('app/Models/') . $this->getSingularModelName($this->argument('name')[0]) . 'Model.php';
+        return base_path('app/Models/') . $this->getSingularModelName($this->argument('name')[0]) . '.php';
     }
 
     /**

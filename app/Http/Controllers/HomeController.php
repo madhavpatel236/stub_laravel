@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Container\Attributes\Config as AttributesConfig;
 use Illuminate\Http\Request;
+// use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Route;
+
 
 use function PHPUnit\Framework\isNull;
 
@@ -120,7 +123,14 @@ class HomeController extends Controller
         // Artisan::call('make:view Edit/' . $request->input('table_name_input'));
         // Artisan::call('make:view Create/' . $request->input('table_name_input'));
 
-        // redirect();
+        // use App\Http\Controllers\{$request->input('table_name_input') . 'Controller'};
+            // @requires ('App\Http\Controllers\${$request->input('table_name_input')} . 'Controller'');
+        // dump($request->input('table_name_input') . 'Controller');
+        // exit;
+        // $controllerName = 'App\\Http\\Controllers\\' . $request->input('table_name_input') . 'Controller';
+        // dump($controllerName); exit;
+        // Route::resource('/user', $controllerName::class);
+        // dump(route('user.index')); exit;
         return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
     }
 

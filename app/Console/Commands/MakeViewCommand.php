@@ -96,14 +96,15 @@ class MakeViewCommand extends Command
         $val = '';
         for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
             $val .= '
-                <lable> ' . $this->argument("name")["table_col_name_input"][$i] . '</lable> <br/> <br/>
+                <lable> ' . $this->argument("name")["table_col_name_input"][$i] . ':</lable>
                 <input class= ' . '"' . $this->argument("name")["table_col_type"][$i] . '"' . '  , ' . 'name=' . '"' . $this->argument("name")["table_col_name_input"][$i] . '"' . '/> <br/> <br/>
             ';
         }
 
 
+        $action = "{{route('user.store')}}";
         $contents = str_replace('$' . 'INPUT_FIELDS' . '$', $val, $contents);
-        // $contents = str_replace('$' . 'action' . '$', $val, $contents);
+        $contents = str_replace('$' . 'action' . '$', $action, $contents);
 
         $contents = str_replace('$' . 'type' . '$', $stubVariables['name'][0], $contents);
         $contents = str_replace('$' . 'name' . '$', $stubVariables['type'][0], $contents);

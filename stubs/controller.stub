@@ -10,6 +10,7 @@ class $class$ extends Controller
 {
     public function index()
     {
+        var_dump('index'); exit;
          $users =$UserModel$::all();
          return view('Pages.$viewFileName$', compact('users'));
     }
@@ -21,6 +22,7 @@ class $class$ extends Controller
 
     public function store(Request $request)
     {
+        var_dump('store'); exit;
         $UserModel$::Create($request->only([$storeData$]));
         return redirect('$url$');
     }

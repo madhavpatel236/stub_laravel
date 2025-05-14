@@ -10,6 +10,7 @@ class test_tableController extends Controller
 {
     public function index()
     {
+        var_dump('index'); exit;
          $users =test_tableModel::all();
          return view('Pages.test_table', compact('users'));
     }
@@ -21,7 +22,8 @@ class test_tableController extends Controller
 
     public function store(Request $request)
     {
-        test_tableModel::Create($request->only(['col1','col2',]));
+        var_dump('store'); exit;
+        test_tableModel::Create($request->only(['col1',]));
         return redirect('$url$');
     }
 
@@ -46,7 +48,7 @@ class test_tableController extends Controller
             'lastName' => 'required'
         ]);
         $user = test_tableModel::findOrFail($id);
-        $user->update($request->only(['col1','col2',]));
+        $user->update($request->only(['col1',]));
         return redirect('$updateURL$');
     }
 

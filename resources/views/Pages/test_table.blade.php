@@ -1,13 +1,10 @@
 <div>
-<form method='post' action='$action$'  name='data_input_form'>
+<form method='post' action='{{route('user.store')}}'  name='data_input_form'>
 @method('post')
 @csrf
 
-                <lable> col1</lable>
-                <input class= "integer"  , name="col1"/>
-            
-                <lable> col2</lable>
-                <input class= "integer"  , name="col2"/>
+                <lable> col1:</lable>
+                <input class= "integer"  , name="col1"/> <br/> <br/>
             
 <button name="data_submit_btn"> Submit </button>
 </form>

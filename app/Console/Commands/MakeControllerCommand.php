@@ -103,7 +103,7 @@ class MakeControllerCommand extends Command
             $val .= "'" . $this->argument('name')['table_col_name_input'][$i] . "'" . ',';
         }
         $contents = str_replace('$' . 'storeData' . '$', $val, $contents);
-        // dump($contents);
+        dump($contents);
         return $contents;
     }
 
@@ -113,7 +113,7 @@ class MakeControllerCommand extends Command
 
     public function getGenetatedControllerPath()
     {
-        return base_path('app/Http/Controllers/') . $this->getSingularControllerName($this->argument('name')[0]) . 'Controller.php';
+        return base_path('app/Http/Controllers/') . $this->getSingularControllerName($this->argument('name')[0]) . '.php';
     }
 
     /**
