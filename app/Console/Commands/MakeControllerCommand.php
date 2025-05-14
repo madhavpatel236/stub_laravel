@@ -63,9 +63,10 @@ class MakeControllerCommand extends Command
      */
     public function getStubVariables()
     {
+        // dump($this->getSingularControllerName($this->argument('name')[0])); exit;
         return [
             'namespace' => 'app\\Http\\Controller',
-            'class' => $this->getSingularControllerName($this->argument('name')),
+            'class' => $this->getSingularControllerName($this->argument('name')[0]),
             'rootNamespace' => 'App\\'
         ];
     }
@@ -89,8 +90,8 @@ class MakeControllerCommand extends Command
     {
         // dump(($this->argument('name')));
         $contents = file_get_contents($stub);
-        // dump($contents);
-        $contents = str_replace('$' . 'class' . '$', $this->argument('name')[0], $contents);
+        // dump($stubVariables); exit;
+        $contents = str_replace('$' . 'class' . '$', $stubVariables['class'], $contents);
         $contents = str_replace('$' . 'namespace' . '$', 'App\Http\Controllers', $contents);
         $contents = str_replace('$' . 'UserModel' . '$', $this->argument('name')['table_name'] . 'Model', $contents);
         $contents = str_replace('$' . 'viewFileName' . '$', $this->argument('name')['table_name'], $contents);
@@ -123,7 +124,8 @@ class MakeControllerCommand extends Command
     public function getSingularControllerName($name)
     {
         // return ucwords(Pluralizer::singular($name));
-        return $name;
+        // dump($name);
+        return ucfirst($name);
     }
 
 

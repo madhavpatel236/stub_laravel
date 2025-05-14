@@ -66,7 +66,7 @@ class MakeModelCommand extends Command
     {
         return [
             'namespace' => 'app\\Models',
-            'class' => $this->getSingularModelName($this->argument('name')),
+            'class' => $this->getSingularModelName($this->argument('name')[0]),
             'rootNamespace' => 'App\\'
         ];
     }
@@ -90,7 +90,7 @@ class MakeModelCommand extends Command
     {
         // dump(($this->argument('name')));
         $contents = file_get_contents($stub);
-        $contents = str_replace('$' . 'class' . '$', $this->argument('name')[0] , $contents);
+        $contents = str_replace('$' . 'class' . '$', $stubVariables['class'] , $contents);
         $contents = str_replace('$' . 'namespace' . '$', "App\Models" , $contents);
         $contents = str_replace('$' . 'tableName' . '$', "'" . $this->argument('name')['table_name'] . "'" , $contents);
         // dump($contents);
@@ -113,7 +113,7 @@ class MakeModelCommand extends Command
     public function getSingularModelName($name)
     {
         // return ucwords(Pluralizer::singular($name));
-        return $name;
+        return ucwords($name);
     }
 
 

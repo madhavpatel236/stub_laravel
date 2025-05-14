@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class test_tableModel extends Model
+class test_table1Model extends Model
 {
-    $table = 'test_table';
+    $table = 'test_table1';
 }

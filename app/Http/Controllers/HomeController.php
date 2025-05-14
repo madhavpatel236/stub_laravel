@@ -123,14 +123,13 @@ class HomeController extends Controller
         // Artisan::call('make:view Edit/' . $request->input('table_name_input'));
         // Artisan::call('make:view Create/' . $request->input('table_name_input'));
 
-        // use App\Http\Controllers\{$request->input('table_name_input') . 'Controller'};
-            // @requires ('App\Http\Controllers\${$request->input('table_name_input')} . 'Controller'');
-        // dump($request->input('table_name_input') . 'Controller');
-        // exit;
         // $controllerName = 'App\\Http\\Controllers\\' . $request->input('table_name_input') . 'Controller';
         // dump($controllerName); exit;
+
         // Route::resource('/user', $controllerName::class);
+
         // dump(route('user.index')); exit;
+
         return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
     }
 
