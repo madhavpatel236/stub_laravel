@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use PHPUnit\TextUI\XmlConfiguration\RemoveLogTypes;
 use Illuminate\Support\Str;
 
-$storeController = ucfirst(Storage::get('newController'));
-dump(ucfirst($storeController));
+// $storeController = ucfirst(Storage::get('newController'));
+// dump(ucfirst($storeController));
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,9 +27,3 @@ Route::resource('/Home', HomeController::class);
 // Route::post('/test',  "$storeController@index")->name('test');
 // Route::resource('/test',  $storeController::class);
 
-
-function dynamic_route() {
-// Route::post('/submit-form', [{$controllerName}::class, 'store'])->name('dynamic.store');
-
-
-}

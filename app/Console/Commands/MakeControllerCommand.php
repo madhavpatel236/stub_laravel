@@ -39,6 +39,11 @@ class MakeControllerCommand extends Command
         $this->makeDireactory(dirname($path));
         $contents = $this->getSourceFile();
 
+
+        // $controllerName = ucfirst($this->argument('name')[0]) . 'Controller';
+        // $this->addDynamicRoute($controllerName);
+
+
         if (! $this->files->exists($path)) {
             $this->files->put($path, $contents);
             $this->info("File : {$path} created");
@@ -140,4 +145,19 @@ class MakeControllerCommand extends Command
         }
         return $path;
     }
+
+//     public function addDynamicRoute($controllerName)
+//     {
+//         $routePath = base_path('routes/web.php');
+//         $slug = strtolower(str_replace('Controller', '', $controllerName)); // e.g., "product"
+
+//         $routeCode = <<<PHP
+
+// use App\\Http\\Controllers\\{$controllerName};
+
+// Route::post('/submit-form', [{$controllerName}::class, 'store'])->name('dynamic.store');
+
+// PHP;
+//         file_put_contents($routePath, $routeCode, FILE_APPEND);
+//     }
 }

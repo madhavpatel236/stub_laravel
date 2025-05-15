@@ -104,7 +104,7 @@ class MakeInterfaceCommand extends Command
 
         foreach ($stubVariables as $search => $replace)
         {
-            dump($replace); exit;
+            // dump($replace); exit;
 
             $contents = str_replace('$'.$search.'$' , $replace, $contents);
         }

@@ -34,7 +34,7 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dump('rv'); exit;
         // Storage::disk('local')->put('controllerName', $request->input('table_name_input') . 'Controller');
         // dump($request->all());
         $count = 0;
@@ -86,7 +86,7 @@ class HomeController extends Controller
             'table_col_name_input' => $table_col_name_input,
         ]]);
 
-        Storage::put('newController', $request->input('table_name_input') . 'Controller');
+        // Storage::put('newController', $request->input('table_name_input') . 'Controller');
         // $storeController = Storage::get('newController');
         // dump($storeController);
 
@@ -152,6 +152,6 @@ class HomeController extends Controller
     public function storetablename(Request $request)
     {
 
-        dd('storetablename');
+        // dd('storetablename');
     }
 }
