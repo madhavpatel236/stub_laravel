@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\test_table5Model;
+use app\Models\customer12Model;
 
 
-class Test_table5Controller extends Controller
+class Customer12Controller extends Controller
 {
     public function index()
     {
         var_dump('index'); exit;
-         $users =test_table5Model::all();
-         return view('Pages.test_table5', compact('users'));
+         $users =customer12Model::all();
+         return view('Pages.customer12', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.test_table5' );
+        return view('Create.customer12' );
     }
 
     public function store(Request $request)
     {
         var_dump('store'); exit;
-        test_table5Model::Create($request->only(['col1',]));
+        customer12Model::Create($request->only(['id',]));
         return redirect('$url$');
     }
 
@@ -34,8 +34,8 @@ class Test_table5Controller extends Controller
 
     public function edit(string $id)
     {
-        $user = test_table5Model::findOrFail($id);
-        return view('Edit.test_table5',  compact('user'));
+        $user = customer12Model::findOrFail($id);
+        return view('Edit.customer12',  compact('user'));
     }
 
     /**
@@ -47,8 +47,8 @@ class Test_table5Controller extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = test_table5Model::findOrFail($id);
-        $user->update($request->only(['col1',]));
+        $user = customer12Model::findOrFail($id);
+        $user->update($request->only(['id',]));
         return redirect('$updateURL$');
     }
 
@@ -57,7 +57,7 @@ class Test_table5Controller extends Controller
      */
     public function destroy(string $id)
     {
-        $user = test_table5Model::findOrFail($id);
+        $user = customer12Model::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\isNull;
 
@@ -34,6 +34,8 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
+
+        // Storage::disk('local')->put('controllerName', $request->input('table_name_input') . 'Controller');
         // dump($request->all());
         $count = 0;
         $table_col_name_input = [];
@@ -61,15 +63,6 @@ class HomeController extends Controller
             // array_push($count_stub, $count);
             $count = $count + 1;
         }
-        // dump($table_col_name_input);
-
-
-        // env('DB_DATABASE', $request->input('db_name_input'));
-        // config()->set('DB_DATABASE', $request->input('db_name_input') );
-        // Config::set('database', $request->input('db_name_input'));
-        Artisan::call('config:cache');
-        Config::set('database.connections.mysql.database', $request->input('db_name_input'));
-
         Artisan::call('make:migration', ['name' => [
             'table_name' => [$request->input('table_name_input')],
             'table_col_name_input' => $table_col_name_input,
@@ -84,7 +77,6 @@ class HomeController extends Controller
             'col_count' => count($table_col_name_input),
         ]]);
 
-
         Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input') . '_table.php');
         // Artisan::call('migrate --path=/database/migrations/' . $request->input('table_name_input'));
         Artisan::call('make:controller', ['name' => [
@@ -94,6 +86,11 @@ class HomeController extends Controller
             'table_col_name_input' => $table_col_name_input,
         ]]);
 
+        Storage::put('newController', $request->input('table_name_input') . 'Controller');
+        // $storeController = Storage::get('newController');
+        // dump($storeController);
+
+
         // Artisan::call('make:model', ['name' => $request->input('table_name_input') . 'Model']); // add the fillable in the argument
         Artisan::call('make:model', ['name' => [
             $request->input('table_name_input') . 'Model',
@@ -102,13 +99,7 @@ class HomeController extends Controller
             'table_col_name_input' => $table_col_name_input,
         ]]);
 
-        // dump($request->input('table_name_input'). 'Controller'); exit;
-        // $controllerName = 'App\\Http\\Controllers\\' . $request->input('table_name_input') . 'Controller';
-
-        Route::resource('/user', ucfirst($request->input('table_name_input')) . "Controller"::class);
-        // Route::has();
-        // dump(ucfirst($request->input('table_name_input')) . "Controller"::class);
-
+        // dump($request->input('table_name_input'). 'Controller');
         Artisan::call('make:view', ['name' => [
             'table_name' => [$request->input('table_name_input')],
             'table_col_name_input' => $table_col_name_input,
@@ -161,6 +152,6 @@ class HomeController extends Controller
     public function storetablename(Request $request)
     {
 
-        dd($request);
+        dd('storetablename');
     }
 }

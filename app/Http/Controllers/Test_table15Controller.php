@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\test_table6Model;
+use app\Models\test_table15Model;
 
 
-class Test_table6Controller extends Controller
+class Test_table15Controller extends Controller
 {
     public function index()
     {
         var_dump('index'); exit;
-         $users =test_table6Model::all();
-         return view('Pages.test_table6', compact('users'));
+         $users =test_table15Model::all();
+         return view('Pages.test_table15', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.test_table6' );
+        return view('Create.test_table15' );
     }
 
     public function store(Request $request)
     {
         var_dump('store'); exit;
-        test_table6Model::Create($request->only(['col1','col2',]));
+        test_table15Model::Create($request->only(['col1',]));
         return redirect('$url$');
     }
 
@@ -34,8 +34,8 @@ class Test_table6Controller extends Controller
 
     public function edit(string $id)
     {
-        $user = test_table6Model::findOrFail($id);
-        return view('Edit.test_table6',  compact('user'));
+        $user = test_table15Model::findOrFail($id);
+        return view('Edit.test_table15',  compact('user'));
     }
 
     /**
@@ -47,8 +47,8 @@ class Test_table6Controller extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = test_table6Model::findOrFail($id);
-        $user->update($request->only(['col1','col2',]));
+        $user = test_table15Model::findOrFail($id);
+        $user->update($request->only(['col1',]));
         return redirect('$updateURL$');
     }
 
@@ -57,7 +57,7 @@ class Test_table6Controller extends Controller
      */
     public function destroy(string $id)
     {
-        $user = test_table6Model::findOrFail($id);
+        $user = test_table15Model::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
 

@@ -3,38 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\test_table4Model;
+use app\Models\customer13Model;
 
 
-class Test_table4Controller extends Controller
+class Customer13Controller extends Controller
 {
     public function index()
     {
-        var_dump('index');
-        exit;
-        $users = test_table4Model::all();
-        return view('Pages.test_table4', compact('users'));
+        var_dump('index'); exit;
+         $users =customer13Model::all();
+         return view('Pages.customer13', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.test_table4');
+        return view('Create.customer13' );
     }
 
     public function store(Request $request)
     {
-        var_dump('store');
-        exit;
-        test_table4Model::Create($request->only(['col1',]));
+        var_dump('store'); exit;
+        customer13Model::Create($request->only(['id',]));
         return redirect('$url$');
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+
+    }
 
     public function edit(string $id)
     {
-        $user = test_table4Model::findOrFail($id);
-        return view('Edit.test_table4',  compact('user'));
+        $user = customer13Model::findOrFail($id);
+        return view('Edit.customer13',  compact('user'));
     }
 
     /**
@@ -46,8 +47,8 @@ class Test_table4Controller extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = test_table4Model::findOrFail($id);
-        $user->update($request->only(['col1',]));
+        $user = customer13Model::findOrFail($id);
+        $user->update($request->only(['id',]));
         return redirect('$updateURL$');
     }
 
@@ -56,8 +57,9 @@ class Test_table4Controller extends Controller
      */
     public function destroy(string $id)
     {
-        $user = test_table4Model::findOrFail($id);
+        $user = customer13Model::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
+
     }
 }

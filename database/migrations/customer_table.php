@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('customer', function (Blueprint $table) {
             $table->integer('id', )->comment('');
+$table->integer('name', )->comment('');
 ;
             $table->timestamps();
         });

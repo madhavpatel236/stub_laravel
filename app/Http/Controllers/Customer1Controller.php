@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\customersModel;
+use app\Models\customer1Model;
 
 
-class CustomersController extends Controller
+class Customer1Controller extends Controller
 {
     public function index()
     {
         var_dump('index'); exit;
-         $users =customersModel::all();
-         return view('Pages.customers', compact('users'));
+         $users =customer1Model::all();
+         return view('Pages.customer1', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.customers' );
+        return view('Create.customer1' );
     }
 
     public function store(Request $request)
     {
         var_dump('store'); exit;
-        customersModel::Create($request->only(['name',]));
+        customer1Model::Create($request->only(['id',]));
         return redirect('$url$');
     }
 
@@ -34,8 +34,8 @@ class CustomersController extends Controller
 
     public function edit(string $id)
     {
-        $user = customersModel::findOrFail($id);
-        return view('Edit.customers',  compact('user'));
+        $user = customer1Model::findOrFail($id);
+        return view('Edit.customer1',  compact('user'));
     }
 
     /**
@@ -47,8 +47,8 @@ class CustomersController extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = customersModel::findOrFail($id);
-        $user->update($request->only(['name',]));
+        $user = customer1Model::findOrFail($id);
+        $user->update($request->only(['id',]));
         return redirect('$updateURL$');
     }
 
@@ -57,7 +57,7 @@ class CustomersController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = customersModel::findOrFail($id);
+        $user = customer1Model::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
 

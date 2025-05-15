@@ -1,10 +1,10 @@
 <div>
-<form method='post'   name='data_input_form'>
+<form method='post' action='{{route('test.store')}}'  name='data_input_form'>
 @csrf
 
                 <lable> id:</lable>
                 <input class= "integer"  , name="id"/> <br/> <br/>
-
+            
 <button name="data_submit_btn"> Submit </button>
 </form> <br /> <br/>
 

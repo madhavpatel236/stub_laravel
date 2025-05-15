@@ -111,7 +111,7 @@ class MakeViewCommand extends Command
 
         $tbody = '<tr></tr>';
 
-        $action = "{{route('user.storetablename')}}";
+        $action = "{{route('test.index')}}";
 
         $contents = str_replace('$' . 'INPUT_FIELDS' . '$', $val, $contents);
         $contents = str_replace('$' . 'action' . '$', $action, $contents);
