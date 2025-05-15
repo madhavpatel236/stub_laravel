@@ -26,5 +26,8 @@ Route::resource('/Home', HomeController::class);
 use App\Http\Controllers\AController;
 
 Route::post('/AController', [AController::class, 'store'])->name('AController.store');
+
 use App\Http\Controllers\AAController;
 Route::post('/AAController', [AAController::class, 'store'])->name('AAController.store');
+use App\Http\Controllers\BController;
+Route::post('/BController', [BController::class, 'store'])->name('BController.store');
