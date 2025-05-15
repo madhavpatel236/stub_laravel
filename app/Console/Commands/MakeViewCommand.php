@@ -111,7 +111,8 @@ class MakeViewCommand extends Command
 
         $tbody = '<tr></tr>';
 
-        $action = "{{route('test.index')}}";
+        // $action = "{{route('test.index')}}";
+        $action = '{{route(' . "'" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . '.store' . "'" .  ')}}';
 
         $contents = str_replace('$' . 'INPUT_FIELDS' . '$', $val, $contents);
         $contents = str_replace('$' . 'action' . '$', $action, $contents);

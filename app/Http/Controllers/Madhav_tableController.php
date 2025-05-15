@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\customer12Model;
+use app\Models\madhav_tableModel;
 
 
-class Customer12Controller extends Controller
+class Madhav_tableController extends Controller
 {
     public function index()
     {
         var_dump('index'); exit;
-         $users =customer12Model::all();
-         return view('Pages.customer12', compact('users'));
+         $users =madhav_tableModel::all();
+         return view('Pages.madhav_table', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.customer12' );
+        return view('Create.madhav_table' );
     }
 
     public function store(Request $request)
     {
         var_dump('store'); exit;
-        customer12Model::Create($request->only(['id',]));
+        madhav_tableModel::Create($request->only(['patel',]));
         return redirect('$url$');
     }
 
@@ -34,8 +34,8 @@ class Customer12Controller extends Controller
 
     public function edit(string $id)
     {
-        $user = customer12Model::findOrFail($id);
-        return view('Edit.customer12',  compact('user'));
+        $user = madhav_tableModel::findOrFail($id);
+        return view('Edit.madhav_table',  compact('user'));
     }
 
     /**
@@ -47,8 +47,8 @@ class Customer12Controller extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = customer12Model::findOrFail($id);
-        $user->update($request->only(['id',]));
+        $user = madhav_tableModel::findOrFail($id);
+        $user->update($request->only(['patel',]));
         return redirect('$updateURL$');
     }
 
@@ -57,7 +57,7 @@ class Customer12Controller extends Controller
      */
     public function destroy(string $id)
     {
-        $user = customer12Model::findOrFail($id);
+        $user = madhav_tableModel::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
 

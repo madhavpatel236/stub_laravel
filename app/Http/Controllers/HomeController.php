@@ -86,10 +86,9 @@ class HomeController extends Controller
             'table_col_name_input' => $table_col_name_input,
         ]]);
 
-        // Storage::put('newController', $request->input('table_name_input') . 'Controller');
-        // $storeController = Storage::get('newController');
-        // dump($storeController);
 
+        $controllerName = ucfirst($request->input('table_name_input') . 'Controller');
+        $this->addDynamicRoute($controllerName);
 
         // Artisan::call('make:model', ['name' => $request->input('table_name_input') . 'Model']); // add the fillable in the argument
         Artisan::call('make:model', ['name' => [
@@ -114,6 +113,7 @@ class HomeController extends Controller
             'col_count' => count($table_col_name_input),
         ]]);
 
+        // exit;
         return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
     }
 
@@ -153,5 +153,22 @@ class HomeController extends Controller
     {
 
         // dd('storetablename');
+    }
+
+    public function addDynamicRoute($controllerName)
+    {
+        // dump($controllerName); exit;
+        $routePath = base_path('routes/web.php');
+        dump($routePath);
+        $slug = ucfirst(str_replace('Controller', '', $controllerName));
+        dump($slug);
+        // exit;
+
+        $routeCode = <<<PHP
+        use App\\Http\\Controllers\\{$controllerName};
+        Route::post('/{$controllerName}', [{$controllerName}::class, 'store'])->name('{$controllerName}.store');
+
+        PHP;
+        file_put_contents($routePath, $routeCode, FILE_APPEND);
     }
 }

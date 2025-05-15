@@ -40,8 +40,6 @@ class MakeControllerCommand extends Command
         $contents = $this->getSourceFile();
 
 
-        // $controllerName = ucfirst($this->argument('name')[0]) . 'Controller';
-        // $this->addDynamicRoute($controllerName);
 
 
         if (! $this->files->exists($path)) {
@@ -109,7 +107,7 @@ class MakeControllerCommand extends Command
             $val .= "'" . $this->argument('name')['table_col_name_input'][$i] . "'" . ',';
         }
         $contents = str_replace('$' . 'storeData' . '$', $val, $contents);
-        dump($contents);
+        // dump($contents);
         return $contents;
     }
 
@@ -146,18 +144,5 @@ class MakeControllerCommand extends Command
         return $path;
     }
 
-//     public function addDynamicRoute($controllerName)
-//     {
-//         $routePath = base_path('routes/web.php');
-//         $slug = strtolower(str_replace('Controller', '', $controllerName)); // e.g., "product"
 
-//         $routeCode = <<<PHP
-
-// use App\\Http\\Controllers\\{$controllerName};
-
-// Route::post('/submit-form', [{$controllerName}::class, 'store'])->name('dynamic.store');
-
-// PHP;
-//         file_put_contents($routePath, $routeCode, FILE_APPEND);
-//     }
 }
