@@ -23,6 +23,8 @@ Route::redirect('/', '/Home');
 
 Route::resource('/Home', HomeController::class);
 
+use App\Http\Controllers\AController;
 
-use App\Http\Controllers\Madhav_tableController;
-Route::post('/Madhav_tableController', [Madhav_tableController::class, 'store'])->name('Madhav_tableController.store');
+Route::post('/AController', [AController::class, 'store'])->name('AController.store');
+use App\Http\Controllers\AAController;
+Route::post('/AAController', [AAController::class, 'store'])->name('AAController.store');

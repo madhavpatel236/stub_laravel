@@ -37,6 +37,8 @@ class HomeController extends Controller
         // dump('rv'); exit;
         // Storage::disk('local')->put('controllerName', $request->input('table_name_input') . 'Controller');
         // dump($request->all());
+
+
         $count = 0;
         $table_col_name_input = [];
         $table_col_type = [];
@@ -48,6 +50,9 @@ class HomeController extends Controller
         $table_col_comment = [];
         $table_col_length = [];
         $count_stub = [];
+
+        Artisan::call('config:cache');
+        Config::set('database.connections.mysql.database', $request->input('db_name_input'));
 
         while ($request->input('table_col_name_input' . $count) != null) {
             array_push($table_col_name_input, $request->input('table_col_name_input' . $count));
@@ -63,6 +68,7 @@ class HomeController extends Controller
             // array_push($count_stub, $count);
             $count = $count + 1;
         }
+
         Artisan::call('make:migration', ['name' => [
             'table_name' => [$request->input('table_name_input')],
             'table_col_name_input' => $table_col_name_input,
