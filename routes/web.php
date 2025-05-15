@@ -19,6 +19,16 @@ use App\Http\Controllers\BBBController;
 use App\Http\Controllers\TestingController;
 
 // use App\Http\Controllers\TestingController;
+use App\Http\Controllers\NandController;
+use App\Http\Controllers\TryController;
+use App\Http\Controllers\Try2Controller;
+use App\Http\Controllers\try2;
+use App\Http\Controllers\Try3Controller;
+use App\Http\Controllers\try3;
+use App\Http\Controllers\Try4Controller;
+use App\Http\Controllers\Try5Controller;
+use App\Http\Controllers\Try6Controller;
+use App\Http\Controllers\Try7Controller;
 // [USE_CONTROLLERS]
 
 
@@ -40,4 +50,12 @@ Route::resource('TestController', TestController::class);
 Route::resource('AAAController', AAAController::class);
 Route::resource('BBBController', BBBController::class);
 Route::resource('TestingController', TestingController::class);
+Route::resource('NandController', NandController::class);
+Route::resource('TryController', TryController::class);
+Route::resource('Try2Controller', Try2Controller::class);
+Route::resource('Try3Controller', Try3Controller::class);
+Route::resource('Try4Controller', Try4Controller::class);
+Route::resource('Try5Controller', Try5Controller::class);
+Route::resource('Try6Controller', Try6Controller::class);
+Route::resource('Try7Controller', Try7Controller::class);
 // [ROUTE_CONTROLLERS]

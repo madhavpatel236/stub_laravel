@@ -55,8 +55,8 @@ class HomeController extends Controller
 
         Artisan::call('config:cache');
         Config::set('database.connections.mysql.database', $request->input('db_name_input'));
-        DB::purge('mysql');
-        DB::reconnect('mysql');
+        // DB::purge('mysql');
+        // DB::reconnect('mysql');
 
 
         while ($request->input('table_col_name_input' . $count) != null) {
@@ -101,10 +101,18 @@ class HomeController extends Controller
         $controllerName = ucfirst($request->input('table_name_input') . 'Controller');
         $this->addDynamicRoute($controllerName);
 
+
+        // dump($request->input('db_name_input')); exit;
+
+        $dbName = ($request->input('db_name_input'));
+        $this->addDynamicDatabase($dbName);
+
+
+
         // Artisan::call('make:model', ['name' => $request->input('table_name_input') . 'Model']); // add the fillable in the argument
         Artisan::call('make:model', ['name' => [
             $request->input('table_name_input') . 'Model',
-            'db_name' => 'demo',
+            'db_name' => $request->input('db_name_input'),
             'table_name' => $request->input('table_name_input'),
             'table_col_name_input' => $table_col_name_input,
         ]]);
@@ -200,7 +208,7 @@ class HomeController extends Controller
 
         // Avoid duplicates
         if (str_contains($fileContents, $useLine) || str_contains($fileContents, $routeLine)) {
-            echo "$controllerName already exists in web.php\n";
+            // echo "$controllerName already exists in web.php\n";
             return;
         }
 
@@ -219,7 +227,49 @@ class HomeController extends Controller
 
         // Save file
         file_put_contents($routePath, $fileContents);
-
         echo "Route and use statement for $controllerName added successfully.\n";
+    }
+
+    public function addDynamicDatabase($dbname)
+    {
+        $routePath = base_path('config/database.php');
+        $fileContents = file_get_contents($routePath);
+
+        $content = "
+        '{$dbname}' => [
+            'driver' => 'mysql',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', '{$dbname}'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'Madhav@123'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ],
+            ) : [],
+        ],";
+
+        if (str_contains($fileContents, $content)) {
+            // echo "$dbname already exists in web.php\n";
+            return;
+        }
+
+        $fileContents = str_replace(
+            '// [NEWDB]',
+            "$content\n// [NEWDB]",
+            $fileContents
+        );
+
+        file_put_contents($routePath, $fileContents);
+
+
     }
 }
