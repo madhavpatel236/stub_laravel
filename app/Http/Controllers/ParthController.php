@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\AAModel;
+use app\Models\parthModel;
 
 
-class AAController extends Controller
+class ParthController extends Controller
 {
     public function index()
     {
         var_dump('index'); exit;
-         $users =AAModel::all();
-         return view('Pages.AA', compact('users'));
+         $users =parthModel::all();
+         return view('Pages.parth', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.AA' );
+        return view('Create.parth' );
     }
 
     public function store(Request $request)
     {
         var_dump('store'); exit;
-        AAModel::Create($request->only(['AA',]));
+        parthModel::Create($request->only(['a',]));
         return redirect('$url$');
     }
 
@@ -34,8 +34,8 @@ class AAController extends Controller
 
     public function edit(string $id)
     {
-        $user = AAModel::findOrFail($id);
-        return view('Edit.AA',  compact('user'));
+        $user = parthModel::findOrFail($id);
+        return view('Edit.parth',  compact('user'));
     }
 
     /**
@@ -47,8 +47,8 @@ class AAController extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = AAModel::findOrFail($id);
-        $user->update($request->only(['AA',]));
+        $user = parthModel::findOrFail($id);
+        $user->update($request->only(['a',]));
         return redirect('$updateURL$');
     }
 
@@ -57,7 +57,7 @@ class AAController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = AAModel::findOrFail($id);
+        $user = parthModel::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
 

@@ -3,7 +3,7 @@
 namespace $namespace$;
 
 use Illuminate\Http\Request;
-use app\Models\$UserModel$;
+use App\Models\$UserModel$;
 
 
 class $class$ extends Controller

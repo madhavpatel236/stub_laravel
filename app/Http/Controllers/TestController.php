@@ -3,29 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\aModel;
+use app\Models\testModel;
 
 
-class AController extends Controller
+class TestController extends Controller
 {
     public function index()
     {
-        dump('index'); exit;
-         $users =aModel::all();
-         return $users;
-        //  return view('Pages.a', compact('users'));
+        var_dump('index'); exit;
+         $users =testModel::all();
+         return view('Pages.test', compact('users'));
     }
 
     public function create()
     {
-        // return view('Create.a' );
+        return view('Create.test' );
     }
 
     public function store(Request $request)
     {
-        dump('store'); exit;
-        aModel::Create($request->only(['a','aa','aaa',]));
-        // return redirect('/Home');
+        var_dump('store'); exit;
+        testModel::Create($request->only(['wert']));
+        return redirect('testcontroller');
     }
 
     public function show(string $id)
@@ -35,8 +34,8 @@ class AController extends Controller
 
     public function edit(string $id)
     {
-        $user = aModel::findOrFail($id);
-        // return view('Edit.a',  compact('user'));
+        $user = testModel::findOrFail($id);
+        return view('Edit.test',  compact('user'));
     }
 
     /**
@@ -48,9 +47,9 @@ class AController extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = aModel::findOrFail($id);
-        $user->update($request->only(['a','aa','aaa',]));
-        return redirect('$updateURL$');
+        $user = testModel::findOrFail($id);
+        $user->update($request->only(['wert']));
+        return redirect('testcontroller');
     }
 
     /**
@@ -58,9 +57,9 @@ class AController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = aModel::findOrFail($id);
+        $user = testModel::findOrFail($id);
         $user->delete();
-        return redirect('$deleteURL$');
+        return redirect('testcontroller');
 
     }
 }

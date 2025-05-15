@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('B', function (Blueprint $table) {
-            $table->integer('B', )->comment('');
-$table->integer('BB', )->comment('');
+        Schema::create('Suchak', function (Blueprint $table) {
+            $table->integer('q', 1)->comment('');
+$table->text('w', 2)->comment('');
 ;
             $table->timestamps();
         });
@@ -24,7 +24,7 @@ $table->integer('BB', )->comment('');
      */
     public function down(): void
     {
-        Schema::dropIfExists('B');
+        Schema::dropIfExists('Suchak');
     }
 };
 

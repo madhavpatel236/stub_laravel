@@ -111,6 +111,8 @@ class MakeControllerCommand extends Command
         return $contents;
     }
 
+
+
     /**
      * @return string
      */

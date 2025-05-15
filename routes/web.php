@@ -6,10 +6,21 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Http\Controllers\AController;
+use App\Http\Controllers\PatelController;
+use App\Http\Controllers\Patel1Controller;
+use App\Http\Controllers\Patel2Controller;
+use App\Http\Controllers\ParthController;
+use App\Http\Controllers\MaanController;
+use App\Http\Controllers\Maan2Controller;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\AAAController;
+use App\Http\Controllers\BBBController;
+use App\Http\Controllers\TestingController;
 
-// $mit;
-// $storeController = ucfirst(Storage::get('newController'));
-// dump(ucfirst($storeController));
+// use App\Http\Controllers\TestingController;
+// [USE_CONTROLLERS]
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,17 +28,16 @@ Route::get('/', function () {
 
 Route::redirect('/', '/Home');
 
-// Route::get('/Home', function(){
-//     return view('Pages.Home');
-// });
-
 Route::resource('/Home', HomeController::class);
 
-use App\Http\Controllers\AController;
-
-Route::post('/AController', [AController::class, 'store'])->name('AController.store');
-
-use App\Http\Controllers\AAController;
-Route::post('/AAController', [AAController::class, 'store'])->name('AAController.store');
-use App\Http\Controllers\BController;
-Route::post('/BController', [BController::class, 'store'])->name('BController.store');
+Route::resource('patel', PatelController::class);
+Route::resource('Patel1Controller', Patel1Controller::class);
+Route::resource('Patel2Controller', Patel2Controller::class);
+Route::resource('ParthController', ParthController::class);
+Route::resource('MaanController', MaanController::class);
+Route::resource('Maan2Controller', Maan2Controller::class);
+Route::resource('TestController', TestController::class);
+Route::resource('AAAController', AAAController::class);
+Route::resource('BBBController', BBBController::class);
+Route::resource('TestingController', TestingController::class);
+// [ROUTE_CONTROLLERS]

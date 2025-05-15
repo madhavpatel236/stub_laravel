@@ -3,28 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\madhav_tableModel;
+use app\Models\maan2Model;
 
 
-class Madhav_tableController extends Controller
+class Maan2Controller extends Controller
 {
     public function index()
     {
         var_dump('index'); exit;
-         $users =madhav_tableModel::all();
-         return view('Pages.madhav_table', compact('users'));
+         $users =maan2Model::all();
+         return view('Pages.maan2', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.madhav_table' );
+        return view('Create.maan2' );
     }
 
     public function store(Request $request)
     {
         var_dump('store'); exit;
-        madhav_tableModel::Create($request->only(['patel',]));
-        return redirect('$url$');
+        maan2Model::Create($request->only(['qwe']));
+        return redirect('maan2controller');
     }
 
     public function show(string $id)
@@ -34,8 +34,8 @@ class Madhav_tableController extends Controller
 
     public function edit(string $id)
     {
-        $user = madhav_tableModel::findOrFail($id);
-        return view('Edit.madhav_table',  compact('user'));
+        $user = maan2Model::findOrFail($id);
+        return view('Edit.maan2',  compact('user'));
     }
 
     /**
@@ -47,9 +47,9 @@ class Madhav_tableController extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = madhav_tableModel::findOrFail($id);
-        $user->update($request->only(['patel',]));
-        return redirect('$updateURL$');
+        $user = maan2Model::findOrFail($id);
+        $user->update($request->only(['qwe']));
+        return redirect('maan2controller');
     }
 
     /**
@@ -57,9 +57,9 @@ class Madhav_tableController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = madhav_tableModel::findOrFail($id);
+        $user = maan2Model::findOrFail($id);
         $user->delete();
-        return redirect('$deleteURL$');
+        return redirect('maan2controller');
 
     }
 }

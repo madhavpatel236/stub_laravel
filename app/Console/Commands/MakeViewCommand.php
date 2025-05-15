@@ -122,6 +122,23 @@ class MakeViewCommand extends Command
         $contents = str_replace('$' . 'tableHead' . '$', $thead, $contents);
         $contents = str_replace('$' . 'tableBody' . '$', $tbody, $contents);
 
+
+        // ucfirst($this->argument('name')['table_name'][0]) . 'Controller'
+        $ajax = ' $.ajax({
+                url: "' . "{{" . "route" . "(" . "'" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . '.index' . "'" . ")" . "}}"  . '",
+                type: "get",
+                data: {},
+                success: function($res) {
+                    alert($res);
+
+                    $val = ' . "`" . '<tr>
+                        
+                    </tr>' . "`" .  '
+                }
+                }
+    )}) ';
+
+        $contents = str_replace('$' . 'ajax' . '$', $ajax, $contents);
         dump($contents);
 
 

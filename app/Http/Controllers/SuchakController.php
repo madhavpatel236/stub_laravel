@@ -3,29 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\aModel;
+use app\Models\SuchakModel;
 
 
-class AController extends Controller
+class SuchakController extends Controller
 {
     public function index()
     {
-        dump('index'); exit;
-         $users =aModel::all();
-         return $users;
-        //  return view('Pages.a', compact('users'));
+        var_dump('index'); exit;
+         $users =SuchakModel::all();
+         return view('Pages.Suchak', compact('users'));
     }
 
     public function create()
     {
-        // return view('Create.a' );
+        return view('Create.Suchak' );
     }
 
     public function store(Request $request)
     {
-        dump('store'); exit;
-        aModel::Create($request->only(['a','aa','aaa',]));
-        // return redirect('/Home');
+        var_dump('store'); exit;
+        SuchakModel::Create($request->only(['q','w',]));
+        return redirect('$url$');
     }
 
     public function show(string $id)
@@ -35,8 +34,8 @@ class AController extends Controller
 
     public function edit(string $id)
     {
-        $user = aModel::findOrFail($id);
-        // return view('Edit.a',  compact('user'));
+        $user = SuchakModel::findOrFail($id);
+        return view('Edit.Suchak',  compact('user'));
     }
 
     /**
@@ -48,8 +47,8 @@ class AController extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = aModel::findOrFail($id);
-        $user->update($request->only(['a','aa','aaa',]));
+        $user = SuchakModel::findOrFail($id);
+        $user->update($request->only(['q','w',]));
         return redirect('$updateURL$');
     }
 
@@ -58,7 +57,7 @@ class AController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = aModel::findOrFail($id);
+        $user = SuchakModel::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
 

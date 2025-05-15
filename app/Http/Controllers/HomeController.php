@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isNull;
 
@@ -53,6 +55,9 @@ class HomeController extends Controller
 
         Artisan::call('config:cache');
         Config::set('database.connections.mysql.database', $request->input('db_name_input'));
+        DB::purge('mysql');
+        DB::reconnect('mysql');
+
 
         while ($request->input('table_col_name_input' . $count) != null) {
             array_push($table_col_name_input, $request->input('table_col_name_input' . $count));
@@ -121,6 +126,7 @@ class HomeController extends Controller
 
         // exit;
         return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
+        // return redirect()->route(Str::kebab($request->input('table_name_input')) . '.index');
     }
 
     /**
@@ -161,20 +167,59 @@ class HomeController extends Controller
         // dd('storetablename');
     }
 
+    // public function addDynamicRoute($controllerName)
+    // {
+    //     // dump($controllerName); exit;
+    //     $routePath = base_path('routes/web.php');
+    //     dump($routePath);
+    //     $slug = ucfirst(str_replace('Controller', '', $controllerName));
+    //     dump($slug);
+    //     // exit;
+
+    //     $routeCode = <<<PHP
+    //     use App\\Http\\Controllers\\{$controllerName};
+    //     Route::resource('/{$controllerName}', {$controllerName}::class);
+
+    //     PHP;
+    //     file_put_contents($routePath, $routeCode, FILE_APPEND);
+    // }
     public function addDynamicRoute($controllerName)
     {
-        // dump($controllerName); exit;
         $routePath = base_path('routes/web.php');
-        dump($routePath);
-        $slug = ucfirst(str_replace('Controller', '', $controllerName));
-        dump($slug);
-        // exit;
+        $controllerClass = "App\\Http\\Controllers\\$controllerName";
 
-        $routeCode = <<<PHP
-        use App\\Http\\Controllers\\{$controllerName};
-        Route::post('/{$controllerName}', [{$controllerName}::class, 'store'])->name('{$controllerName}.store');
+        // Route path exactly matches controller name
+        $routeUrl = $controllerName;
 
-        PHP;
-        file_put_contents($routePath, $routeCode, FILE_APPEND);
+        // Read web.php contents
+        $fileContents = file_get_contents($routePath);
+
+        // Generate use and route lines
+        $useLine   = "use $controllerClass;";
+        $routeLine = "Route::resource('$routeUrl', $controllerName::class);";
+
+        // Avoid duplicates
+        if (str_contains($fileContents, $useLine) || str_contains($fileContents, $routeLine)) {
+            echo "$controllerName already exists in web.php\n";
+            return;
+        }
+
+        // Replace placeholders
+        $fileContents = str_replace(
+            '// [USE_CONTROLLERS]',
+            "$useLine\n// [USE_CONTROLLERS]",
+            $fileContents
+        );
+
+        $fileContents = str_replace(
+            '// [ROUTE_CONTROLLERS]',
+            "$routeLine\n// [ROUTE_CONTROLLERS]",
+            $fileContents
+        );
+
+        // Save file
+        file_put_contents($routePath, $fileContents);
+
+        echo "Route and use statement for $controllerName added successfully.\n";
     }
 }
