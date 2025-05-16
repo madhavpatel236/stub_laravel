@@ -132,24 +132,17 @@ class MakeViewCommand extends Command
 
                 // alert($res.col1);
 
-                 res.forEach(row => {
-            html += `<tr>
-                <td>${row.col1}</td>
-                <td>${row.col2}</td>
-                ...
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-            </tr>`;
+                let rows = "";
+            res.forEach(row => {
+            rows += "<tr>";
+            for (let key in row) {
+                rows += "<td>" + row[key] + "</td>";
+            }
+            rows += "<td><button>Edit</button></td></tr>";
         });
-        document.getElementById("table-body").innerHTML = html;
+        document.getElementById("table_body").innerHTML = rows;
 
-
-
-
-                    $val = ' . "`" . '<tr>
-
-                    </tr>' . "`" .  '
-                }
-                }
+    }}
     ) ';
 
         $contents = str_replace('$' . 'ajax' . '$', $ajax, $contents);

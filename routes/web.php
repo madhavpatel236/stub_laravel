@@ -30,6 +30,8 @@ use App\Http\Controllers\Try5Controller;
 use App\Http\Controllers\Try6Controller;
 use App\Http\Controllers\Try7Controller;
 use App\Http\Controllers\Maan_table10Controller;
+use App\Http\Controllers\Test123Controller;
+use App\Http\Controllers\Test1234Controller;
 // [USE_CONTROLLERS]
 
 
@@ -60,4 +62,6 @@ Route::resource('Try5Controller', Try5Controller::class);
 Route::resource('Try6Controller', Try6Controller::class);
 Route::resource('Try7Controller', Try7Controller::class);
 Route::resource('Maan_table10Controller', Maan_table10Controller::class);
+Route::resource('Test123Controller', Test123Controller::class);
+Route::resource('Test1234Controller', Test1234Controller::class);
 // [ROUTE_CONTROLLERS]

@@ -10,9 +10,10 @@ class TestController extends Controller
 {
     public function index()
     {
-        var_dump('index'); exit;
+        // var_dump('index'); exit;
          $users =testModel::all();
-         return view('Pages.test', compact('users'));
+         return response()->json($users);
+        //  return view('Pages.test', compact('users'));
     }
 
     public function create()

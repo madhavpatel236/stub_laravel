@@ -1,29 +1,29 @@
 <?php
 
-namespace $namespace$;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\$UserModel$;
+use App\Models\Test1234Model;
 
 
-class $class$ extends Controller
+class Test1234Controller extends Controller
 {
     public function index()
     {
-         $users =$UserModel$::all();
+         $users =Test1234Model::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.$viewFileName$' );
+        return view('Create.test1234' );
     }
 
     public function store(Request $request)
     {
-        var_dump('store'); exit;
-        $UserModel$::Create($request->only([$storeData$]));
-        return redirect('$url$');
+        // var_dump('store'); exit;
+        Test1234Model::Create($request->only(['col1','col2',]));
+        // return redirect('$url$');
     }
 
     public function show(string $id)
@@ -33,8 +33,8 @@ class $class$ extends Controller
 
     public function edit(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
-        return view('Edit.$viewFileName$',  compact('user'));
+        $user = Test1234Model::findOrFail($id);
+        return view('Edit.test1234',  compact('user'));
     }
 
     /**
@@ -46,8 +46,8 @@ class $class$ extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = $UserModel$::findOrFail($id);
-        $user->update($request->only([$storeData$]));
+        $user = Test1234Model::findOrFail($id);
+        $user->update($request->only(['col1','col2',]));
         return redirect('$updateURL$');
     }
 
@@ -56,7 +56,7 @@ class $class$ extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Test1234Model::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
 

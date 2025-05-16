@@ -15,7 +15,7 @@
                 <th> Edit </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="table_body">
             <tr></tr>
         </tbody>
     </table>
@@ -31,17 +31,33 @@
             type: "get",
             data: {},
             success: function($res) {
-                alert($res);
-
-                foreach($res as key => value) {
-                    alert(value);
-                }
+                // alert($res[0]['col1']);
 
 
+                var val = '';
+                res.forEach(element => {
+                    val += '<tr>';
+                    for (const key in element) {
+                        alert(key);
+                        val += '<td>' + element[key] + '</td>';
+                    }
+                    val += '</tr>';
+                });
+                document.getElementById("table_body").innerHTML = val;
+                document.getElementById("table_body").innerHTML = "val";
 
-                $val = `<tr>
 
-                    </tr>`
+                // $res.forEach(element => {
+                //     alert(element['col1']);
+
+                //     var val = ' <tr > < td > '.
+                //           {element['col1 ']} .
+                //         ' < /td></tr > ';
+                // });
+
+                // document.getElementById("table-body").innerHTML = val;
+
+
             }
         })
     })

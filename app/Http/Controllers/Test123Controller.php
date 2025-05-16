@@ -1,40 +1,40 @@
 <?php
 
-namespace $namespace$;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\$UserModel$;
+use App\Models\Test123Model;
 
 
-class $class$ extends Controller
+class Test123Controller extends Controller
 {
     public function index()
     {
-         $users =$UserModel$::all();
-        return response()->json($users);
+        // var_dump('index'); exit;
+        $users = Test123Model::all();
+        return $users;
+        //  return view('Pages.test123', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.$viewFileName$' );
+        return view('Create.test123');
     }
 
     public function store(Request $request)
     {
-        var_dump('store'); exit;
-        $UserModel$::Create($request->only([$storeData$]));
+        var_dump('store');
+        exit;
+        Test123Model::Create($request->only(['qwer', 'qwertyui',]));
         return redirect('$url$');
     }
 
-    public function show(string $id)
-    {
-
-    }
+    public function show(string $id) {}
 
     public function edit(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
-        return view('Edit.$viewFileName$',  compact('user'));
+        $user = Test123Model::findOrFail($id);
+        return view('Edit.test123',  compact('user'));
     }
 
     /**
@@ -46,8 +46,8 @@ class $class$ extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = $UserModel$::findOrFail($id);
-        $user->update($request->only([$storeData$]));
+        $user = Test123Model::findOrFail($id);
+        $user->update($request->only(['qwer', 'qwertyui',]));
         return redirect('$updateURL$');
     }
 
@@ -56,9 +56,8 @@ class $class$ extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Test123Model::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
-
     }
 }
