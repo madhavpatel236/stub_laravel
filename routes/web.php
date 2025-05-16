@@ -83,6 +83,8 @@ use App\Http\Controllers\TargetController;
 use App\Http\Controllers\EeeController;
 use App\Http\Controllers\TtController;
 use App\Http\Controllers\Table_1Controller;
+use App\Http\Controllers\ABCController;
+use App\Http\Controllers\MmmmController;
 // [USE_CONTROLLERS]
 
 
@@ -128,4 +130,6 @@ Route::resource('TargetController', TargetController::class);
 Route::resource('EeeController', EeeController::class);
 Route::resource('TtController', TtController::class);
 Route::resource('Table_1Controller', Table_1Controller::class);
+Route::resource('ABCController', ABCController::class);
+Route::resource('MmmmController', MmmmController::class);
 // [ROUTE_CONTROLLERS]

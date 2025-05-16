@@ -3,33 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\QwertModel;
+use App\Models\MmmmModel;
 
 
-class QwertController extends Controller
+class MmmmController extends Controller
 {
     public function index()
     {
-        $users = QwertModel::all();
-        return view('Pages.qwert');
+         $users =MmmmModel::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.qwert');
+        return view('Create.mmmm' );
     }
 
     public function store(Request $request)
     {
-        QwertModel::Create($request->only(['qwert',]));
+        MmmmModel::Create($request->only(['mmm',]));
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+
+    }
 
     public function edit(string $id)
     {
-        $user = QwertModel::findOrFail($id);
+        $user = MmmmModel::findOrFail($id);
         return response()->json($user);
     }
 
@@ -38,8 +40,8 @@ class QwertController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = QwertModel::findOrFail($id);
-        $user->update($request->only(['qwert',]));
+        $user = MmmmModel::findOrFail($id);
+        $user->update($request->only(['mmm',]));
     }
 
     /**
@@ -47,7 +49,8 @@ class QwertController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = QwertModel::findOrFail($id);
+        $user = MmmmModel::findOrFail($id);
         $user->delete();
+
     }
 }

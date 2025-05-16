@@ -36,11 +36,6 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        // dump('rv'); exit;
-        // Storage::disk('local')->put('controllerName', $request->input('table_name_input') . 'Controller');
-        // dump($request->all());
-
-
         $count = 0;
         $table_col_name_input = [];
         $table_col_type = [];
@@ -103,11 +98,8 @@ class HomeController extends Controller
 
 
         // dump($request->input('db_name_input')); exit;
-
         $dbName = ($request->input('db_name_input'));
         $this->addDynamicDatabase($dbName);
-
-
 
         // Artisan::call('make:model', ['name' => $request->input('table_name_input') . 'Model']); // add the fillable in the argument
         Artisan::call('make:model', ['name' => [
@@ -132,8 +124,11 @@ class HomeController extends Controller
             'col_count' => count($table_col_name_input),
         ]]);
 
+
+        // var_dump(ucfirst($request->input('table_name_input')) . 'Controller.index');
         // exit;
-        return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
+        return redirect()->route(ucfirst($request->input('table_name_input')) . 'Controller.index');
+        // return view('Pages.' . $request->input('table_name_input'))->with('data', 'madhav');
         // return redirect()->route(Str::kebab($request->input('table_name_input')) . '.index');
     }
 

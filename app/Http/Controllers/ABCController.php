@@ -3,33 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\QwertModel;
+use App\Models\ABCModel;
 
 
-class QwertController extends Controller
+class ABCController extends Controller
 {
     public function index()
     {
-        $users = QwertModel::all();
-        return view('Pages.qwert');
-        return response()->json($users);
+        $users = ABCModel::all();
+        // var_dump($users);
+        return view('Pages.ABC', compact('users'));
+        // return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.qwert');
+
     }
 
     public function store(Request $request)
     {
-        QwertModel::Create($request->only(['qwert',]));
+        ABCModel::Create($request->only(['Name',]));
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+        $users = ABCModel::all();
+        return response()->json($users);
+    }
 
     public function edit(string $id)
     {
-        $user = QwertModel::findOrFail($id);
+        $user = ABCModel::findOrFail($id);
         return response()->json($user);
     }
 
@@ -38,8 +43,8 @@ class QwertController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = QwertModel::findOrFail($id);
-        $user->update($request->only(['qwert',]));
+        $user = ABCModel::findOrFail($id);
+        $user->update($request->only(['Name',]));
     }
 
     /**
@@ -47,7 +52,7 @@ class QwertController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = QwertModel::findOrFail($id);
+        $user = ABCModel::findOrFail($id);
         $user->delete();
     }
 }
