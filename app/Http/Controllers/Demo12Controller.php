@@ -1,27 +1,28 @@
 <?php
 
-namespace $namespace$;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\$UserModel$;
+use App\Models\Demo12Model;
 
 
-class $class$ extends Controller
+class Demo12Controller extends Controller
 {
     public function index()
     {
-         $users =$UserModel$::all();
+         $users =Demo12Model::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.$viewFileName$' );
+        return view('Create.demo12' );
     }
 
     public function store(Request $request)
     {
-        $UserModel$::Create($request->only([$storeData$]));
+        var_dump($request->all()); exit;
+        Demo12Model::Create($request->only(['demo123',]));
     }
 
     public function show(string $id)
@@ -31,7 +32,7 @@ class $class$ extends Controller
 
     public function edit(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Demo12Model::findOrFail($id);
         return response()->json($user);
     }
 
@@ -40,8 +41,8 @@ class $class$ extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = $UserModel$::findOrFail($id);
-        $user->update($request->only([$storeData$]));
+        $user = Demo12Model::findOrFail($id);
+        $user->update($request->only(['demo123',]));
     }
 
     /**
@@ -49,7 +50,7 @@ class $class$ extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Demo12Model::findOrFail($id);
         $user->delete();
 
     }

@@ -1,27 +1,28 @@
 <?php
 
-namespace $namespace$;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\$UserModel$;
+use App\Models\Tests01Model;
 
 
-class $class$ extends Controller
+class Tests01Controller extends Controller
 {
     public function index()
     {
-         $users =$UserModel$::all();
+         $users =Tests01Model::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.$viewFileName$' );
+        return view('Create.tests01' );
     }
 
     public function store(Request $request)
     {
-        $UserModel$::Create($request->only([$storeData$]));
+        var_dump('store'); exit;
+        Tests01Model::Create($request->only(['aa',]));
     }
 
     public function show(string $id)
@@ -31,7 +32,7 @@ class $class$ extends Controller
 
     public function edit(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Tests01Model::findOrFail($id);
         return response()->json($user);
     }
 
@@ -40,8 +41,8 @@ class $class$ extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = $UserModel$::findOrFail($id);
-        $user->update($request->only([$storeData$]));
+        $user = Tests01Model::findOrFail($id);
+        $user->update($request->only(['aa',]));
     }
 
     /**
@@ -49,7 +50,7 @@ class $class$ extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Tests01Model::findOrFail($id);
         $user->delete();
 
     }

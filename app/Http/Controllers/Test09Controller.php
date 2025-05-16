@@ -1,27 +1,28 @@
 <?php
 
-namespace $namespace$;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\$UserModel$;
+use App\Models\Test09Model;
 
 
-class $class$ extends Controller
+class Test09Controller extends Controller
 {
     public function index()
     {
-         $users =$UserModel$::all();
+         $users =Test09Model::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.$viewFileName$' );
+        return view('Create.test09' );
     }
 
     public function store(Request $request)
     {
-        $UserModel$::Create($request->only([$storeData$]));
+        var_dump('store'); exit;
+        Test09Model::Create($request->only(['ewf',]));
     }
 
     public function show(string $id)
@@ -31,7 +32,7 @@ class $class$ extends Controller
 
     public function edit(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Test09Model::findOrFail($id);
         return response()->json($user);
     }
 
@@ -40,8 +41,8 @@ class $class$ extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = $UserModel$::findOrFail($id);
-        $user->update($request->only([$storeData$]));
+        $user = Test09Model::findOrFail($id);
+        $user->update($request->only(['ewf',]));
     }
 
     /**
@@ -49,7 +50,7 @@ class $class$ extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Test09Model::findOrFail($id);
         $user->delete();
 
     }

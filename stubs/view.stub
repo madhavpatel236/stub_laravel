@@ -1,13 +1,13 @@
     <div>
-    <form method='post' action='$action$' name='data_input_form'>
+    <form method='post' id='data_input_form' action='$action$' name='data_input_form'>
     @csrf
     $INPUT_FIELDS$
     <button name="data_submit_btn"> Submit </button>
     </form> <br /> <br/>
 
     <table border=2 >
-    <thead> $tableHead$ </thead>
-    <tbody> $tableBody$ </tbody>
+     $tableHead$
+     $tableBody$
     </table>
     </div>
 

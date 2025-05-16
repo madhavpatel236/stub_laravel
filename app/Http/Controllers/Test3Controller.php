@@ -3,28 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Test1234Model;
+use App\Models\Test3Model;
 
 
-class Test1234Controller extends Controller
+class Test3Controller extends Controller
 {
     public function index()
     {
-         $users =Test1234Model::all();
+         $users =Test3Model::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.test1234' );
+        return view('Create.test3' );
     }
 
     public function store(Request $request)
     {
-        // var_dump('store'); exit;
-        Test1234Model::Create($request->only(['col1','col2',]));
-        return response()->json('sucess');
-        // return redirect('$url$');
+        var_dump('store'); exit;
+        Test3Model::Create($request->only(['name','age',]));
+        return redirect('$url$');
     }
 
     public function show(string $id)
@@ -34,8 +33,8 @@ class Test1234Controller extends Controller
 
     public function edit(string $id)
     {
-        $user = Test1234Model::findOrFail($id);
-        return view('Edit.test1234',  compact('user'));
+        $user = Test3Model::findOrFail($id);
+        return view('Edit.test3',  compact('user'));
     }
 
     /**
@@ -47,8 +46,8 @@ class Test1234Controller extends Controller
             'name' => 'required',
             'lastName' => 'required'
         ]);
-        $user = Test1234Model::findOrFail($id);
-        $user->update($request->only(['col1','col2',]));
+        $user = Test3Model::findOrFail($id);
+        $user->update($request->only(['name','age',]));
         return redirect('$updateURL$');
     }
 
@@ -57,7 +56,7 @@ class Test1234Controller extends Controller
      */
     public function destroy(string $id)
     {
-        $user = Test1234Model::findOrFail($id);
+        $user = Test3Model::findOrFail($id);
         $user->delete();
         return redirect('$deleteURL$');
 

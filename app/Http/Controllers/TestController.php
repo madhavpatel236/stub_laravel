@@ -11,27 +11,25 @@ class TestController extends Controller
     public function index()
     {
         // var_dump('index'); exit;
-         $users =testModel::all();
-         return response()->json($users);
+        $users = testModel::all();
+        return response()->json($users);
         //  return view('Pages.test', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.test' );
+        return view('Create.test');
     }
 
     public function store(Request $request)
     {
-        var_dump('store'); exit;
+        var_dump('store');
+        exit;
         testModel::Create($request->only(['wert']));
         return redirect('testcontroller');
     }
 
-    public function show(string $id)
-    {
-
-    }
+    public function show(string $id) {}
 
     public function edit(string $id)
     {
@@ -61,6 +59,5 @@ class TestController extends Controller
         $user = testModel::findOrFail($id);
         $user->delete();
         return redirect('testcontroller');
-
     }
 }

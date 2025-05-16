@@ -1,37 +1,36 @@
 <?php
 
-namespace $namespace$;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\$UserModel$;
+use App\Models\Test_table5Model;
 
 
-class $class$ extends Controller
+class Test_table5Controller extends Controller
 {
     public function index()
     {
-         $users =$UserModel$::all();
+        $users = Test_table5Model::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.$viewFileName$' );
+        return view('Create.test_table5');
     }
 
     public function store(Request $request)
     {
-        $UserModel$::Create($request->only([$storeData$]));
+        var_dump('store');
+        exit;
+        Test_table5Model::Create($request->only(['test',]));
     }
 
-    public function show(string $id)
-    {
-
-    }
+    public function show(string $id) {}
 
     public function edit(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Test_table5Model::findOrFail($id);
         return response()->json($user);
     }
 
@@ -40,8 +39,8 @@ class $class$ extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = $UserModel$::findOrFail($id);
-        $user->update($request->only([$storeData$]));
+        $user = Test_table5Model::findOrFail($id);
+        $user->update($request->only(['test',]));
     }
 
     /**
@@ -49,8 +48,7 @@ class $class$ extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Test_table5Model::findOrFail($id);
         $user->delete();
-
     }
 }

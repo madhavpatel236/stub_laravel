@@ -101,15 +101,13 @@ class MakeViewCommand extends Command
             ';
         }
 
-        $th = '';
-        for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
-            $th .=  '<th>' . $this->argument('name')['table_col_name_input'][$i] . '</th>';
-        }
-        $th .= '<th> Edit </th>'; // for the edit and delete btn
-        $thead = '<tr>' . $th . '</tr>';
-
-
-        $tbody = '<tr></tr>';
+        // $th = '';
+        // for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+        //     $th .=  '<th>' . $this->argument('name')['table_col_name_input'][$i] . '</th>';
+        // }
+        // $th .= '<th> Edit </th>'; // for the edit and delete btn
+        $thead = '<thead id="table_head">' . '' . '</thead>';
+        $tbody = '<tbody id="table_body">' . '' . '</tbody>';
 
         // $action = "{{route('test.index')}}";
         $action = '{{route(' . "'" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . '.store' . "'" .  ')}}';
@@ -122,33 +120,59 @@ class MakeViewCommand extends Command
         $contents = str_replace('$' . 'tableHead' . '$', $thead, $contents);
         $contents = str_replace('$' . 'tableBody' . '$', $tbody, $contents);
 
-
-        // ucfirst($this->argument('name')['table_name'][0]) . 'Controller'
         $ajax = ' $.ajax({
-                url: "' . "{{" . "route" . "(" . "'" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . '.index' . "'" . ")" . "}}"  . '",
+                url: "' . "{{" . "  " . "route(" . "'" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . '.index' . "'" . ")" . "}}"  . '",
                 type: "get",
                 data: {},
-                success: function($res) {
-
+                success: function(res) {
                 // alert($res.col1);
 
-                let rows = "";
-            res.forEach(row => {
-            rows += "<tr>";
-            for (let key in row) {
-                rows += "<td>" + row[key] + "</td>";
-            }
-            rows += "<td><button>Edit</button></td></tr>";
-        });
-        document.getElementById("table_body").innerHTML = rows;
+                let headers = "<tr>";
+                for(let key in res[0]) {
+                    headers += "<th>" + key + "</th>";
+                }
 
+                headers += "<th>Action</th></tr>";
+                document.getElementById("table_head").innerHTML = headers;
+                let rows = "";
+
+                res.forEach(row => {
+                    rows += "<tr>";
+                    // alert(row["col1"]);
+                    for (let key in row) {
+                        rows += "<td>" + row[key] + "</td>";
+                        // alert(row["col1"]);
+                        // rows += "<td>" + row["col2"] + "</td>";
+                    }
+                    // rows += "<td><button id = "row[col1]" >Edit</button></td></tr>";
+                });
+            document.getElementById("table_body").innerHTML = rows;
     }}
     ) ';
 
+        '$("#data_input_form").on("submit", function(e) {
+        e.preventDefault();
+
+        let formData = $(this).serialize();
+        alert(formData);
+
+        $.ajax({
+        url: "{{ route(' . $this->argument('name')['table_name'][0] . ') }}",
+        type: "POST",
+        data: formData,
+        success: function(res) {
+            alert("Data added successfully!");
+            $("#data_input_form")[0].reset();
+            // location.reload();
+            },
+        });
+})';
+
+
+
+
         $contents = str_replace('$' . 'ajax' . '$', $ajax, $contents);
         dump($contents);
-
-
         return $contents;
     }
 
