@@ -96,7 +96,7 @@ class MakeControllerCommand extends Command
         // dump($stubVariables); exit;
         $contents = str_replace('$' . 'class' . '$', $stubVariables['class'], $contents);
         $contents = str_replace('$' . 'namespace' . '$', 'App\Http\Controllers', $contents);
-        $contents = str_replace('$' . 'UserModel' . '$', $this->argument('name')['table_name'] . 'Model', $contents);
+        $contents = str_replace('$' . 'UserModel' . '$', ucfirst($this->argument('name')['table_name']) . 'Model', $contents);
         $contents = str_replace('$' . 'viewFileName' . '$', $this->argument('name')['table_name'], $contents);
 
         $val = '';
@@ -145,6 +145,4 @@ class MakeControllerCommand extends Command
         }
         return $path;
     }
-
-
 }

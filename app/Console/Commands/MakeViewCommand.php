@@ -129,14 +129,28 @@ class MakeViewCommand extends Command
                 type: "get",
                 data: {},
                 success: function($res) {
-                    alert($res);
+
+                // alert($res.col1);
+
+                 res.forEach(row => {
+            html += `<tr>
+                <td>${row.col1}</td>
+                <td>${row.col2}</td>
+                ...
+                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            </tr>`;
+        });
+        document.getElementById("table-body").innerHTML = html;
+
+
+
 
                     $val = ' . "`" . '<tr>
-                        
+
                     </tr>' . "`" .  '
                 }
                 }
-    )}) ';
+    ) ';
 
         $contents = str_replace('$' . 'ajax' . '$', $ajax, $contents);
         dump($contents);
