@@ -1,22 +1,26 @@
-<head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-
 <div>
     <form method='post' id='data_input_form' name='data_input_form'>
-        {{ csrf_field() }}
-        {{-- @csrf --}}
+        @csrf
+
+        {{-- {{ dd(session()->all()) }}; --}}
+
+
+        @php
+            // dd(csrf_token());
+        @endphp
+
 
         {{-- @php
-            $CSRFToken = csrf_token();
-            dump($CSRFToken);
+        $CSRFToken = csrf_token();
+        dump($CSRFToken);
         @endphp --}}
 
-        {{-- <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> --}}
+        {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
 
+        {{-- {{ csrf_field() }} --}}
         <lable> demo:</lable>
         <input class= "integer" id="demo14" name="demo" /> <br /> <br />
-
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <button name="data_submit_btn"> Submit </button>
     </form> <br /> <br />
 
@@ -35,6 +39,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+
         $.ajax({
             url: "{{ route('Demo14Controller.index') }}",
             type: "get",
