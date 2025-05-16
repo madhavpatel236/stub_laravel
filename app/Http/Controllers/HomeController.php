@@ -208,7 +208,6 @@ class HomeController extends Controller
 
         // Avoid duplicates
         if (str_contains($fileContents, $useLine) || str_contains($fileContents, $routeLine)) {
-            // echo "$controllerName already exists in web.php\n";
             return;
         }
 
@@ -227,7 +226,6 @@ class HomeController extends Controller
 
         // Save file
         file_put_contents($routePath, $fileContents);
-        echo "Route and use statement for $controllerName added successfully.\n";
     }
 
     public function addDynamicDatabase($dbname)
@@ -258,7 +256,6 @@ class HomeController extends Controller
         ],";
 
         if (str_contains($fileContents, $content)) {
-            // echo "$dbname already exists in web.php\n";
             return;
         }
 
@@ -269,7 +266,5 @@ class HomeController extends Controller
         );
 
         file_put_contents($routePath, $fileContents);
-
-
     }
 }

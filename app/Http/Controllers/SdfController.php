@@ -3,33 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Demo14Model;
+use App\Models\SdfModel;
 
 
-class Demo14Controller extends Controller
+class SdfController extends Controller
 {
     public function index()
     {
-        $users = Demo14Model::all();
+         $users =SdfModel::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.demo14');
+        return view('Create.Sdf' );
     }
 
     public function store(Request $request)
     {
-        // var_dump('store');
-        Demo14Model::Create($request->only(['demo',]));
+        SdfModel::Create($request->only(['dfc',]));
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+
+    }
 
     public function edit(string $id)
     {
-        $user = Demo14Model::findOrFail($id);
+        $user = SdfModel::findOrFail($id);
         return response()->json($user);
     }
 
@@ -38,8 +40,8 @@ class Demo14Controller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = Demo14Model::findOrFail($id);
-        $user->update($request->only(['demo',]));
+        $user = SdfModel::findOrFail($id);
+        $user->update($request->only(['dfc',]));
     }
 
     /**
@@ -47,7 +49,8 @@ class Demo14Controller extends Controller
      */
     public function destroy(string $id)
     {
-        $user = Demo14Model::findOrFail($id);
+        $user = SdfModel::findOrFail($id);
         $user->delete();
+
     }
 }

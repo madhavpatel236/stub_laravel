@@ -1,6 +1,7 @@
     <div>
-        <form method='post' id='data_input_form' name='data_input_form'>
+        <form method='post' id='data_input_form'  name='data_input_form'>
             @csrf
+
             <lable> qwe:</lable>
             <input class= "integer" , name="qwe" /> <br /> <br />
 
@@ -19,7 +20,7 @@
     {{-- <script>
         $(document).ready(function() {
             $.ajax({
-                // url: "{{ route('') }}",
+                url: "{{ route('Testing12') }}",
                 type: "get",
                 data: {},
                 success: function(res) {

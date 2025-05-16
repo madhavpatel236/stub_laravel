@@ -35,7 +35,7 @@ class MakeViewCommand extends Command
     public function handle()
     {
 
-        dump(($this->argument('name')));
+        // dump(($this->argument('name')));
         $path = $this->getGenetatedControllerPath();
         $this->makeDireactory(dirname($path));
         $contents = $this->getSourceFile();
@@ -172,7 +172,7 @@ class MakeViewCommand extends Command
 
 
         $contents = str_replace('$' . 'ajax' . '$', $ajax, $contents);
-        dump($contents);
+        // dump($contents);
         return $contents;
     }
 

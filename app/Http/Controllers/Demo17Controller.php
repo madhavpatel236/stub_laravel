@@ -3,33 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Demo14Model;
+use App\Models\Demo17Model;
 
 
-class Demo14Controller extends Controller
+class Demo17Controller extends Controller
 {
     public function index()
     {
-        $users = Demo14Model::all();
+         $users =Demo17Model::all();
         return response()->json($users);
     }
 
     public function create()
     {
-        return view('Create.demo14');
+        return view('Create.demo17' );
     }
 
     public function store(Request $request)
     {
-        // var_dump('store');
-        Demo14Model::Create($request->only(['demo',]));
+        Demo17Model::Create($request->only(['dsvc',]));
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+
+    }
 
     public function edit(string $id)
     {
-        $user = Demo14Model::findOrFail($id);
+        $user = Demo17Model::findOrFail($id);
         return response()->json($user);
     }
 
@@ -38,8 +40,8 @@ class Demo14Controller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = Demo14Model::findOrFail($id);
-        $user->update($request->only(['demo',]));
+        $user = Demo17Model::findOrFail($id);
+        $user->update($request->only(['dsvc',]));
     }
 
     /**
@@ -47,7 +49,8 @@ class Demo14Controller extends Controller
      */
     public function destroy(string $id)
     {
-        $user = Demo14Model::findOrFail($id);
+        $user = Demo17Model::findOrFail($id);
         $user->delete();
+
     }
 }
