@@ -97,7 +97,7 @@ class MakeViewCommand extends Command
         for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
             $val .= '
                 <lable> ' . $this->argument("name")["table_col_name_input"][$i] . ':</lable>
-                <input class= ' . '"' . $this->argument("name")["table_col_type"][$i] . '"' . '  , ' . 'name=' . '"' . $this->argument("name")["table_col_name_input"][$i] . '"' . '/> <br/> <br/>
+                <input class= ' . '"' . $this->argument("name")["table_col_type"][$i] . '"' . ' id=' . '"' .  $this->argument("name")["table_col_name_input"][$i] . '"' . 'name=' . '"' . $this->argument("name")["table_col_name_input"][$i] . '"' . '/><br/> <br/>
             ';
         }
 
@@ -120,12 +120,14 @@ class MakeViewCommand extends Command
         $contents = str_replace('$' . 'tableHead' . '$', $thead, $contents);
         $contents = str_replace('$' . 'tableBody' . '$', $tbody, $contents);
 
+        // dump($this->argument('name')['table_name']);
+        // exit;
         $ajax = "
+            $(document).ready(function(){
+
             fetchData();
 
             $('#data_submit_btn').on('click', function() {
-            // e.preventDefault();
-            // let formData = $(this).serialize();
             let formData = $('#Name').val();
             alert(formData);
 
@@ -138,14 +140,110 @@ class MakeViewCommand extends Command
                     $('#data_input_form')[0].reset();
                 },
             });
+        })
+
+        $(document).on('click', '.edit-btn', function() {
+            let userId = $(this).data('id');
+            $('#data-id').val();
+            let editteUrl = '{{ route('" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' .  ".edit', ['" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' .  "' => 'id']) }}'.replace(
+                'id', userId);
+
+            $.ajax({
+                url: editteUrl,
+                type: 'GET',
+                success: function(data) {
+                    $(" . $this->argument('name')['table_name'][0]['table_col_name_input']  . ").val(data." . $this->argument('name')['table_name'][0]['table_col_name_input'] . ");
+                    $('#edit_id').val(userId);
+                    $('#data_update_btn').show();
+                    $('#data_submit_btn').hide();
+    )},
+            });
         });
 
-        ";
+
+        $(document).on('click', '.delete-btn', function() {
+            let userId = $(this).data('id');
+
+            let deleteUrl = '{{ route('" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . ".destroy', ['" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' .  "' => 'id']) }}'.replace(
+                'id', userId);
+
+            $.ajax({
+                url: deleteUrl,
+                type: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    fetchData();
+                },
+            });
+        });
 
 
+        $('#data_update_btn').on('click', function() {
+            let newName = $('#Name').val();
+            let userId = $('#edit_id').val();
+
+            let updateUrl = '{{ route('" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . ".update', ['" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . "' => ':id']) }}'.replace(
+                ':id', userId);
+
+            $.ajax({
+                url: updateUrl,
+                type: 'PUT',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    Name: newName
+                },
+                success: function(response) {
+                    fetchData();
+                },
+
+            });
+        });
+    })
 
 
+    function fetchData() {
+        $.ajax({
+            url: '{{ route('" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . ".index') }}',
+            type: 'GET',
+            success: function(res) {
+                var data = {!! " . '$' . 'users' . " !!}
+                // alert(data);
 
+                if (data.length === 0) {
+                    $('#table_head').html('');
+                    $('#table_body').html('<tr><td'>No data Present in db</td></tr>);
+                    return;
+                }
+
+                let headers = '<tr>';
+                for (let key in data[0]) {
+                    headers += '<th>' + key + '</th>';
+                }
+                headers += '<th>Action</th></tr>';
+                $('#table_head').html(headers);
+
+                let rows = '';
+                data.forEach(function(row) {
+                    rows += '<tr>';
+                    for (let key in row) {
+                        rows += '<td>' + row[key] + '</td>';
+                    }
+                    rows += '<td>' +
+                        '<button class='edit-btn' data-id='' + row.id +
+                        ''>Edit</button> ' +
+                        '<button class='delete-btn' data-id='' + row.id +
+                        ''>Delete</button>' +
+                        '</td>';
+                    rows += '</tr>';
+                });
+                $('#table_body').html(rows);
+            },
+
+        });
+    }
+        ;";
 
         $contents = str_replace('$' . 'ajax' . '$', $ajax, $contents);
         // dump($contents);

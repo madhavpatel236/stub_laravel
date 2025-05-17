@@ -2,7 +2,11 @@
     <form method='post' id='data_input_form' name='data_input_form'>
     @csrf
     $INPUT_FIELDS$
-    <button name="data_submit_btn"> Submit </button>
+            <input type="hidden" id="edit_id" value="">
+
+        <button type="submit" name="data_submit_btn" id="data_submit_btn">Submit</button>
+                <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
+
     </form> <br /> <br/>
 
     <table border=2 >
@@ -15,8 +19,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-    $(document).ready(function(){
     $ajax$
-    })
     </script>
 

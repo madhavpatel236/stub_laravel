@@ -3,32 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TttModel;
+use App\Models\TTTTModel;
 
 
-class TttController extends Controller
+class TTTTController extends Controller
 {
     public function index()
     {
-        $users = TttModel::all();
-        return response()->json($users);
+        $users =TTTTModel::all();
+        return view('Pages.TTTT', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.ttt');
     }
 
     public function store(Request $request)
     {
-        TttModel::Create($request->only(['ttt',]));
+        TTTTModel::Create($request->only(['TTTT','T',]));
+        return redirect()->route('TTTTController.index');
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+
+    }
 
     public function edit(string $id)
     {
-        $user = TttModel::findOrFail($id);
+        $user = TTTTModel::findOrFail($id);
         return response()->json($user);
     }
 
@@ -37,8 +40,8 @@ class TttController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = TttModel::findOrFail($id);
-        $user->update($request->only(['ttt',]));
+        $user = TTTTModel::findOrFail($id);
+        $user->update($request->only(['TTTT','T',]));
     }
 
     /**
@@ -46,7 +49,10 @@ class TttController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = TttModel::findOrFail($id);
+        $user = TTTTModel::findOrFail($id);
         $user->delete();
+        return redirect()->route('TTTTController.index');
+
+
     }
 }

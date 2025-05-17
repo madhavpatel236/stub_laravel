@@ -1,25 +1,24 @@
 <div>
-    <form method="post" id="data_input_form" name="data_input_form">
+    <form method='post' id='data_input_form' name='data_input_form'>
         @csrf
 
-        <label>Name:</label>
-        <input type="text" class="integer" name="Name" id="Name" /> <br /><br />
+        <lable> Q:</lable>
+        <input class= "integer" id="Q"name="Q" /><br /> <br />
 
         <input type="hidden" id="edit_id" value="">
+
         <button type="submit" name="data_submit_btn" id="data_submit_btn">Submit</button>
         <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
+
     </form>
 
-
-
-    <table border="2">
+    <table border=2>
         <thead id="table_head"></thead>
         <tbody id="table_body"></tbody>
     </table>
-    {{-- {{ $users }} --}}
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 
 <script>
     $(document).ready(function() {
@@ -32,7 +31,7 @@
             // alert(formData);
 
             $.ajax({
-                url: "{{ route('ABCController.store') }}",
+                url: "{{ route('QQQQQController.store') }}",
                 method: "POST",
                 data: formData,
                 success: function(response) {
@@ -45,15 +44,15 @@
         $(document).on('click', '.edit-btn', function() {
             let userId = $(this).data('id');
             $('#data-id').val();
-            let editteUrl = "{{ route('ABCController.edit', ['ABCController' => 'id']) }}".replace(
+            let editteUrl = "{{ route('QQQQQController.edit', ['QQQQQController' => 'id']) }}".replace(
                 'id', userId);
 
             $.ajax({
                 url: editteUrl,
                 type: "GET",
                 success: function(data) {
-                    alert(data.Name);
-                    $("input[name='Name']").val(data.Name);
+                    alert(data.Q);
+                    $("#Q").val(data.Q);
                     $('#edit_id').val(userId);
                     // $('#data_input_form').append(
                     //     '<input type="hidden" name="user_id" value="' + data.id + '">');
@@ -67,8 +66,9 @@
             let userId = $(this).data('id');
             // alert(userId);
 
-            let deleteUrl = "{{ route('ABCController.destroy', ['ABCController' => 'id']) }}".replace(
-                'id', userId);
+            let deleteUrl = "{{ route('QQQQQController.destroy', ['QQQQQController' => 'id']) }}"
+                .replace(
+                    'id', userId);
 
             $.ajax({
                 url: deleteUrl,
@@ -88,8 +88,9 @@
             let userId = $('#edit_id').val();
             // alert(userId);
 
-            let updateUrl = "{{ route('ABCController.update', ['ABCController' => ':id']) }}".replace(
-                ':id', userId);
+            let updateUrl = "{{ route('QQQQQController.update', ['QQQQQController' => ':id']) }}"
+                .replace(
+                    ':id', userId);
 
             $.ajax({
                 url: updateUrl,
@@ -108,7 +109,7 @@
 
     function fetchData() {
         $.ajax({
-            url: "{{ route('ABCController.index') }}",
+            url: "{{ route('QQQQQController.index') }}",
             type: "GET",
             success: function(res) {
                 var data = {!! $users !!}

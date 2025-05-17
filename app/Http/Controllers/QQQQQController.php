@@ -3,32 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TttModel;
+use App\Models\QQQQQModel;
 
 
-class TttController extends Controller
+class QQQQQController extends Controller
 {
     public function index()
     {
-        $users = TttModel::all();
-        return response()->json($users);
+        $users = QQQQQModel::all();
+        return view('Pages.QQQQQ', compact('users'));
     }
 
-    public function create()
-    {
-        return view('Create.ttt');
-    }
+    public function create() {}
 
     public function store(Request $request)
     {
-        TttModel::Create($request->only(['ttt',]));
+        QQQQQModel::Create($request->only(['Q',]));
+        return redirect()->route('QQQQQController.index');
     }
 
     public function show(string $id) {}
 
     public function edit(string $id)
     {
-        $user = TttModel::findOrFail($id);
+        $user = QQQQQModel::findOrFail($id);
         return response()->json($user);
     }
 
@@ -37,8 +35,8 @@ class TttController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = TttModel::findOrFail($id);
-        $user->update($request->only(['ttt',]));
+        $user = QQQQQModel::findOrFail($id);
+        $user->update($request->only(['Q',]));
     }
 
     /**
@@ -46,7 +44,8 @@ class TttController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = TttModel::findOrFail($id);
+        $user = QQQQQModel::findOrFail($id);
         $user->delete();
+        return redirect()->route('QQQQQController.index');
     }
 }

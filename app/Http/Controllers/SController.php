@@ -3,32 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TttModel;
+use App\Models\SModel;
 
 
-class TttController extends Controller
+class SController extends Controller
 {
     public function index()
     {
-        $users = TttModel::all();
-        return response()->json($users);
+        $users =SModel::all();
+        return view('Pages.S', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.ttt');
     }
 
     public function store(Request $request)
     {
-        TttModel::Create($request->only(['ttt',]));
+        SModel::Create($request->only(['S',]));
+        return redirect()->route('SController.index');
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+
+    }
 
     public function edit(string $id)
     {
-        $user = TttModel::findOrFail($id);
+        $user = SModel::findOrFail($id);
         return response()->json($user);
     }
 
@@ -37,8 +40,8 @@ class TttController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = TttModel::findOrFail($id);
-        $user->update($request->only(['ttt',]));
+        $user = SModel::findOrFail($id);
+        $user->update($request->only(['S',]));
     }
 
     /**
@@ -46,7 +49,10 @@ class TttController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = TttModel::findOrFail($id);
+        $user = SModel::findOrFail($id);
         $user->delete();
+        return redirect()->route('SController.index');
+
+
     }
 }

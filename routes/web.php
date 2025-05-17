@@ -81,7 +81,6 @@ use App\Http\Controllers\Demo1234Controller;
 use App\Http\Controllers\Demo011Controller;
 use App\Http\Controllers\TargetController;
 use App\Http\Controllers\EeeController;
-use App\Http\Controllers\TtController;
 use App\Http\Controllers\Table_1Controller;
 use App\Http\Controllers\ABCController;
 use App\Http\Controllers\MmmmController;
@@ -101,6 +100,12 @@ use App\Http\Controllers\AAController;
 use App\Http\Controllers\CController;
 use App\Http\Controllers\ZZController;
 use App\Http\Controllers\VController;
+use App\Http\Controllers\GGController;
+use App\Http\Controllers\TTController;
+use App\Http\Controllers\TTTTController;
+use App\Http\Controllers\QQQQController;
+use App\Http\Controllers\QQQQQController;
+use App\Http\Controllers\SController;
 // [USE_CONTROLLERS]
 
 
@@ -165,4 +170,11 @@ Route::resource('CController', CController::class);
 Route::resource('ZZController', ZZController::class);
 Route::resource('ZzController', ZzController::class);
 Route::resource('VController', VController::class);
+Route::resource('GGController', GGController::class);
+Route::resource('TTController', TTController::class);
+Route::resource('TTTTController', TTTTController::class);
+Route::resource('EEEController', EEEController::class);
+Route::resource('QQQQController', QQQQController::class);
+Route::resource('QQQQQController', QQQQQController::class);
+Route::resource('SController', SController::class);
 // [ROUTE_CONTROLLERS]

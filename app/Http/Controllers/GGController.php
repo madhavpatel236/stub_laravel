@@ -3,32 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TttModel;
+use App\Models\GGModel;
 
 
-class TttController extends Controller
+class GGController extends Controller
 {
     public function index()
     {
-        $users = TttModel::all();
-        return response()->json($users);
+        $users =GGModel::all();
+        return view('Pages.GG', compact('users'));
     }
 
     public function create()
     {
-        return view('Create.ttt');
     }
 
     public function store(Request $request)
     {
-        TttModel::Create($request->only(['ttt',]));
+        GGModel::Create($request->only(['G','GG','GGG',]));
+        return redirect()->route('GGController.index');
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+
+    }
 
     public function edit(string $id)
     {
-        $user = TttModel::findOrFail($id);
+        $user = GGModel::findOrFail($id);
         return response()->json($user);
     }
 
@@ -37,8 +40,8 @@ class TttController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = TttModel::findOrFail($id);
-        $user->update($request->only(['ttt',]));
+        $user = GGModel::findOrFail($id);
+        $user->update($request->only(['G','GG','GGG',]));
     }
 
     /**
@@ -46,7 +49,10 @@ class TttController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = TttModel::findOrFail($id);
+        $user = GGModel::findOrFail($id);
         $user->delete();
+        return redirect()->route('GGController.index');
+
+
     }
 }
