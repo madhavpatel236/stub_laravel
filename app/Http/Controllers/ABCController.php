@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ABCModel;
-
+use Illuminate\Support\Facades\DB;
 
 class ABCController extends Controller
 {

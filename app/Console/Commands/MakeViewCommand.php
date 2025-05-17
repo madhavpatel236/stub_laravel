@@ -97,7 +97,8 @@ class MakeViewCommand extends Command
         for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
             $val .= '
                 <lable> ' . $this->argument("name")["table_col_name_input"][$i] . ':</lable>
-                <input class= ' . '"' . $this->argument("name")["table_col_type"][$i] . '"' . ' id=' . '"' .  $this->argument("name")["table_col_name_input"][$i] . '"' . 'name=' . '"' . $this->argument("name")["table_col_name_input"][$i] . '"' . '/><br/> <br/>
+                <input class= ' . '"' . $this->argument("name")["table_col_type"][$i] . '"' . ' id=' . '"' .  $this->argument("name")["table_col_name_input"][$i] . '"' . ' ' . 'name=' . '"' . $this->argument("name")["table_col_name_input"][$i] . '"' . '/>
+                <span class= ' . '"' . $this->argument("name")["table_col_type"][$i] . "_error" . '"' . ' id=' . '"' .  $this->argument("name")["table_col_name_input"][$i] . "_error" . '"' . ' ' . 'name=' . '"' . $this->argument("name")["table_col_name_input"][$i] . "_error" . '">' . '</span><br/> <br/>
             ';
         }
 
@@ -152,11 +153,10 @@ class MakeViewCommand extends Command
                 url: editteUrl,
                 type: 'GET',
                 success: function(data) {
-                    $(" . $this->argument('name')['table_name'][0]['table_col_name_input']  . ").val(data." . $this->argument('name')['table_name'][0]['table_col_name_input'] . ");
                     $('#edit_id').val(userId);
                     $('#data_update_btn').show();
                     $('#data_submit_btn').hide();
-    )},
+    },
             });
         });
 
@@ -213,7 +213,7 @@ class MakeViewCommand extends Command
 
                 if (data.length === 0) {
                     $('#table_head').html('');
-                    $('#table_body').html('<tr><td'>No data Present in db</td></tr>);
+                    $('#table_body').html('<tr><td>No data Present in db</td></tr>');
                     return;
                 }
 
@@ -231,12 +231,13 @@ class MakeViewCommand extends Command
                         rows += '<td>' + row[key] + '</td>';
                     }
                     rows += '<td>' +
-                        '<button class='edit-btn' data-id='' + row.id +
-                        ''>Edit</button> ' +
-                        '<button class='delete-btn' data-id='' + row.id +
-                        ''>Delete</button>' +
+                        '<button class= edit-btn '  data-id='+row.id+'>Edit</button> ' +
+                        '<button class='" . "delete-btn" . "' data-id='+row.id+'>Delete</button> ' +
                         '</td>';
                     rows += '</tr>';
+
+
+
                 });
                 $('#table_body').html(rows);
             },
@@ -245,7 +246,42 @@ class MakeViewCommand extends Command
     }
         ;";
 
+        $validation = '';
+
+        dump($this->argument('name'));
+        for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+            // dump($this->argument('name')['table_col_name_input'][$i]);
+            $validation .= "var flag = true;" . "\n";
+            $validation .= "
+                var " . $this->argument('name')['table_col_name_input'][$i] . " = $('#" . $this->argument('name')['table_col_name_input'][$i] . "').val().trim();"  .
+                "" . "\n";
+
+            $validation .= "if(" . $this->argument('name')['table_col_name_input'][$i] . ' == ""' . " || " . $this->argument('name')['table_col_name_input'][$i] . " == " . 'null'  . "){
+                $('#" . $this->argument('name')['table_col_name_input'][$i] . "_error" . "').html('" . $this->argument('name')['table_col_name_input'][$i] . " is required!!" . "')
+                flag = false;
+                }" . "\n";
+
+            $validation .= " if(typeof " . $this->argument('name')['table_col_name_input'][$i] . " == " . "'" . "string" .  "'" . " == " . "'" .  $this->argument('name')['table_col_type'][$i] . "'" . " && " . $this->argument('name')['table_col_name_input'][$i] . ".length() > "  . $this->argument('name')['table_col_length'][$i]  .  "){
+                $('#" . $this->argument('name')['table_col_name_input'][$i] . "_error" . "').html('" . " Max allowed field length is: " . $this->argument('name')['table_col_length'][$i] . "')
+            flag = false;
+                }" . "\n";
+
+            $validation .= "if (flag != true) {
+                    e.preventDefault();
+                }";
+        }
+        dump($validation);
+        // exit;
+
+
+
+
+
+
+
+
         $contents = str_replace('$' . 'ajax' . '$', $ajax, $contents);
+        $contents = str_replace('$' . 'validation' . '$', $validation, $contents);
         // dump($contents);
         return $contents;
     }

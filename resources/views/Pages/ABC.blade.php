@@ -4,12 +4,11 @@
 
         <label>Name:</label>
         <input type="text" class="integer" name="Name" id="Name" /> <br /><br />
-
+        <span class= "string_error" id="Name_error" name="Name_error"></span><br /> <br />
         <input type="hidden" id="edit_id" value="">
         <button type="submit" name="data_submit_btn" id="data_submit_btn">Submit</button>
         <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
     </form>
-
 
 
     <table border="2">
@@ -116,7 +115,7 @@
 
                 if (data.length === 0) {
                     $('#table_head').html('');
-                    $('#table_body').html('<tr><td">No data Present in db</td></tr>');
+                    $('#table_body').html('<tr><td>No data Present in db</td></tr>');
                     return;
                 }
 
@@ -134,10 +133,10 @@
                         rows += '<td>' + row[key] + '</td>';
                     }
                     rows += '<td>' +
-                        '<button class="edit-btn" data-id="' + row.id +
-                        '">Edit</button> ' +
-                        '<button class="delete-btn" data-id="' + row.id +
-                        '">Delete</button>' +
+                        '<button class="edit-btn" data-id=' + row.id +
+                        '>Edit</button> ' +
+                        '<button class="delete-btn" data-id=' + row.id +
+                        '>Delete</button>' +
                         '</td>';
                     rows += '</tr>';
                 });
@@ -146,4 +145,26 @@
 
         });
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#data_input_form').submit(function(e) {
+            var flag = true;
+
+            var Name = $('#Name').val().trim();
+            if (Name == "" || Name == null) {
+                $('#Name_error').html('Name is required!!')
+                flag = false;
+            }
+            if (typeof Name == 'string' == 'string' && Name.length() > 12) {
+                $('#Name_error').html(' Max allowed field length is: 12')
+                flag = false;
+            }
+            if (flag != true) {
+                e.preventDefault();
+            }
+        })
+
+    })
 </script>

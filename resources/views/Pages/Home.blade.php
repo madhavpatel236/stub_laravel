@@ -30,7 +30,7 @@
                 <td> <select name="table_col_type0" class="table_col_type0" id="table_col_type0">
                         <option value="integer"> INT </option>
                         <option value="string"> VARCHAR </option>
-                        <option value="text"> TEXT </option>
+                        <option value="string"> TEXT </option>
                         <option value="charset('binary')"> BINARY </option>
 
                         {{-- <option value="date"> DATE </option> --}}

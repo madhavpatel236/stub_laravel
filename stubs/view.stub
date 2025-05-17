@@ -22,3 +22,11 @@
     $ajax$
     </script>
 
+<script>
+$(document).ready(function(){
+    $('#data_input_form').submit(function(e){
+$validation$
+    })
+
+})
+</script>
