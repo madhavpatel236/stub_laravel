@@ -34,7 +34,7 @@ class MakeModelCommand extends Command
 
     public function handle()
     {
-        // dump(($this->argument('name')));
+        dump(($this->argument('name')));
 
         $path = $this->getGenetatedModelPath();
         $this->makeDireactory(dirname($path));
@@ -89,10 +89,23 @@ class MakeModelCommand extends Command
     public function getStubContents($stub, $stubVariables = [])
     {
         $contents = file_get_contents($stub);
+
+        $fillableVal = '';
+        foreach (($this->argument('name')['table_col_name_input']) as $key => $val) {
+            // dump($val); exit;
+            // $fillableVal .= ' '. $val . ','  ;
+            $fillableVal .= "'" . $val . "'" . ",";
+            // array_push($fillableVal, $val);
+        }
+
+        // $fillable = $fillableVal;
+        // dd($fillableVal);
+
         $contents = str_replace('$' . 'class' . '$', $stubVariables['class'], $contents);
         $contents = str_replace('$' . 'namespace' . '$', "App\Models", $contents);
         $contents = str_replace('$' . 'tableName' . '$', "'" . $this->argument('name')['table_name'] . "'", $contents);
         $contents = str_replace('$' . 'dbname' . '$', "'" . $this->argument('name')['db_name'] . "'", $contents);
+        $contents = str_replace('$' . 'fillable' . '$',  $fillableVal, $contents);
         // dump($contents);
         return $contents;
     }

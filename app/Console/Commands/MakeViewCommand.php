@@ -120,53 +120,29 @@ class MakeViewCommand extends Command
         $contents = str_replace('$' . 'tableHead' . '$', $thead, $contents);
         $contents = str_replace('$' . 'tableBody' . '$', $tbody, $contents);
 
-        $ajax = ' $.ajax({
-                url: "' . "{{" . "  " . "route(" . "'" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . '.index' . "'" . ")" . "}}"  . '",
-                type: "get",
-                data: {},
-                success: function(res) {
-                // alert($res.col1);
+        $ajax = "
+            fetchData();
 
-                let headers = "<tr>";
-                for(let key in res[0]) {
-                    headers += "<th>" + key + "</th>";
-                }
+            $('#data_submit_btn').on('click', function() {
+            // e.preventDefault();
+            // let formData = $(this).serialize();
+            let formData = $('#Name').val();
+            alert(formData);
 
-                headers += "<th>Action</th></tr>";
-                document.getElementById("table_head").innerHTML = headers;
-                let rows = "";
-
-                res.forEach(row => {
-                    rows += "<tr>";
-                    // alert(row["col1"]);
-                    for (let key in row) {
-                        rows += "<td>" + row[key] + "</td>";
-                        // alert(row["col1"]);
-                        // rows += "<td>" + row["col2"] + "</td>";
-                    }
-                    // rows += "<td><button id = "row[col1]" >Edit</button></td></tr>";
-                });
-            document.getElementById("table_body").innerHTML = rows;
-    }}
-    ) ';
-
-        '$("#data_input_form").on("submit", function(e) {
-        e.preventDefault();
-
-        let formData = $(this).serialize();
-        alert(formData);
-
-        $.ajax({
-        url: "{{ route(' . $this->argument('name')['table_name'][0] . ') }}",
-        type: "POST",
-        data: formData,
-        success: function(res) {
-            alert("Data added successfully!");
-            $("#data_input_form")[0].reset();
-            // location.reload();
-            },
+            $.ajax({
+                url: '{{ route('" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . ".store') }}',
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    fetchData();
+                    $('#data_input_form')[0].reset();
+                },
+            });
         });
-})';
+
+        ";
+
+
 
 
 

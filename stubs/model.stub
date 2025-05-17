@@ -8,4 +8,5 @@ class $class$ extends Model
 {
     protected $connection = $dbname$;
     protected $table = $tableName$;
+    protected $fillable = $[fillable]$;
 }

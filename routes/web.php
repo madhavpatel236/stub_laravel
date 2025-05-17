@@ -86,6 +86,18 @@ use App\Http\Controllers\Table_1Controller;
 use App\Http\Controllers\ABCController;
 use App\Http\Controllers\MmmmController;
 use App\Http\Controllers\Madhav_table23Controller;
+use App\Http\Controllers\AsdfgController;
+use App\Http\Controllers\AsdfghController;
+use App\Http\Controllers\ZxcController;
+use App\Http\Controllers\ZxcvController;
+use App\Http\Controllers\ZxcvbController;
+use App\Http\Controllers\MnController;
+use App\Http\Controllers\MnbController;
+use App\Http\Controllers\MnmController;
+use App\Http\Controllers\LlController;
+use App\Http\Controllers\LllController;
+use App\Http\Controllers\LlllController;
+use App\Http\Controllers\AAController;
 // [USE_CONTROLLERS]
 
 
@@ -134,4 +146,16 @@ Route::resource('Table_1Controller', Table_1Controller::class);
 Route::resource('ABCController', ABCController::class);
 Route::resource('MmmmController', MmmmController::class);
 Route::resource('Madhav_table23Controller', Madhav_table23Controller::class);
+Route::resource('AsdfgController', AsdfgController::class);
+Route::resource('AsdfghController', AsdfghController::class);
+Route::resource('ZxcController', ZxcController::class);
+Route::resource('ZxcvController', ZxcvController::class);
+Route::resource('ZxcvbController', ZxcvbController::class);
+Route::resource('MnController', MnController::class);
+Route::resource('MnbController', MnbController::class);
+Route::resource('MnmController', MnmController::class);
+Route::resource('LlController', LlController::class);
+Route::resource('LllController', LllController::class);
+Route::resource('LlllController', LlllController::class);
+Route::resource('AAController', AAController::class);
 // [ROUTE_CONTROLLERS]
