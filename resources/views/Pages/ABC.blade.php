@@ -6,7 +6,9 @@
         <input type="text" class="integer" name="Name" /> <br /><br />
 
         <button type="submit" name="data_submit_btn" id="data_submit_btn">Submit</button>
-        <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
+        <form name="update_form" id="update_form" method="post">
+            <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
+        </form>
     </form> <br /><br />
 
     <table border="2">

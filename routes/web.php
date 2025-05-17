@@ -85,6 +85,7 @@ use App\Http\Controllers\TtController;
 use App\Http\Controllers\Table_1Controller;
 use App\Http\Controllers\ABCController;
 use App\Http\Controllers\MmmmController;
+use App\Http\Controllers\Madhav_table23Controller;
 // [USE_CONTROLLERS]
 
 
@@ -132,4 +133,5 @@ Route::resource('TtController', TtController::class);
 Route::resource('Table_1Controller', Table_1Controller::class);
 Route::resource('ABCController', ABCController::class);
 Route::resource('MmmmController', MmmmController::class);
+Route::resource('Madhav_table23Controller', Madhav_table23Controller::class);
 // [ROUTE_CONTROLLERS]
