@@ -17,7 +17,6 @@ class CController extends Controller
 
     public function create()
     {
-        return view('Create.c' );
     }
 
     public function store(Request $request)

@@ -98,6 +98,8 @@ class MakeControllerCommand extends Command
         $contents = str_replace('$' . 'namespace' . '$', 'App\Http\Controllers', $contents);
         $contents = str_replace('$' . 'UserModel' . '$', ucfirst($this->argument('name')['table_name']) . 'Model', $contents);
         $contents = str_replace('$' . 'viewFileName' . '$', $this->argument('name')['table_name'], $contents);
+        $contents = str_replace('$' . 'bladeFile' . '$', $this->argument('name')['table_name'], $contents);
+        $contents = str_replace('$' . 'controller' . '$', ucfirst($this->argument('name')['table_name']) . 'Controller', $contents);
 
         $val = '';
 

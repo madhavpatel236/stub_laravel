@@ -98,6 +98,9 @@ use App\Http\Controllers\LlController;
 use App\Http\Controllers\LllController;
 use App\Http\Controllers\LlllController;
 use App\Http\Controllers\AAController;
+use App\Http\Controllers\CController;
+use App\Http\Controllers\ZZController;
+use App\Http\Controllers\VController;
 // [USE_CONTROLLERS]
 
 
@@ -158,4 +161,8 @@ Route::resource('LlController', LlController::class);
 Route::resource('LllController', LllController::class);
 Route::resource('LlllController', LlllController::class);
 Route::resource('AAController', AAController::class);
+Route::resource('CController', CController::class);
+Route::resource('ZZController', ZZController::class);
+Route::resource('ZzController', ZzController::class);
+Route::resource('VController', VController::class);
 // [ROUTE_CONTROLLERS]

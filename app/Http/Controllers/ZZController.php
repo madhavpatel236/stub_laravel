@@ -1,17 +1,17 @@
 <?php
 
-namespace $namespace$;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\$UserModel$;
+use App\Models\ZZModel;
 
 
-class $class$ extends Controller
+class ZZController extends Controller
 {
     public function index()
     {
-        $users =$UserModel$::all();
-        return view('Pages.$bladeFile$', compact('users'));
+        $users =ZZModel::all();
+        return view('Pages.ZZ', compact('users'));
     }
 
     public function create()
@@ -20,8 +20,8 @@ class $class$ extends Controller
 
     public function store(Request $request)
     {
-        $UserModel$::Create($request->only([$storeData$]));
-        return redirect()->route('$controller$.index');
+        ZZModel::Create($request->only(['ZZ',]));
+        return redirect()->route('ZZController.index');
     }
 
     public function show(string $id)
@@ -31,7 +31,7 @@ class $class$ extends Controller
 
     public function edit(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = ZZModel::findOrFail($id);
         return response()->json($user);
     }
 
@@ -40,8 +40,8 @@ class $class$ extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = $UserModel$::findOrFail($id);
-        $user->update($request->only([$storeData$]));
+        $user = ZZModel::findOrFail($id);
+        $user->update($request->only(['ZZ',]));
     }
 
     /**
@@ -49,9 +49,9 @@ class $class$ extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = ZZModel::findOrFail($id);
         $user->delete();
-        return redirect()->route('$controller$.index');
+        return redirect()->route('ZZController.index');
 
 
     }
