@@ -16,14 +16,12 @@ class ABCController extends Controller
         // return response()->json($users);
     }
 
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     public function store(Request $request)
     {
         ABCModel::Create($request->only(['Name',]));
+        return redirect()->route('ABCController.index');
     }
 
     public function show(string $id)
@@ -54,5 +52,7 @@ class ABCController extends Controller
     {
         $user = ABCModel::findOrFail($id);
         $user->delete();
+        return redirect()->route('ABCController.index');
+//
     }
 }

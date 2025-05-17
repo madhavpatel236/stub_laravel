@@ -3,13 +3,14 @@
         @csrf
 
         <label>Name:</label>
-        <input type="text" class="integer" name="Name" /> <br /><br />
+        <input type="text" class="integer" name="Name" id="Name" /> <br /><br />
 
+        <input type="hidden" id="edit_id" value="">
         <button type="submit" name="data_submit_btn" id="data_submit_btn">Submit</button>
-        <form name="update_form" id="update_form" method="post">
-            <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
-        </form>
-    </form> <br /><br />
+        <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
+    </form>
+
+
 
     <table border="2">
         <thead id="table_head"></thead>
@@ -24,9 +25,11 @@
     $(document).ready(function() {
         fetchData();
 
-        $('#data_input_form').on('submit', function(e) {
-            e.preventDefault();
-            let formData = $(this).serialize();
+        $('#data_submit_btn').on('click', function() {
+            // e.preventDefault();
+            // let formData = $(this).serialize();
+            let formData = $('#Name').val();
+            alert(formData);
 
             $.ajax({
                 url: "{{ route('ABCController.store') }}",
@@ -41,6 +44,7 @@
 
         $(document).on('click', '.edit-btn', function() {
             let userId = $(this).data('id');
+            $('#data-id').val();
             let editteUrl = "{{ route('ABCController.edit', ['ABCController' => 'id']) }}".replace(
                 'id', userId);
 
@@ -49,8 +53,9 @@
                 type: "GET",
                 success: function(data) {
                     $("input[name='Name']").val(data.Name);
-                    $('#data_input_form').append(
-                        '<input type="hidden" name="user_id" value="' + data.id + '">');
+                    $('#edit_id').val(userId);
+                    // $('#data_input_form').append(
+                    //     '<input type="hidden" name="user_id" value="' + data.id + '">');
                     $('#data_update_btn').show();
                     $('#data_submit_btn').hide();
                 },
@@ -76,10 +81,11 @@
             });
         });
 
-        $(document).on('click', '#data_update_btn', function() {
-            // alert('vgh');
-            let userId = $(this).data('id');
-            let newName = $('Name').val();
+        $('#data_update_btn').on('click', function() {
+            // let userId = $(this).data('id');
+            let newName = $('#Name').val();
+            let userId = $('#edit_id').val();
+            // alert(userId);
 
             let updateUrl = "{{ route('ABCController.update', ['ABCController' => ':id']) }}".replace(
                 ':id', userId);
@@ -92,14 +98,11 @@
                     Name: newName
                 },
                 success: function(response) {
-                    alert("Updated successfully!");
                     fetchData();
                 },
 
             });
         });
-
-
     });
 
     function fetchData() {
