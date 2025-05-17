@@ -134,6 +134,8 @@ use App\Http\Controllers\Rajastan1Controller;
 use App\Http\Controllers\Rajastan2Controller;
 use App\Http\Controllers\Rr4Controller;
 use App\Http\Controllers\ABCDEController;
+use App\Http\Controllers\Rr20Controller;
+use App\Http\Controllers\Rajastan21Controller;
 // [USE_CONTROLLERS]
 
 
@@ -233,4 +235,6 @@ Route::resource('Rajastan1Controller', Rajastan1Controller::class);
 Route::resource('Rajastan2Controller', Rajastan2Controller::class);
 Route::resource('Rr4Controller', Rr4Controller::class);
 Route::resource('ABCDEController', ABCDEController::class);
+Route::resource('Rr20Controller', Rr20Controller::class);
+Route::resource('Rajastan21Controller', Rajastan21Controller::class);
 // [ROUTE_CONTROLLERS]

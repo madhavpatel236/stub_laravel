@@ -1,170 +1,179 @@
     <div>
-    <form method='post' id='data_input_form' name='data_input_form'>
-    @csrf
-    
-                <lable> ABCDE:</lable>
-                <input class= "integer" id="ABCDE" name="ABCDE"/>
-                <span class= "integer_error" id="ABCDE_error" name="ABCDE_error"></span><br/> <br/>
-            
+        <form method='post' id='data_input_form' name='data_input_form'>
+            @csrf
+
+            <lable> ABCDE:</lable>
+            <input class= "integer" id="ABCDE" name="ABCDE" />
+            <span class= "integer_error" id="ABCDE_error" name="ABCDE_error"></span><br /> <br />
+
             <input type="hidden" id="edit_id" value="">
 
-        <button type="submit" name="data_submit_btn" id="data_submit_btn">Submit</button>
-                <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
+            <button type="submit" name="data_submit_btn" id="data_submit_btn">Submit</button>
+            <button type="submit" name="data_update_btn" id="data_update_btn" style="display: none">Update</button>
 
-    </form> <br /> <br/>
+        </form> <br /> <br />
 
-    <table border=2 >
-     <thead id="table_head"></thead>
-     <tbody id="table_body"></tbody>
-    </table>
+        <table border=2>
+            <thead id="table_head"></thead>
+            <tbody id="table_body"></tbody>
+        </table>
     </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-    
-            $(document).ready(function(){
+        $(document).ready(function() {
 
             fetchData();
 
             $('#data_submit_btn').on('click', function() {
-            let formData = $('#Name').val();
-            alert(formData);
+                let formData = $('#Name').val();
+                alert(formData);
 
-            $.ajax({
-                url: '{{ route('ABCDEController.store') }}',
-                method: 'POST',
-                data: formData,
-                success: function(response) {
-                    fetchData();
-                    $('#data_input_form')[0].reset();
-                },
+                $.ajax({
+                    url: '{{ route('ABCDEController.store') }}',
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        fetchData();
+                        $('#data_input_form')[0].reset();
+                    },
+                });
+            })
+
+            $(document).on('click', '.edit-btn', function() {
+                let userId = $(this).data('id');
+                $('#data-id').val();
+                let editteUrl = '{{ route('ABCDEController.edit', ['ABCDEController' => 'id']) }}'.replace(
+                    'id', userId);
+
+                $.ajax({
+                    url: editteUrl,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#edit_id').val(userId);
+                        $('#data_update_btn').show();
+                        $('#data_submit_btn').hide();
+                    },
+                });
+            });
+
+
+            $(document).on('click', '.delete-btn', function() {
+                let userId = $(this).data('id');
+
+                let deleteUrl = '{{ route('ABCDEController.destroy', ['ABCDEController' => 'id']) }}'
+                    .replace(
+                        'id', userId);
+
+                $.ajax({
+                    url: deleteUrl,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        fetchData();
+                    },
+                });
+            });
+
+
+            $('#data_update_btn').on('click', function() {
+                let newName = $('#Name').val();
+                let userId = $('#edit_id').val();
+
+                let updateUrl = '{{ route('ABCDEController.update', ['ABCDEController' => ':id']) }}'
+                    .replace(
+                        ':id', userId);
+
+                $.ajax({
+                    url: updateUrl,
+                    type: 'PUT',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        Name: newName
+                    },
+                    success: function(response) {
+                        fetchData();
+                    },
+
+                });
             });
         })
 
-        $(document).on('click', '.edit-btn', function() {
-            let userId = $(this).data('id');
-            $('#data-id').val();
-            let editteUrl = '{{ route('ABCDEController.edit', ['ABCDEController' => 'id']) }}'.replace(
-                'id', userId);
 
+        function fetchData() {
             $.ajax({
-                url: editteUrl,
+                url: '{{ route('ABCDEController.index') }}',
                 type: 'GET',
-                success: function(data) {
-                    $('#edit_id').val(userId);
-                    $('#data_update_btn').show();
-                    $('#data_submit_btn').hide();
-    },
-            });
-        });
+                success: function(res) {
+                    var data = {!! $users !!}
+                    // alert(data);
 
-
-        $(document).on('click', '.delete-btn', function() {
-            let userId = $(this).data('id');
-
-            let deleteUrl = '{{ route('ABCDEController.destroy', ['ABCDEController' => 'id']) }}'.replace(
-                'id', userId);
-
-            $.ajax({
-                url: deleteUrl,
-                type: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function(response) {
-                    fetchData();
-                },
-            });
-        });
-
-
-        $('#data_update_btn').on('click', function() {
-            let newName = $('#Name').val();
-            let userId = $('#edit_id').val();
-
-            let updateUrl = '{{ route('ABCDEController.update', ['ABCDEController' => ':id']) }}'.replace(
-                ':id', userId);
-
-            $.ajax({
-                url: updateUrl,
-                type: 'PUT',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    Name: newName
-                },
-                success: function(response) {
-                    fetchData();
-                },
-
-            });
-        });
-    })
-
-
-    function fetchData() {
-        $.ajax({
-            url: '{{ route('ABCDEController.index') }}',
-            type: 'GET',
-            success: function(res) {
-                var data = {!! $users !!}
-                // alert(data);
-
-                if (data.length === 0) {
-                    $('#table_head').html('');
-                    $('#table_body').html('<tr><td>No data Present in db</td></tr>');
-                    return;
-                }
-
-                let headers = '<tr>';
-                for (let key in data[0]) {
-                    headers += '<th>' + key + '</th>';
-                }
-                headers += '<th>Action</th></tr>';
-                $('#table_head').html(headers);
-
-                let rows = '';
-                data.forEach(function(row) {
-                    rows += '<tr>';
-                    for (let key in row) {
-                        rows += '<td>' + row[key] + '</td>';
+                    if (data.length === 0) {
+                        $('#table_head').html('');
+                        $('#table_body').html('<tr><td>No data Present in db</td></tr>');
+                        return;
                     }
-                    rows += '<td>' +
-                        '<button class= edit-btn '  data-id='+row.id+'>Edit</button> ' +
-                        '<button class='delete-btn' data-id='+row.id+'>Delete</button> ' +
-                        '</td>';
-                    rows += '</tr>';
+
+                    let headers = '<tr>';
+                    for (let key in data[0]) {
+                        headers += '<th>' + key + '</th>';
+                    }
+                    headers += '<th>Action</th></tr>';
+                    $('#table_head').html(headers);
+
+                    let rows = '';
+                    data.forEach(function(row) {
+                        rows += '<tr>';
+                        for (let key in row) {
+                            rows += '<td>' + row[key] + '</td>';
+                        }
+                        rows += '<td>' +
+                            '<button class= edit-btn '
+                        data - id = '+row.id+' > Edit < /button> ' +
+                        '<button class='
+                        delete - btn ' data-id=' + row.id + '>Delete</button> ' +
+                            '</td>';
+                        rows += '</tr>';
 
 
 
-                });
-                $('#table_body').html(rows);
-            },
+                    });
+                    $('#table_body').html(rows);
+                },
 
-        });
-    }
-        ;
+            });
+        };
     </script>
 
-<script>
-$(document).ready(function(){
-    $('#data_input_form').submit(function(e){
-var flag = true;
+    <script>
+        $(document).ready(function() {
+            $('#data_input_form').submit(function(e) {
+                var flag = true;
 
                 var ABCDE = $('#ABCDE').val().trim();
-if(ABCDE == "" || ABCDE == null){
-                $('#ABCDE_error').html('ABCDE is required!!')
-                flag = false;
+                if (ABCDE == "" || ABCDE == null) {
+                    $('#ABCDE_error').html('ABCDE is required!!')
+                    flag = false;
                 }
- if(typeof ABCDE == 'string' == 'integer' && ABCDE.length() > ){
-                $('#ABCDE_error').html(' Max allowed field length is: ')
-            flag = false;
+                alert((ABCDE) != "^[0-9]");
+                debugger;
+                if (ABCDE != "^[0-9]") {
+                    $('#ABCDE_error').html('Only numbers is allowed ');
+                    flag = false;
                 }
-if (flag != true) {
+                // alert(ABCDE.length()); debugger;
+                if (ABCDE.length() > ) {
+                    $('#ABCDE_error').html(' Max allowed field length is: ')
+                    flag = false;
+                }
+                if (flag != true) {
                     e.preventDefault();
                 }
-    })
+            })
 
-})
-</script>
+        })
+    </script>
