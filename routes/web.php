@@ -143,6 +143,21 @@ use App\Http\Controllers\Dc2Controller;
 use App\Http\Controllers\Dc3Controller;
 use App\Http\Controllers\ASSController;
 use App\Http\Controllers\ASSSController;
+use App\Http\Controllers\Channai1Controller;
+use App\Http\Controllers\Channai3Controller;
+use App\Http\Controllers\Channai8Controller;
+use App\Http\Controllers\Channai11Controller;
+use App\Http\Controllers\Channai14Controller;
+use App\Http\Controllers\Channai15Controller;
+use App\Http\Controllers\Channai16Controller;
+use App\Http\Controllers\Channai17Controller;
+use App\Http\Controllers\Channai18Controller;
+use App\Http\Controllers\Channai19Controller;
+use App\Http\Controllers\Channai20Controller;
+use App\Http\Controllers\Channai21Controller;
+use App\Http\Controllers\Channai22Controller;
+use App\Http\Controllers\Channai23Controller;
+use App\Http\Controllers\Channai24Controller;
 // [USE_CONTROLLERS]
 
 
@@ -251,4 +266,19 @@ Route::resource('Dc2Controller', Dc2Controller::class);
 Route::resource('Dc3Controller', Dc3Controller::class);
 Route::resource('ASSController', ASSController::class);
 Route::resource('ASSSController', ASSSController::class);
+Route::resource('Channai1Controller', Channai1Controller::class);
+Route::resource('Channai3Controller', Channai3Controller::class);
+Route::resource('Channai8Controller', Channai8Controller::class);
+Route::resource('Channai11Controller', Channai11Controller::class);
+Route::resource('Channai14Controller', Channai14Controller::class);
+Route::resource('Channai15Controller', Channai15Controller::class);
+Route::resource('Channai16Controller', Channai16Controller::class);
+Route::resource('Channai17Controller', Channai17Controller::class);
+Route::resource('Channai18Controller', Channai18Controller::class);
+Route::resource('Channai19Controller', Channai19Controller::class);
+Route::resource('Channai20Controller', Channai20Controller::class);
+Route::resource('Channai21Controller', Channai21Controller::class);
+Route::resource('Channai22Controller', Channai22Controller::class);
+Route::resource('Channai23Controller', Channai23Controller::class);
+Route::resource('Channai24Controller', Channai24Controller::class);
 // [ROUTE_CONTROLLERS]

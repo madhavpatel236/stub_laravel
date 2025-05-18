@@ -1,17 +1,17 @@
 <?php
 
-namespace $namespace$;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\$UserModel$;
+use App\Models\Channai14Model;
 
 
-class $class$ extends Controller
+class Channai14Controller extends Controller
 {
     public function index()
     {
-        $users =$UserModel$::all();
-        return view('Pages.$bladeFile$', compact('users'));
+        $users =Channai14Model::all();
+        return view('Pages.channai14', compact('users'));
     }
 
     public function create()
@@ -20,8 +20,8 @@ class $class$ extends Controller
 
     public function store(Request $request)
     {
-        $UserModel$::Create($request->only([$storeData$]));
-        return redirect()->route('$controller$.index');
+        Channai14Model::Create($request->only(['name',]));
+        return redirect()->route('Channai14Controller.index');
     }
 
     public function show(string $id)
@@ -31,7 +31,7 @@ class $class$ extends Controller
 
     public function edit(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Channai14Model::findOrFail($id);
         return response()->json($user);
     }
 
@@ -40,9 +40,8 @@ class $class$ extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = $UserModel$::findOrFail($id);
-        $user->update($request->only([$storeData$]));
-        return redirect()->route('$controller$.index');
+        $user = Channai14Model::findOrFail($id);
+        $user->update($request->only(['name',]));
     }
 
     /**
@@ -50,9 +49,9 @@ class $class$ extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $UserModel$::findOrFail($id);
+        $user = Channai14Model::findOrFail($id);
         $user->delete();
-        return redirect()->route('$controller$.index');
+        return redirect()->route('Channai14Controller.index');
 
 
     }

@@ -123,19 +123,38 @@ class MakeViewCommand extends Command
 
         // dump($this->argument('name')['table_name']);
         // exit;
+
+        $edit = '';
+        for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+            $col = $this->argument('name')['table_col_name_input'][$i];
+            $edit .= "$('#$col').val(data.$col);\n";
+        }
+
+        $formData = '';
+        for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+            $col = $this->argument('name')['table_col_name_input'][$i];
+            $formData .= "$('#$col').val();\n";
+        }
+
+        $Data = "data: {\n    _token: '{{ csrf_token() }}',\n";
+
+        for ($i = 0; $i < $this->argument('name')['col_count']; $i++) {
+            $col = $this->argument('name')['table_col_name_input'][$i];
+            $Data .= "    $col: $('#$col').val(),\n";
+        }
+
+        $Data .= "},";
+
+
+
         $ajax = "
             $(document).ready(function(){
-
             fetchData();
 
-            $('#data_submit_btn').on('click', function() {
-            let formData = $('#Name').val();
-            alert(formData);
-
+            $('#data_submit_btn').on('click', function(e) {
             $.ajax({
                 url: '{{ route('" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . ".store') }}',
                 method: 'POST',
-                data: formData,
                 success: function(response) {
                     fetchData();
                     $('#data_input_form')[0].reset();
@@ -153,7 +172,8 @@ class MakeViewCommand extends Command
                 url: editteUrl,
                 type: 'GET',
                 success: function(data) {
-                    $('#edit_id').val(userId);
+                $edit
+                $('#edit_id').val(userId);
                     $('#data_update_btn').show();
                     $('#data_submit_btn').hide();
     },
@@ -180,8 +200,9 @@ class MakeViewCommand extends Command
         });
 
 
-        $('#data_update_btn').on('click', function() {
-            let newName = $('#Name').val();
+        $('#data_update_btn').on('click', function(e) {
+            e.preventDefault();
+            $formData
             let userId = $('#edit_id').val();
 
             let updateUrl = '{{ route('" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . ".update', ['" . ucfirst($this->argument('name')['table_name'][0]) . 'Controller' . "' => ':id']) }}'.replace(
@@ -190,10 +211,7 @@ class MakeViewCommand extends Command
             $.ajax({
                 url: updateUrl,
                 type: 'PUT',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    Name: newName
-                },
+                $Data
                 success: function(response) {
                     fetchData();
                 },
