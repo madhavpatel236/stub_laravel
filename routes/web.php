@@ -136,6 +136,13 @@ use App\Http\Controllers\Rr4Controller;
 use App\Http\Controllers\ABCDEController;
 use App\Http\Controllers\Rr20Controller;
 use App\Http\Controllers\Rajastan21Controller;
+use App\Http\Controllers\Rajastan22Controller;
+use App\Http\Controllers\Rajastan24Controller;
+use App\Http\Controllers\Rajastan25Controller;
+use App\Http\Controllers\Dc2Controller;
+use App\Http\Controllers\Dc3Controller;
+use App\Http\Controllers\ASSController;
+use App\Http\Controllers\ASSSController;
 // [USE_CONTROLLERS]
 
 
@@ -237,4 +244,11 @@ Route::resource('Rr4Controller', Rr4Controller::class);
 Route::resource('ABCDEController', ABCDEController::class);
 Route::resource('Rr20Controller', Rr20Controller::class);
 Route::resource('Rajastan21Controller', Rajastan21Controller::class);
+Route::resource('Rajastan22Controller', Rajastan22Controller::class);
+Route::resource('Rajastan24Controller', Rajastan24Controller::class);
+Route::resource('Rajastan25Controller', Rajastan25Controller::class);
+Route::resource('Dc2Controller', Dc2Controller::class);
+Route::resource('Dc3Controller', Dc3Controller::class);
+Route::resource('ASSController', ASSController::class);
+Route::resource('ASSSController', ASSSController::class);
 // [ROUTE_CONTROLLERS]

@@ -231,10 +231,10 @@ class MakeViewCommand extends Command
                         rows += '<td>' + row[key] + '</td>';
                     }
                     rows += '<td>' +
-                        '<button class= edit-btn '  data-id='+row.id+'>Edit</button> ' +
-                        '<button class='" . "delete-btn" . "' data-id='+row.id+'>Delete</button> ' +
-                        '</td>';
-                    rows += '</tr>';
+                            \"<button class='edit-btn' data-id=\" + row.id + \">Edit</button> \" +
+                            \"<button class='delete-btn' data-id=\" + row.id + \">Delete</button>\" +
+                            \"</td>\";
+                        rows += '</tr>';
 
 
 

@@ -2,9 +2,9 @@
         <form method='post' id='data_input_form' name='data_input_form'>
             @csrf
 
-            <lable> qw:</lable>
-            <input class= "integer" id="qw" name="qw" />
-            <span class= "integer_error" id="qw_error" name="qw_error"></span><br /> <br />
+            <lable> ASS:</lable>
+            <input class= "integer" id="ASS" name="ASS" />
+            <span class= "integer_error" id="ASS_error" name="ASS_error"></span><br /> <br />
 
             <input type="hidden" id="edit_id" value="">
 
@@ -32,7 +32,7 @@
                 alert(formData);
 
                 $.ajax({
-                    url: '{{ route('Rajastan21Controller.store') }}',
+                    url: '{{ route('ASSController.store') }}',
                     method: 'POST',
                     data: formData,
                     success: function(response) {
@@ -45,9 +45,8 @@
             $(document).on('click', '.edit-btn', function() {
                 let userId = $(this).data('id');
                 $('#data-id').val();
-                let editteUrl = '{{ route('Rajastan21Controller.edit', ['Rajastan21Controller' => 'id']) }}'
-                    .replace(
-                        'id', userId);
+                let editteUrl = '{{ route('ASSController.edit', ['ASSController' => 'id']) }}'.replace(
+                    'id', userId);
 
                 $.ajax({
                     url: editteUrl,
@@ -64,9 +63,8 @@
             $(document).on('click', '.delete-btn', function() {
                 let userId = $(this).data('id');
 
-                let deleteUrl =
-                    '{{ route('Rajastan21Controller.destroy', ['Rajastan21Controller' => 'id']) }}'.replace(
-                        'id', userId);
+                let deleteUrl = '{{ route('ASSController.destroy', ['ASSController' => 'id']) }}'.replace(
+                    'id', userId);
 
                 $.ajax({
                     url: deleteUrl,
@@ -85,9 +83,8 @@
                 let newName = $('#Name').val();
                 let userId = $('#edit_id').val();
 
-                let updateUrl =
-                    '{{ route('Rajastan21Controller.update', ['Rajastan21Controller' => ':id']) }}'.replace(
-                        ':id', userId);
+                let updateUrl = '{{ route('ASSController.update', ['ASSController' => ':id']) }}'.replace(
+                    ':id', userId);
 
                 $.ajax({
                     url: updateUrl,
@@ -107,7 +104,7 @@
 
         function fetchData() {
             $.ajax({
-                url: '{{ route('Rajastan21Controller.index') }}',
+                url: '{{ route('ASSController.index') }}',
                 type: 'GET',
                 success: function(res) {
                     var data = {!! $users !!}
@@ -133,12 +130,13 @@
                             rows += '<td>' + row[key] + '</td>';
                         }
                         rows += '<td>' +
-                            '<button class= edit-btn '
-                        data - id = '+row.id+' > Edit < /button> ' +
-                        '<button class='
+                            '<button class= edit-btn  data-id=' + row.id + '>Edit</button> ' +
+                            '<button class='
                         delete - btn ' data-id=' + row.id + '>Delete</button> ' +
                             '</td>';
                         rows += '</tr>';
+
+
 
                     });
                     $('#table_body').html(rows);
@@ -153,17 +151,17 @@
             $('#data_input_form').submit(function(e) {
                 var flag = true;
 
-                var qw = $('#qw').val().trim();
-                if (qw == "" || qw == null) {
-                    $('#qw_error').html('qw is required!!')
+                var ASS = $('#ASS').val().trim();
+                if (ASS == "" || ASS == null) {
+                    $('#ASS_error').html('ASS is required!!')
                     flag = false;
                 }
-                if (qw.length() > 255) {
-                    $('#qw_error').html(' Max allowed field length is: 255')
+                if (ASS.length() > 255) {
+                    $('#ASS_error').html(' Max allowed field length is: 255')
                     flag = false;
                 }
-                if (qw != ^ [0 - 9]) {
-                    $('#qw_error').html('Only numbers is allowed ')
+                if (ASS != ^ [0 - 9]) {
+                    $('#ASS_error').html('Only numbers is allowed ')
                     flag = false;
                 }
                 if (flag != true) {

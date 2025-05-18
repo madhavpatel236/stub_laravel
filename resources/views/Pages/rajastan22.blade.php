@@ -32,7 +32,7 @@
                 alert(formData);
 
                 $.ajax({
-                    url: '{{ route('Rajastan21Controller.store') }}',
+                    url: '{{ route('Rajastan22Controller.store') }}',
                     method: 'POST',
                     data: formData,
                     success: function(response) {
@@ -45,7 +45,7 @@
             $(document).on('click', '.edit-btn', function() {
                 let userId = $(this).data('id');
                 $('#data-id').val();
-                let editteUrl = '{{ route('Rajastan21Controller.edit', ['Rajastan21Controller' => 'id']) }}'
+                let editteUrl = '{{ route('Rajastan22Controller.edit', ['Rajastan22Controller' => 'id']) }}'
                     .replace(
                         'id', userId);
 
@@ -65,7 +65,7 @@
                 let userId = $(this).data('id');
 
                 let deleteUrl =
-                    '{{ route('Rajastan21Controller.destroy', ['Rajastan21Controller' => 'id']) }}'.replace(
+                    '{{ route('Rajastan22Controller.destroy', ['Rajastan22Controller' => 'id']) }}'.replace(
                         'id', userId);
 
                 $.ajax({
@@ -86,7 +86,7 @@
                 let userId = $('#edit_id').val();
 
                 let updateUrl =
-                    '{{ route('Rajastan21Controller.update', ['Rajastan21Controller' => ':id']) }}'.replace(
+                    '{{ route('Rajastan22Controller.update', ['Rajastan22Controller' => ':id']) }}'.replace(
                         ':id', userId);
 
                 $.ajax({
@@ -107,7 +107,7 @@
 
         function fetchData() {
             $.ajax({
-                url: '{{ route('Rajastan21Controller.index') }}',
+                url: '{{ route('Rajastan22Controller.index') }}',
                 type: 'GET',
                 success: function(res) {
                     var data = {!! $users !!}
@@ -133,8 +133,7 @@
                             rows += '<td>' + row[key] + '</td>';
                         }
                         rows += '<td>' +
-                            '<button class= edit-btn '
-                        data - id = '+row.id+' > Edit < /button> ' +
+                            '<button class= '.edit - btn..data - id = '+row.id+' > Edit < /button> ' +
                         '<button class='
                         delete - btn ' data-id=' + row.id + '>Delete</button> ' +
                             '</td>';

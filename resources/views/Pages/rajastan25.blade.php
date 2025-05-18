@@ -2,9 +2,9 @@
         <form method='post' id='data_input_form' name='data_input_form'>
             @csrf
 
-            <lable> qw:</lable>
-            <input class= "integer" id="qw" name="qw" />
-            <span class= "integer_error" id="qw_error" name="qw_error"></span><br /> <br />
+            <lable> rr:</lable>
+            <input class= "integer" id="rr" name="rr" />
+            <span class= "integer_error" id="rr_error" name="rr_error"></span><br /> <br />
 
             <input type="hidden" id="edit_id" value="">
 
@@ -32,7 +32,7 @@
                 alert(formData);
 
                 $.ajax({
-                    url: '{{ route('Rajastan21Controller.store') }}',
+                    url: '{{ route('Rajastan25Controller.store') }}',
                     method: 'POST',
                     data: formData,
                     success: function(response) {
@@ -45,7 +45,7 @@
             $(document).on('click', '.edit-btn', function() {
                 let userId = $(this).data('id');
                 $('#data-id').val();
-                let editteUrl = '{{ route('Rajastan21Controller.edit', ['Rajastan21Controller' => 'id']) }}'
+                let editteUrl = '{{ route('Rajastan25Controller.edit', ['Rajastan25Controller' => 'id']) }}'
                     .replace(
                         'id', userId);
 
@@ -65,7 +65,7 @@
                 let userId = $(this).data('id');
 
                 let deleteUrl =
-                    '{{ route('Rajastan21Controller.destroy', ['Rajastan21Controller' => 'id']) }}'.replace(
+                    '{{ route('Rajastan25Controller.destroy', ['Rajastan25Controller' => 'id']) }}'.replace(
                         'id', userId);
 
                 $.ajax({
@@ -86,7 +86,7 @@
                 let userId = $('#edit_id').val();
 
                 let updateUrl =
-                    '{{ route('Rajastan21Controller.update', ['Rajastan21Controller' => ':id']) }}'.replace(
+                    '{{ route('Rajastan25Controller.update', ['Rajastan25Controller' => ':id']) }}'.replace(
                         ':id', userId);
 
                 $.ajax({
@@ -107,7 +107,7 @@
 
         function fetchData() {
             $.ajax({
-                url: '{{ route('Rajastan21Controller.index') }}',
+                url: '{{ route('Rajastan25Controller.index') }}',
                 type: 'GET',
                 success: function(res) {
                     var data = {!! $users !!}
@@ -133,12 +133,13 @@
                             rows += '<td>' + row[key] + '</td>';
                         }
                         rows += '<td>' +
-                            '<button class= edit-btn '
-                        data - id = '+row.id+' > Edit < /button> ' +
-                        '<button class='
+                            '<button class=. ' edit - btn ' .   data-id=' + row.id + '>Edit</button> ' +
+                            '<button class='
                         delete - btn ' data-id=' + row.id + '>Delete</button> ' +
                             '</td>';
                         rows += '</tr>';
+
+
 
                     });
                     $('#table_body').html(rows);
@@ -153,17 +154,17 @@
             $('#data_input_form').submit(function(e) {
                 var flag = true;
 
-                var qw = $('#qw').val().trim();
-                if (qw == "" || qw == null) {
-                    $('#qw_error').html('qw is required!!')
+                var rr = $('#rr').val().trim();
+                if (rr == "" || rr == null) {
+                    $('#rr_error').html('rr is required!!')
                     flag = false;
                 }
-                if (qw.length() > 255) {
-                    $('#qw_error').html(' Max allowed field length is: 255')
+                if (rr.length() > 255) {
+                    $('#rr_error').html(' Max allowed field length is: 255')
                     flag = false;
                 }
-                if (qw != ^ [0 - 9]) {
-                    $('#qw_error').html('Only numbers is allowed ')
+                if (rr != ^ [0 - 9]) {
+                    $('#rr_error').html('Only numbers is allowed ')
                     flag = false;
                 }
                 if (flag != true) {

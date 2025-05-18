@@ -133,11 +133,11 @@
                         rows += '<td>' + row[key] + '</td>';
                     }
                     rows += '<td>' +
-                        '<button class="edit-btn" data-id=' + row.id +
-                        '>Edit</button> ' +
-                        '<button class="delete-btn" data-id=' + row.id +
-                        '>Delete</button>' +
-                        '</td>';
+                        "<button class='edit-btn' data-id=" + row.id +
+                        ">Edit</button> " +
+                        "<button class='delete-btn' data-id=" + row.id +
+                        ">Delete</button>" +
+                        "</td>";
                     rows += '</tr>';
                 });
                 $('#table_body').html(rows);
@@ -157,8 +157,12 @@
                 $('#Name_error').html('Name is required!!')
                 flag = false;
             }
-            if (typeof Name == 'string' == 'string' && Name.length() > 12) {
-                $('#Name_error').html(' Max allowed field length is: 12')
+            // if (ABCDE != "^[0-9]") {
+            //     $('#ABCDE_error').html('Only numbers is allowed ');
+            //     flag = false;
+            // }
+            if (Name.toString().length > 3) {
+                $('#Name_error').html(' Max allowed field length is: 3')
                 flag = false;
             }
             if (flag != true) {
