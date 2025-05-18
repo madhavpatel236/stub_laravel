@@ -15,7 +15,7 @@
             <input class= "integer" id="four" name="four" /><br /> <br />
 
             <lable> five:</lable>
-            <input class= "->timestamp()" id="five" name="five" /><br /> <br />
+            <input class= "->" id="five" name="five" /><br /> <br />
 
             <input type="hidden" id="edit_id" value="">
 

@@ -24,7 +24,11 @@
 
 <script>
 $(document).ready(function(){
-    $('#data_input_form').submit(function(e){
+    $('#data_update_btn').click(function(e){
+$validation$
+    })
+
+    $('#data_submit_btn').click(function(e){
 $validation$
     })
 

@@ -158,6 +158,10 @@ use App\Http\Controllers\Channai21Controller;
 use App\Http\Controllers\Channai22Controller;
 use App\Http\Controllers\Channai23Controller;
 use App\Http\Controllers\Channai24Controller;
+use App\Http\Controllers\Channai25Controller;
+use App\Http\Controllers\Channai41Controller;
+use App\Http\Controllers\Channai42Controller;
+use App\Http\Controllers\Channai43Controller;
 // [USE_CONTROLLERS]
 
 
@@ -281,4 +285,8 @@ Route::resource('Channai21Controller', Channai21Controller::class);
 Route::resource('Channai22Controller', Channai22Controller::class);
 Route::resource('Channai23Controller', Channai23Controller::class);
 Route::resource('Channai24Controller', Channai24Controller::class);
+Route::resource('Channai25Controller', Channai25Controller::class);
+Route::resource('Channai41Controller', Channai41Controller::class);
+Route::resource('Channai42Controller', Channai42Controller::class);
+Route::resource('Channai43Controller', Channai43Controller::class);
 // [ROUTE_CONTROLLERS]

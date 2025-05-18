@@ -283,25 +283,25 @@ class MakeViewCommand extends Command
                 flag = false;
                 }" . "\n";
 
-            $validation .= " if(" . $this->argument('name')['table_col_name_input'][$i] . ".length() >  "  . $validationLength  .  "){
+            $validation .= " if(" . $this->argument('name')['table_col_name_input'][$i] . ".length >  "  . $validationLength  .  "){
                 $('#" . $this->argument('name')['table_col_name_input'][$i] . "_error" . "').html('" . " Max allowed field length is: "  . $validationLength   . "')
             flag = false;
                 }" . "\n";
 
             // dd(($this->argument('name')['table_col_type'][$i]));
-            if ($this->argument('name')['table_col_type'][$i] == 'integer') {
-                $validation .= "if(" . $this->argument('name')['table_col_name_input'][$i] . " != " . "^[0-9]"  . "){
-                    $('#" . $this->argument('name')['table_col_name_input'][$i] . "_error" .  "').html('Only numbers is allowed ')
-                    flag = false;
-                }"  . "\n";
-            }
+            // if ($this->argument('name')['table_col_type'][$i] == 'integer') {
+            //     $validation .= "if(" . $this->argument('name')['table_col_name_input'][$i] . " != " . "^[0-9]"  . "){
+            //         $('#" . $this->argument('name')['table_col_name_input'][$i] . "_error" .  "').html('Only numbers is allowed ')
+            //         flag = false;
+            //     }"  . "\n";
+            // }
 
-            if ($this->argument('name')['table_col_type'][$i] == 'string') {
-                $validation .= "if(" . $this->argument('name')['table_col_name_input'][$i] . " != " . "^[a-zA-Z]*$"  . "){
-                    $('#" . $this->argument('name')['table_col_name_input'][$i] . "_error" .  "').html('Only numbers is allowed ')
-                    flag = false;
-                }"  . "\n";
-            }
+            // if ($this->argument('name')['table_col_type'][$i] == 'string') {
+            //     $validation .= "if(" . $this->argument('name')['table_col_name_input'][$i] . " != " . "^[a-zA-Z]*$"  . "){
+            //         $('#" . $this->argument('name')['table_col_name_input'][$i] . "_error" .  "').html('Only numbers is allowed ')
+            //         flag = false;
+            //     }"  . "\n";
+            // }
 
             $validation .= "if (flag != true) {
                     e.preventDefault();

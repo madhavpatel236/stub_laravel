@@ -144,6 +144,8 @@ class MakeMigrationCommand extends Command
         }
     }
 
+
+
     /**
      * @return string
      */

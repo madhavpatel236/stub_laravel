@@ -32,13 +32,8 @@
 
             $('#data_submit_btn').on('click', function(e) {
                 $.ajax({
-                    url: '{{ route('Channai24Controller.store') }}',
+                    url: '{{ route('Channai25Controller.store') }}',
                     method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        // name: $('#name').val(),
-                        // age: $('#age').val(),
-                    },
                     success: function(response) {
                         fetchData();
                         $('#data_input_form')[0].reset();
@@ -49,7 +44,7 @@
             $(document).on('click', '.edit-btn', function() {
                 let userId = $(this).data('id');
                 $('#data-id').val();
-                let editteUrl = '{{ route('Channai24Controller.edit', ['Channai24Controller' => 'id']) }}'
+                let editteUrl = '{{ route('Channai25Controller.edit', ['Channai25Controller' => 'id']) }}'
                     .replace(
                         'id', userId);
 
@@ -72,7 +67,7 @@
                 let userId = $(this).data('id');
 
                 let deleteUrl =
-                    '{{ route('Channai24Controller.destroy', ['Channai24Controller' => 'id']) }}'.replace(
+                    '{{ route('Channai25Controller.destroy', ['Channai25Controller' => 'id']) }}'.replace(
                         'id', userId);
 
                 $.ajax({
@@ -96,7 +91,7 @@
                 let userId = $('#edit_id').val();
 
                 let updateUrl =
-                    '{{ route('Channai24Controller.update', ['Channai24Controller' => ':id']) }}'.replace(
+                    '{{ route('Channai25Controller.update', ['Channai25Controller' => ':id']) }}'.replace(
                         ':id', userId);
 
                 $.ajax({
@@ -118,7 +113,7 @@
 
         function fetchData() {
             $.ajax({
-                url: '{{ route('Channai24Controller.index') }}',
+                url: '{{ route('Channai25Controller.index') }}',
                 type: 'GET',
                 success: function(res) {
                     var data = {!! $users !!}
@@ -169,11 +164,14 @@
                     $('#name_error').html('name is required!!')
                     flag = false;
                 }
-                if (name.length > 21) {
-                    $('#name_error').html(' Max allowed field length is: 21')
+                if (name.length > 4) {
+                    $('#name_error').html(' Max allowed field length is: 4')
                     flag = false;
                 }
-
+                if (flag != true) {
+                    e.preventDefault();
+                }
+                var flag = true;
 
                 var age = $('#age').val().trim();
                 if (age == "" || age == null) {
@@ -197,11 +195,14 @@
                     $('#name_error').html('name is required!!')
                     flag = false;
                 }
-                if (name.length > 21) {
-                    $('#name_error').html(' Max allowed field length is: 21')
+                if (name.length > 4) {
+                    $('#name_error').html(' Max allowed field length is: 4')
                     flag = false;
                 }
-
+                if (flag != true) {
+                    e.preventDefault();
+                }
+                var flag = true;
 
                 var age = $('#age').val().trim();
                 if (age == "" || age == null) {
