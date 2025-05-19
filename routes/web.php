@@ -165,6 +165,7 @@ use App\Http\Controllers\Channai43Controller;
 use App\Http\Controllers\Channai44Controller;
 use App\Http\Controllers\Channai45Controller;
 use App\Http\Controllers\Channai46Controller;
+use App\Http\Controllers\Lsg1Controller;
 // [USE_CONTROLLERS]
 
 
@@ -295,4 +296,5 @@ Route::resource('Channai43Controller', Channai43Controller::class);
 Route::resource('Channai44Controller', Channai44Controller::class);
 Route::resource('Channai45Controller', Channai45Controller::class);
 Route::resource('Channai46Controller', Channai46Controller::class);
+Route::resource('Lsg1Controller', Lsg1Controller::class);
 // [ROUTE_CONTROLLERS]
