@@ -166,6 +166,10 @@ use App\Http\Controllers\Channai44Controller;
 use App\Http\Controllers\Channai45Controller;
 use App\Http\Controllers\Channai46Controller;
 use App\Http\Controllers\Lsg1Controller;
+use App\Http\Controllers\Rcb10Controller;
+use App\Http\Controllers\Rcb11Controller;
+use App\Http\Controllers\Rcb12Controller;
+use App\Http\Controllers\Rcb13Controller;
 // [USE_CONTROLLERS]
 
 
@@ -297,4 +301,8 @@ Route::resource('Channai44Controller', Channai44Controller::class);
 Route::resource('Channai45Controller', Channai45Controller::class);
 Route::resource('Channai46Controller', Channai46Controller::class);
 Route::resource('Lsg1Controller', Lsg1Controller::class);
+Route::resource('Rcb10Controller', Rcb10Controller::class);
+Route::resource('Rcb11Controller', Rcb11Controller::class);
+Route::resource('Rcb12Controller', Rcb12Controller::class);
+Route::resource('Rcb13Controller', Rcb13Controller::class);
 // [ROUTE_CONTROLLERS]
